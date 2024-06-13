@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+{% if user.is_superuser %}
+
+<h1>Skriv en ny nyhet</h1>
+
+<div hx-get="/news/page" hx-trigger="load" hx-swap="outerHTML"></div>
+
+  {% include 'components/LoadingOverlay.html' %}
+
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a> |
+  <a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends 'layouts/homepage.html' %}
+
+{% block title %}
+	Serviceanmälan
+{% endblock %}
+
+{% block content %}
+<div class="card w-96 bg-base-100 shadow-xl">
+  <div class="card-body">
+
+		<h2>Serviceanmälan</h2>
+<form hx-post="servicereport/createreport/" hx-target="#status" >
+  <div class="mb-3 col">
+    <label for="Name" class="form-label">Name</label>
+    <input type="text" class="input input-bordered w-full max-w-xs" id="Name">
+  </div>
+  <div class="mb-3 col">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="input input-bordered w-full max-w-xs" id="email">
+  </div>
+  <div class="mb-3 col">
+    <label for="Telefonnummer" class="form-label">Telefonnummer</label>
+    <input type="text" class="input input-bordered w-full max-w-xs" id="Telefonnummer">
+  </div>
+  <div class="mb-3 col">
+    <label for="Postnummer" class="form-label">Postnummer</label>
+    <input type="nu,ber" class="input input-bordered w-full max-w-xs" id="Postnummer">
+  </div>
+  <div class="mb-3 col">
+    <label for="Ort" class="form-label">Ort</label>
+    <input type="text" class="input input-bordered w-full max-w-xs" id="Ort">
+  </div>
+  <div class="mb-3 col">
+    <label for="Hemmadatum" class="form-label">Hemmadatum</label>
+    <input type="text" class="input input-bordered w-full max-w-xs" id="Hemmadatum">
+  </div>
+  <div class="mb-3 col">
+    <label for="Hemma fr.o.m kl." class="form-label">Hemma fr.o.m kl.</label>
+    <input type="text" class="input input-bordered w-full max-w-xs" id="Hemma fr.o.m kl.">
+  </div>
+  <div class="mb-3 col">
+    <label for="Hemma t.o.m. kl." class="form-label">Hemma t.o.m. kl.</label>
+    <input type="text" class="input input-bordered w-full max-w-xs" id="Hemma t.o.m. kl.">
+  </div>
+  <div class="mb-3 col">
+    <label for="Felbeskrivning" class="form-label">Felbeskrivning</label>
+    <textarea type="" class="input input-bordered w-full max-w-xs" id="Felbeskrivning"></textarea>
+  </div>
+	<div class="form-check mb-3 col">
+	<input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+	<label class="form-check-label" for="flexCheckDefault">
+		Jag tillåter att ni går in med huvudnyckel
+	</label>
+	</div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<div id="status">
+</div>
+</div>
+	</div>
+
+{% endblock %}

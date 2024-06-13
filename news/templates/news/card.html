@@ -1,0 +1,17 @@
+
+{% for card in news %}
+<div class="fade-in card card-side bg-base-100 shadow-xl">
+	{% if card.image %}
+  <figure><img class="max-h-[500px]" src="{{card.image.url}}" alt=""/></figure>
+  {% endif %}
+
+  <div class="card-body">
+    <h2 class="card-title">{{card.title}}</h2>
+    <p class="font-bold" >{{card.created_at}}</p>
+    <p>{{card.description}}</p>
+    <div class="card-actions justify-end">
+      <!-- <button class="btn btn-primary">Watch</button> -->
+    </div>
+  </div>
+</div>
+{% endfor %}

@@ -1,0 +1,16 @@
+{% block content %}
+	{% for building in buildings %}
+
+<div class="card w-96 bg-base-300 shadow-xl">
+	{% with building.images.all|first as img  %}
+		<figure><img src="{{img.image.url}}" alt="Ingen bild finns" /></figure>
+	{% endwith %}
+  <div class="card-body">
+    <h2 class="card-title">{{building.adress}}</h2>
+    <p>{{building.area}}</p>
+    <p>{{building.description}}</p>
+  </div>
+</div>
+
+		{% endfor %}
+{% endblock %}

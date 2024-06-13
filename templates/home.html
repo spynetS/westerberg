@@ -1,0 +1,32 @@
+{% extends "layouts/homepage.html" %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+
+	<style type="text/css" media="screen">
+	 .main{
+		 background-image: url('/media/slides/1.png');
+		 background-repeat: no-repeat;
+		 background-position: top;
+		 background-size: contain;
+	 }
+
+	</style>
+
+
+	<div class="bg-base-100 layout w-screen" >
+		<div class="text-center main layout h-screen w-screen gap-5">
+			<h1 class="text-4xl w-[500px] text-base-200 font-bold" >Var vill du etablera dig i framtiden</h1>
+			<div class="w-1/5 justify-between flex" >
+				<a hx-boost="true" href="/serviceanmalan" class="btn " >Serviceanmälan</a>
+				<button class="btn " >Intresseanmälan</button>
+			</div>
+		</div>
+		<div hx-get="/news/cards/" hx-swap="beforeend" hx-trigger="load" class="max-w-[50%] p-5 flex flex-col gap-4 h-screen " >
+			<h1 class="text-2xl font-bold" >Nyheter</h1>
+
+		</div>
+	</div>
+
+{% endblock %}

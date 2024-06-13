@@ -1,0 +1,17 @@
+
+* bostädser
+	lägga nya bostäder,lägenheter, lokaler,
+	region, område, bilder, beskribinga
+
+* nyheter
+
+* service,
+	skickar ett mail
+
+
+
+
+
+
+
+

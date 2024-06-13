@@ -1,0 +1,28 @@
+<div id="outer" class="p-5 gap-2 flex flex-col" >
+	<select name="select" hx-push-url="true" hx-get="/fastigheter" hx-target="#outer" hx-swap="outerHTML" hx-headers='{"refresh":true}' class="select select-bordered w-full max-w-xs">
+		<option selected>Open this select menu</option>
+		<option value="alla">Alla</option>
+		{% for option in options %}
+		<option value="{{option.0}}">{{option.1}}</option>
+		{% endfor %}
+	</select>
+
+
+	<div id="building-target" class="flex gap-5 justify-center">
+	{% for building in buildings %}
+
+		<div class="card w-96 bg-base-300 shadow-xl">
+			{% with building.images.all|first as img  %}
+				<figure><img src="{{img.image.url}}" alt="Ingen bild finns" /></figure>
+			{% endwith %}
+		<div class="card-body">
+			<h2 class="card-title">{{building.adress}}</h2>
+			<p>{{building.city}}</p>
+			<p>{{building.area}}</p>
+			<p>{{building.description}}</p>
+		</div>
+		</div>
+
+		{% endfor %}
+	</div>
+</div>
