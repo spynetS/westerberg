@@ -27,17 +27,23 @@ def page(request):
     else:
         buildings = Building.objects.all()
 
-    sorted = {}
+    sorted_buildings = {}
     for building in buildings:
-        if building.area not in sorted : sorted[building.area] = []
-        else : sorted[building.area].append(building)
+        key = str(building.area) + "-id"
+        print(sorted_buildings)
+        if key not in sorted_buildings :
+            print("new key")
+            sorted_buildings[key] = [building]
+        else :
+            print("add")
+            sorted_buildings[key].append(building)
 
-    print(sorted)
+    print(sorted_buildings)
 
     options = Building.City.choices
     options = [[i[0],i[1]] for i in options]
 
-    return render(request, "buildings/page.html",{"buildings": buildings,"options":options})
+    return render(request, "buildings/page.html",{"buildings": list(sorted_buildings.values()),"options":options})
 
 def fast(request):
     if "refresh" in request.headers:

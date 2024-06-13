@@ -1,17 +1,57 @@
 
+<style type="text/css" media="screen">
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(20vh);
+  visibility: hidden;
+  transition: opacity 0.6s ease-out, transform 1.2s ease-out;
+  will-change: opacity, visibility;
+}
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+}
+</style>
+
+<script type="text/javascript">
+     // Create a callback function for the IntersectionObserver
+    const callback = (entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+        } else {
+          entry.target.classList.remove('is-visible');
+        }
+      });
+    };
+
+    // Create an IntersectionObserver instance with the callback
+    const observer = new IntersectionObserver(callback, {
+      root: null, // Use the viewport as the root
+      rootMargin: '0px',
+      threshold: 0.1 // Trigger if at least 10% of the element is visible
+    });
+
+    // Get all the div elements to be observed
+    const divs = document.querySelectorAll('div');
+
+    // Start observing each div
+    divs.forEach(div => {
+      observer.observe(div);
+    });
+</script>
+
 {% for card in news %}
-<div class="fade-in card card-side bg-base-100 shadow-xl">
+<div class="card card-side h-[300px] fade-in-section w-full bg-base-100 shadow-xl">
 	{% if card.image %}
-  <figure><img class="max-h-[500px]" src="{{card.image.url}}" alt=""/></figure>
+  <figure  ><img  src="{{card.image.url}}" alt=""/></figure>
   {% endif %}
 
-  <div class="card-body">
+  <div class="card-body w-[80%]">
     <h2 class="card-title">{{card.title}}</h2>
     <p class="font-bold" >{{card.created_at}}</p>
-    <p>{{card.description}}</p>
-    <div class="card-actions justify-end">
-      <!-- <button class="btn btn-primary">Watch</button> -->
-    </div>
+    <p class="" >{{card.description}}</p>
   </div>
 </div>
 {% endfor %}

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'accounts',
     'buildings',
     'news',
+    'rentals',
 ]
 
 MIDDLEWARE = [

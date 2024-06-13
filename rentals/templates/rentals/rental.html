@@ -1,0 +1,67 @@
+{% extends "layouts/homepage.html" %}
+
+{% block head %}
+{% endblock %}
+{% block content %}
+	<div  class="col w-full container mx-auto gap-5 mb-12">
+		<div>
+			<h1 class="text-4xl font-bold" >{{rental.building.adress}}</h1>
+			<h2 class="text-xl  font-bold">{{rental.building.get_area_display}}</h2>
+		</div>
+		<div class=" grid grid-cols-6 gap-5 justify-around w-full">
+			<div class="cardcomp col gap-5 bg-base-300 col-span-4 ">
+				<div class="col items-center" >
+					<img  class="max-h-[500px]" src="/media/slides/1.png" alt="" />
+				</div>
+				<div class="px-12 grid grid-cols-2 justifty-evenly" >
+					<div  >
+						<p class="text-3xl font-bold">{{rental.rent}} kr</p>
+						<p class="text-3xl font-bold">{{rental.size}} m2</p>
+						<p>{{rental.rooms}} rum och kök</p>
+
+						<div class="mt-5 " >
+							<p>Ort: {{rental.building.get_city_display}}</p>
+						</div>
+						<div class="mt-5 " >
+							<h3 class="font-bold" >Förmåner</h3>
+							{% for feature in rental.features %}
+								<div class="badge badge-primary">{{feature}}</div>
+							{% endfor %}
+						</div>
+					</div>
+					<div>
+						<h2 class="text-xl font-semibold" >Beskrivning</h2>
+						<p>{{rental.description}}</p>
+					</div>
+				</div>
+			</div>
+			<div class="col col-span-2">
+				<div class="cardcomp bg-base-300 ">
+<div id="Map" style="height:250px"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<script src="/media/OpenLayers/OpenLayers.js"></script>
+<script>
+    var lat            = {{rental.lat}};
+    var lon            = {{rental.lon}};
+    var zoom           = 17;
+
+    var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+    var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+    var position       = new OpenLayers.LonLat(lon, lat).transform( fromProjection, toProjection);
+
+    map = new OpenLayers.Map("Map");
+    var mapnik         = new OpenLayers.Layer.OSM();
+    map.addLayer(mapnik);
+
+    var markers = new OpenLayers.Layer.Markers( "Markers" );
+    map.addLayer(markers);
+    markers.addMarker(new OpenLayers.Marker(position));
+
+    map.setCenter(position, zoom);
+</script>
+
+
+{% endblock %}

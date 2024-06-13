@@ -6,9 +6,20 @@
 
 {% if user.is_superuser %}
 
-<h1>Skriv en ny nyhet</h1>
+<div role="tablist" class="tabs tabs-bordered">
+  <a role="tab" class="tab">Tab 1</a>
+  <a role="tab" class="tab tab-active">Tab 2</a>
+  <a role="tab" class="tab">Tab 3</a>
+</div>
 
+<div>
+
+</div>
+<h1>Skriv en ny nyhet</h1>
 <div hx-get="/news/page" hx-trigger="load" hx-swap="outerHTML"></div>
+
+<h1>Skriv en ny anons</h1>
+<div hx-get="/rentals/admin" hx-trigger="load" hx-swap="outerHTML"></div>
 
   {% include 'components/LoadingOverlay.html' %}
 
