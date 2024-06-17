@@ -9,6 +9,12 @@ class Images(models.Model):
 
 class Building(models.Model):
 
+    class City(models.TextChoices):
+        NORRKOPING  = "1", "Norrköping"
+        SODERKOPING = "2", "Söderköping"
+        ABY         = "3", "Åby"
+
+
     class Area(models.TextChoices):
         KNEIPPEN    = "1", "Kneippen/Skarphagen"
         NORDANTILL  = "2", "Nordantill"
@@ -16,11 +22,6 @@ class Building(models.Model):
         SODER       = "4", "Söder"
         SODERKOPING = "5", "Söderköping"
         ABY         = "6", "Åby"
-
-    class City(models.TextChoices):
-        NORRKOPING  = "1", "Norrköping"
-        SODERKOPING = "2", "Söderköping"
-        ABY         = "3", "Åby"
 
     area        = models.CharField(max_length=2,choices=Area.choices)
     city        = models.CharField(max_length=2,choices=City.choices, default=City.NORRKOPING)

@@ -1,20 +1,32 @@
+<form>
+  <h1>Adressen?</h1>
+  <select class="select select-bordered w-full max-w-xs">
+    <option disabled selected>Who shot first?</option>
+    {% for building in buildings %}
+    <option value="{{building.pk}}">{{building.adress}}</option>
+    {% endfor %}
+  </select>
 
-<form >
-	<h1>Adressen?</h1>
-	<select class="select select-bordered w-full max-w-xs">
-		<option disabled selected>Who shot first?</option>
-		{% for building in buildings %}
-			<option value="{{building.pk}}">{{building.adress}}</option>
-			{% endfor %}
-	</select>
+  <input
+    type="number"
+    placeholder="Antal rum"
+    class="input input-bordered w-full max-w-xs"
+  />
+  <input
+    type="number"
+    placeholder="Kvadratmeter"
+    class="input input-bordered w-full max-w-xs"
+  />
+  <input
+    type="number"
+    placeholder="Hyra"
+    class="input input-bordered w-full max-w-xs"
+  />
+  <input
+    type="text"
+    placeholder="Formoner (separera med komma)"
+    class="input input-bordered w-full max-w-xs"
+  />
 
-<input type="number" placeholder="Antal rum" class="input input-bordered w-full max-w-xs" />
-<input type="number" placeholder="Kvadratmeter" class="input input-bordered w-full max-w-xs" />
-<input type="number" placeholder="Hyra" class="input input-bordered w-full max-w-xs" />
-<input type="text" placeholder="Formoner (separera med komma)" class="input input-bordered w-full max-w-xs" />
-
-<textarea class="textarea" placeholder="Beskrivning"></textarea>
-
-
-
+  <textarea class="textarea" placeholder="Beskrivning"></textarea>
 </form>
