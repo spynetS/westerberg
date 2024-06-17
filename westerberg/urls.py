@@ -35,4 +35,4 @@ urlpatterns = [
     path("buildings/", include("buildings.urls")),
     path("news/", include("news.urls")),
     path("rentals/", include("rentals.urls")),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

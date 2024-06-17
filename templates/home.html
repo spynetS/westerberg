@@ -6,7 +6,7 @@
 
 	<style type="text/css" media="screen">
 		.main{
-			background-image: url('/media/slides/1.png');
+			background-image: url('/media/soderkoping.png');
 			background-repeat: no-repeat;
 			background-position: top;
 			background-size: cover;
@@ -14,44 +14,27 @@
 
 	</style>
 
-	<div class="bg-base-100 layout w-screen" >
-		<div class="text-center fadein main layout h-screen w-screen gap-5">
-		<div class="carousel absolute top-[200px] w-1/3 mt-[500px] " >
-			<div id="slide1" class="carousel-item relative w-full">
-				<img src="/media/slides/2.png" class="w-full" />
-				<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-				<a href="#slide4" class="btn btn-circle">❮</a>
-				<a href="#slide2" class="btn btn-circle">❯</a>
-				</div>
-			</div>
-			<div id="slide2" class="carousel-item relative w-full">
-				<img src="/media/slides/3.png" class="w-full" />
-				<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-				<a href="#slide1" class="btn btn-circle">❮</a>
-				<a href="#slide3" class="btn btn-circle">❯</a>
-				</div>
-			</div>
-			<div id="slide3" class="carousel-item relative w-full">
-				<img src="/media/slides/4.png" class="w-full" />
-				<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-				<a href="#slide2" class="btn btn-circle">❮</a>
-				<a href="#slide4" class="btn btn-circle">❯</a>
-				</div>
-			</div>
-			<div id="slide4" class="carousel-item relative w-full">
-				<img src="/media/slides/5.png" class="w-full" />
-				<div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-				<a href="#slide3" class="btn btn-circle">❮</a>
-				<a href="#slide1" class="btn btn-circle">❯</a>
+	<div class="bg-base-100 w-screen" >
+		<div class="text-center main h-screen w-screen gap-5">
+			<div class=" bg-black bg-opacity-[32%] h-full" >
+				<div class="container mx-auto px-5 h-full flex flex-col" >
+					<h1 class="animate-in fade-in duration-700 pt-32 pb-5 text-white font-semibold text-7xl" >Fam WESTERBERG <br />Fastigheter AB</h1>
+
+					<div class="w-full flex justify-center" >
+						<p class="text-lg text-white w-[300px] " >Vi ser mycket långsiktigt på vårt företagande och vår målsättning är att  även detta skall speglas i långvariga och trevliga kontakter med våra  hyresgäster.</p>
+
+					</div>
+
+					<div class=" mt-5 w-full h-full flex justify-evenly items-center" >
+						{% include 'components/HomeButton.html' with icon="Home.png" title="Ledigt just nu" %}
+						{% include 'components/HomeButton.html' with icon="Service.png" title="Ledigt just nu" %}
+						{% include 'components/HomeButton.html' with icon="Search.png" title="Ledigt just nu" %}
+					</div>
+
 				</div>
 			</div>
 		</div>
-			<div class="mt-5 w-1/4 flex justify-between " >
-				<a hx-boost="false" href="/serviceanmalan" class="btn " >Serviceanmälan</a>
-				<button class="btn " >Intresseanmälan</button>
-			</div>
-		</div>
-		<div hx-get="/news/cards/" hx-swap="beforeend" hx-trigger="load" class=" p-5 flex flex-col gap-12 h-screen " >
+		<div hx-get="/news/cards/" hx-swap="beforeend" hx-trigger="" class=" p-5 flex flex-col gap-12 h-screen " >
 			<h1 class="text-2xl font-bold" >Nyheter</h1>
 
 		</div>
