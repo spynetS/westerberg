@@ -5,24 +5,24 @@
 {% block content %}
 
 <div class="flex flex-col items-center justify-center h-screen">
-<div class="card w-96 bg-base-100 shadow-xl">
-  <div class="card-body">
-<h2 class="prose" >Log in</h2>
-<form role="form"  method="post" >{% csrf_token %}
-    <div class="">
-        {% for field in form %}
-            <div class="flex flex-col">
-				<label class="label-text" for="{{ field.id_for_label }}">{{field.label}}</label>
-                <input type="{{field.field.widget.input_type}}" class="input input-bordered w-full max-w-xs" id="{{ field.id_for_label }}" maxlength="30" name="{{ field.html_name }}" value="" type="text" />
-                {{ field.errors }}
-            </div>
-        {% endfor %}
-		<a href="/accounts/signup">signup</a>
-        <input type="submit" class="btn btn-primary" value="login" />
-        <input type="hidden" name="next" value="{{ next }}" />
-    </div>
-</form>
+	<div class="card w-96 bg-base-100 shadow-xl">
+	<div class="card-body">
+		<h2 class="text-xl font-semibold" >Log in</h2>
+		<form role="form"  method="post" >{% csrf_token %}
+			<div class="col ">
+				{% for field in form %}
+					<div class="flex flex-col">
+						<label class="label-text" for="{{ field.id_for_label }}">{{field.label}}</label>
+						<input type="{{field.field.widget.input_type}}" class="input input-bordered w-full max-w-xs" id="{{ field.id_for_label }}" maxlength="30" name="{{ field.html_name }}" value="" type="text" />
+						{{ field.errors }}
+					</div>
+				{% endfor %}
+				<a class="link link-secondary" href="/accounts/signup">signup</a>
+				<input type="submit" class="btn btn-primary" value="login" />
+				<input type="hidden" name="next" value="{{ next }}" />
+			</div>
+		</form>
+		</div>
 	</div>
-	</div>
-	</div>
+</div>
 {% endblock %}

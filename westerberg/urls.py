@@ -20,14 +20,24 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from buildings.views import fast
+from rentals.views import ledigt
 
 from django.views.generic.base import TemplateView
 
+class HomeView(TemplateView):
+    template_name = "home.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['images'] = ['/media/slides/2.png', '/media/slides/3.png', '/media/slides/4.png','/media/slides/5.png','/media/slides/6.png','/media/slides/7.png']  # Add your images here
+        return context
+
 urlpatterns = [
-    path("", TemplateView.as_view(template_name="home.html"), name="home"),
+    path("", HomeView.as_view(template_name="home.html"), name="home"),
     path("admin/", TemplateView.as_view(template_name="admin/admin.html"), name="admin"),
     path('superadmin/', adm.site.urls),
     path("fastigheter/", fast, name="fastigheter"),
+    path("ledigt/", ledigt, name="fastigheter"),
     path("serviceanmalan/", TemplateView.as_view(template_name="serviceanmalan.html"), name="fastigheter"),
 
     path("accounts/", include("accounts.urls")),
@@ -35,4 +45,4 @@ urlpatterns = [
     path("buildings/", include("buildings.urls")),
     path("news/", include("news.urls")),
     path("rentals/", include("rentals.urls")),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)

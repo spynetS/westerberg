@@ -1,17 +1,27 @@
-{% extends "layouts/homepage.html" %}
+{% extends "base.html" %}
 
 {% block head %}
 {% endblock %}
 {% block content %}
-	<div  class="col w-full container mx-auto gap-5 mb-12">
+	{% include "layouts/homepage.html"  %}
+
+	<div  class="col w-full container mx-auto gap-5 mb-12 min-h-screen ">
+		<div class="text-sm breadcrumbs">
+			<ul>
+				<li><a href="/">Startsida</a></li>
+				<li><a href="/ledigt">Lediga obejekt</a></li>
+				<li><a href="#">{{rental.building.adress}}</a></li>
+			</ul>
+		</div>
+
 		<div>
 			<h1 class="text-4xl font-bold" >{{rental.building.adress}}</h1>
 			<h2 class="text-xl  font-bold">{{rental.building.get_area_display}}</h2>
 		</div>
 		<div class=" grid grid-cols-6 gap-5 justify-around w-full">
-			<div class="cardcomp col gap-5 bg-base-300 col-span-4 ">
-				<div class="col items-center" >
-					<img  class="max-h-[500px]" src="/media/slides/1.png" alt="" />
+			<div class="cardcomp col gap-5 col-span-4 p-5 rounded-lg shadow-lg">
+				<div class="min-h-[200px]" >
+					{% include 'components/slider.html' with image=images %}
 				</div>
 				<div class="px-12 grid grid-cols-2 justifty-evenly" >
 					<div  >
@@ -36,12 +46,14 @@
 				</div>
 			</div>
 			<div class="col col-span-2">
-				<div class="cardcomp bg-base-300 ">
-<div id="Map" style="height:250px"></div>
+				<div class="cardcomp bg-base-300 flex flex-col text-end">
+					<div id="Map" style="height:250px"></div>
+					<a class="link link-primary" href="https://maps.google.com/?q={{rental.building.adress}}">Google maps länk</a>
 				</div>
 			</div>
 		</div>
 	</div>
+<script defer src="/static/slide.js"></script>
 <script src="/media/OpenLayers/OpenLayers.js"></script>
 <script>
     var lat            = {{rental.lat}};

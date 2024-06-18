@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Fastigheter{% endblock %}
+
+{% block content %}
+
+	{% include "layouts/homepage.html" %}
+	<div hx-get="/rentals/select/{{select}}" hx-trigger="load" hx-swap="innerHTML" hx-indicator="#loading" ></div>
+	{% include 'components/LoadingOverlay.html' %}
+
+{% endblock %}

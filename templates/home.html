@@ -1,41 +1,76 @@
-{% extends "layouts/homepage.html" %}
+{% extends "base.html"  %}
+
 
 {% block title %}Home{% endblock %}
 
 {% block content %}
+	{% include "layouts/homepage.html" with fixed=True %}
+
+	<script defer src="/static/slide.js"></script>
+	<script defer src="/static/cards.js"></script>
 
 	<style type="text/css" media="screen">
 		.main{
-			background-image: url('/media/soderkoping.png');
+			background-image: url('/media/soderkoping.mkv');
 			background-repeat: no-repeat;
 			background-position: top;
 			background-size: cover;
 		}
+.video-container {
+    position: relative;
+}
 
+.video-container video {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  object-fit: cover;
+  z-index: 0;
+}
+
+/* Just styling the content of the div, the *magic* in the previous rules */
+.video-container .caption {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+  color: #dc0000;
+  padding: 10px;
+}
 	</style>
 
-	<div class="bg-base-100 w-screen" >
-		<div class="text-center main h-screen w-screen gap-5">
-			<div class=" bg-black bg-opacity-[32%] h-full" >
-				<div class="container mx-auto px-5 h-full flex flex-col" >
+	<div hx-boost="true" class="bg-base-100 w-screen" >
+		<div class="video-container text-center main h-screen w-screen gap-5">
+			<video autoplay muted loop>
+				<source  class="z-10" src="/media/soderkoping.mp4" type="video/mp4" />
+			</video>
+			<div class="caption bg-black bg-opacity-[25%] h-full" >
+				<div class="justify-start  px-5 h-full flex flex-col" >
 					<h1 class="animate-in fade-in duration-700 pt-32 pb-5 text-white font-semibold text-7xl" >Fam WESTERBERG <br />Fastigheter AB</h1>
 
 					<div class="w-full flex justify-center" >
-						<p class="text-lg text-white w-[300px] " >Vi ser mycket långsiktigt på vårt företagande och vår målsättning är att  även detta skall speglas i långvariga och trevliga kontakter med våra  hyresgäster.</p>
-
+						<p class="animate-in fade-in duration-700 lg:text-2xl md:text-lg text-white w-[400px] " >Vi ser mycket långsiktigt på vårt företagande och vår målsättning är att  även detta skall speglas i långvariga och trevliga kontakter med våra  hyresgäster.</p>
 					</div>
 
+
 					<div class=" mt-5 w-full h-full flex justify-evenly items-center" >
-						{% include 'components/HomeButton.html' with icon="Home.png" title="Ledigt just nu" %}
-						{% include 'components/HomeButton.html' with icon="Service.png" title="Ledigt just nu" %}
-						{% include 'components/HomeButton.html' with icon="Search.png" title="Ledigt just nu" %}
+						{% include 'components/HomeButton.html' with icon="Home.png" title="Ledigt just nu" url="/ledigt"%}
+						{% include 'components/HomeButton.html' with icon="Service.png" title="Serviceärende" url="/serviceanmalan" %}
+						{% include 'components/HomeButton.html' with icon="Search.png" title="Intresseanmälan" %}
 					</div>
 
 				</div>
 			</div>
 		</div>
-		<div hx-get="/news/cards/" hx-swap="beforeend" hx-trigger="" class=" p-5 flex flex-col gap-12 h-screen " >
-			<h1 class="text-2xl font-bold" >Nyheter</h1>
+		<div class=" p-5 flex flex-col gap-12 h-screen " >
+			<h1 class="text-2xl font-bold" ></h1>
+			{% include 'components/slider.html' with images=images %}
+		</div>
+		<div hx-get="/news/cards/" hx-target="#cardholder" hx-trigger="load" hx-on::after-request="cards()" class="mt-12 p-5 flex flex-col gap-12 min-h-screen items-center w-screen" >
+			<h1 class="text-5xl font-bold" >Nyheter</h1>
+			<div id="cardholder" class="container mx-auto px-5 flex flex-col gap-4">
+
+			</div>
+			<button class="btn btn-secondary" >Visa alla</button>
 
 		</div>
 	</div>

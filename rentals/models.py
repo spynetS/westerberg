@@ -14,7 +14,7 @@ class Rental(models.Model):
     size = models.IntegerField() # kvadrat meter
     rooms = models.IntegerField() # rooms
     description = models.TextField()
-    rent = models.IntegerField() # 10000 = 100 kr
+    rent = models.IntegerField()
     features = models.TextField() # json list ["Diskmakin", "Tv"]
     images = models.ManyToManyField(Image,related_name="images",blank=True)
 
