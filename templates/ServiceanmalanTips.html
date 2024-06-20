@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{% include 'layouts/homepage.html' %}
+	<div class="h-screen" >
+		<div class="container mx-auto p-4 text-sm breadcrumbs mb-12 ">
+			<ul>
+				<li><a href="/serviceanmalan">Serviceanmalan</a></li>
+				<li>Tips & Råd</li>
+			</ul>
+			<div class="flex flex-col items-center" >
+				<h1 class="w-[800px] text-lg font-semibold" >Om du har problem med något i din lägenhet kan du enkelt göra en  serviceanmälan här.
+					Du kan dock själv enkelt  avhjälpa eventuella problem, här nedan följer några tips.</h1>
+			</div>
+		</div>
+		<div class="bg-gradient-to-b from-white to-[#1D467A] h-full" >
+			<div class="container mx-auto flex flex-row p-5 join join-vertical w-full">
+				{% include 'components/Collapse.html' with checked="checked" title="1. Trasiga lampor och lysrör" desc="Du byter själv lampor och lysrör i lägenheten. Om du är osäker på hur man går tillväga kontakta oss." %}
+				{% include 'components/Collapse.html' with title="2. Trasiga elsäkringar eller huvudsäkring" desc="Öppna ditt säkringsskåp och leta upp de säkringar som gått sönder. Ser du ingen trasig så börja med att kontrollera vilken del av lägenheten som elen är borta i och jämför med elsäkrings schemat du normalt har under elmätaren/säkringsskåpet. Tänk på att en spis kan ha flera säkringar. Om du har jordfelsbrytare till lägenheten så kontrollera även den. Byter du propp var noga med att kontrollera mot säkringsschemat att rätt propp sitter i säkringsskåpet." %}
+				{% include 'components/Collapse.html' with title="3. Stopp i avloppet" desc="Golvbrunnen gör du enkelt rent. Lyft på locket och plocka bort hår m.m. Kvarstår stoppet kontakta oss." %}
+				{% include 'components/Collapse.html' with title="4. Stopp i diskbänk" desc="Töm ut vattnet från vasken. Prova därefter med att spola riktigt hett vatten direkt ner i vasken. Blir det inte bättre kontakta oss." %}
+				{% include 'components/Collapse.html' with title="5. Stopp i toaletten" desc="Börja med att ta bort vatten eller låt det sjunka undan. Fyll en hink med vatten och häll den från så hög höjd du kan direkt ner i WC-stolen. Släpper det inte då gör en serviceanmälan eller ring oss." %}
+				{% include 'components/Collapse.html' with title="6. Det kommer upp vatten i kök eller badrum utan att du spolar" desc="Då är det frågan om ett ”stamstopp” troligen är det stopp precis under ditt våningsplan och vattnet tvingas därför upp i ditt badrum eller kök. Säg omedelbart till grannarna ovanpå att de måste sluta spola vatten. Ring oss direkt på 011-181340, alternativt direkt till respektive skötselansvarig." %}
+			</div>
+		</div>
+	</div>
+
+{% endblock %}

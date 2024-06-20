@@ -7,4 +7,5 @@ from .views import *
 
 urlpatterns = [
     path("createreport/", create_report, name="list"),
+    path("getform/", getform, name="getform"),
 ]

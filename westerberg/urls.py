@@ -39,10 +39,13 @@ urlpatterns = [
     path("fastigheter/", fast, name="fastigheter"),
     path("ledigt/", ledigt, name="fastigheter"),
     path("serviceanmalan/", TemplateView.as_view(template_name="serviceanmalan.html"), name="fastigheter"),
+    path("serviceanmalan/tips", TemplateView.as_view(template_name="ServiceanmalanTips.html"), name="fastigheter"),
+    path("serviceanmalan/annat", TemplateView.as_view(template_name="ServiceanmalanAnnat.html"), name="fastigheter"),
 
     path("accounts/", include("accounts.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("buildings/", include("buildings.urls")),
     path("news/", include("news.urls")),
     path("rentals/", include("rentals.urls")),
+    path("servicereport/", include("servicereport.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)

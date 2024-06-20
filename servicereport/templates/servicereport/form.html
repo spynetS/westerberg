@@ -1,0 +1,46 @@
+<form
+	hx-post="/servicereport/createreport/"
+	hx-swap="outerHTML"
+	class="grid grid-cols-2 gap-5 bg-white shadow-lg rounded-xl absolute md:1/2 lg:w-1/3 z-20 p-12">
+
+	<h1 class="col-span-2 font-semibold text-lg" >Fyll i formuläret för att skicka en serviceanmälan</h1>
+	<input name="Namn" type="text" placeholder="Namn" class="input input-bordered w-full max-w-xs" />
+	<input name="E-post" type="email" placeholder="E-post" class="input input-bordered w-full max-w-xs" />
+
+	<input name="Telefonnummer" type="tel" placeholder="Telefonnummer" class="input input-bordered  col-span-2" />
+	<input name="Adress" type="text" placeholder="Adress" class="input input-bordered  col-span-2" />
+
+	<input name="Postnummer" type="number" placeholder="Postnummer" class="input input-bordered  " />
+	<input name="Ort" type="text" placeholder="Ort" class="input input-bordered  " />
+
+	<input name="Hemmadatum" type="date" placeholder="Hemmadatum" class="input input-bordered  col-span-2" />
+
+	<label for="hemma-from">Hemma fr.o.m. kl.</label>
+	<label for="hemma-to"  >Hemma t.o.m. kl. </label>
+
+	<input name="Hemma fr.o.m. kl" id="hemma-from" type="time" placeholder="hrs:mins" class="input input-bordered  " />
+	<input name="Hemma t.o.m. kl" id="hemma-to"   type="time" placeholder="Hemmadatum" class="input input-bordered  " />
+
+	<textarea name="Felbeskrivning" placeholder="Felbeskrivning" class="textarea textarea-bordered textarea-lg col-span-2 " ></textarea>
+
+
+	<div class="flex items-start gap-2 col-span-2">
+		<input name="checkbox" type="checkbox" class="checkbox" />
+		<span class="label-text">Jag tillåter att ni går in med huvudnyckel</span>
+	</div>
+
+	{% if error %}
+		<div role="alert" class="alert alert-error col-span-2">
+			<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+			<span>{{error}}</span>
+		</div>
+	{% endif %}
+	{% if sucess %}
+		<div role="alert" class="alert alert-success">
+			<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+			<span>Det gick igenom</span>
+		</div>
+	{% endif %}
+
+	<button type="submit" class="btn btn-primary col-span-2">Skicka serviceanmälan</button>
+</form>

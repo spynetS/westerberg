@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block title %}
-	Serviceanmälan
+	Akut
 {% endblock %}
 
 {% block content %}
@@ -9,61 +9,18 @@
 <div class=" bg-base-100 shadow-xl">
   <div class="container mx-auto px-5">
 
-<h1 class="text-3xl font-bold mb-12" >Serviceanmälan</h1>
-<div class="shadow-lg rounded-lg p-4">
-
-<form class="grid grid-cols-2 gap-4" hx-post="servicereport/createreport/" hx-target="#status" >
-  <div class="mb-3 col">
-    <label for="Name" class="form-label">Name</label>
-    <input type="text" class="input input-bordered w-full max-w-xs" id="Name">
-  </div>
-  <div class="mb-3 col">
-    <label for="email" class="form-label">Email address</label>
-    <input type="email" class="input input-bordered w-full max-w-xs" id="email">
-  </div>
-  <div class="mb-3 col">
-    <label for="Telefonnummer" class="form-label">Telefonnummer</label>
-    <input type="text" class="input input-bordered w-full max-w-xs" id="Telefonnummer">
-  </div>
-  <div class="mb-3 col">
-    <label for="Postnummer" class="form-label">Postnummer</label>
-    <input type="number" class="input input-bordered w-full max-w-xs" id="Postnummer">
-  </div>
-  <div class="mb-3 col">
-    <label for="Ort" class="form-label">Ort</label>
-    <input type="text" class="input input-bordered w-full max-w-xs" id="Ort">
-  </div>
-  <div class="mb-3 col">
-    <label for="Hemmadatum" class="form-label">Hemmadatum</label>
-    <input type="text" class="input input-bordered w-full max-w-xs" id="Hemmadatum">
-  </div>
-  <div class="mb-3 col">
-    <label for="Hemma fr.o.m kl." class="form-label">Hemma fr.o.m kl.</label>
-    <input type="text" class="input input-bordered w-full max-w-xs" id="Hemma fr.o.m kl.">
-  </div>
-  <div class="mb-3 col">
-    <label for="Hemma t.o.m. kl." class="form-label">Hemma t.o.m. kl.</label>
-    <input type="text" class="input input-bordered w-full max-w-xs" id="Hemma t.o.m. kl.">
-  </div>
-  <div class="col-span-2 mb-3 col">
-    <label for="Felbeskrivning" class="form-label">Felbeskrivning</label>
-    <textarea type="" class="input input-bordered w-full" id="Felbeskrivning"></textarea>
+    <h1 class="text-3xl font-bold mb-12" >Serviceanmälan</h1>
+    <div class="h-[80vh]  shadow-lg rounded-lg p-4 flex flex-col items-center  ">
+      <h1 class="text-4xl font-semibold" >Vilken passar bäst</h1>
+      <div class="mx-auto w-2/3 mt-32 z-20 relative flex flex-row justify-around " >
+        {% include 'components/ServiceButton.html' with href="akut" url='/media/High Priority.png' title='Akut' %}
+        {% include 'components/ServiceButton.html' with href="tips" url='/media/Idea.png' title='Tips & råd' %}
+        {% include 'components/ServiceButton.html' with href="annat" url='/media/Help.png' title='Annat' %}
+      </div>
+      <img class="z-10 absolute right-0 bottom-0 w-screen" src="/media/Vector 6.png" alt="" />
+    </div>
   </div>
 
-	<div class="col-span-2 form-check mb-3 col">
-	  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-    <label class="form-check-label" for="flexCheckDefault">
-      Jag tillåter att ni går in med huvudnyckel
-    </label>
-    <button type="submit" class="btn btn-primary">Submit</button>
-	</div>
-
-
-</form>
 </div>
-<div id="status">
-</div>
-</div>
-	</div>
 
 {% endblock %}

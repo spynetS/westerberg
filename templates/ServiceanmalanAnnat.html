@@ -1,0 +1,23 @@
+
+{% extends 'base.html' %}
+
+{% block title %}
+	Serviceanmalan Annat
+{% endblock %}
+
+{% block content %}
+	{% include "layouts/homepage.html" %}
+	<div class="relative flex h-screen justify-center bg-gradient-to-b from-white to-black " >
+		<div class="absolute top-2 container mx-auto p-4 text-sm breadcrumbs mb-12 ">
+			<ul>
+				<li><a href="/serviceanmalan">Serviceanmalan</a></li>
+				<li>Annat</li>
+			</ul>
+		</div>
+		<div hx-get="/servicereport/getform" hx-trigger="load" hx-swap="outerHTML">
+
+		</div>
+		<img class="absolute bottom-0 right-0 w-screen" src="/media/Vector 5.png" alt="" />
+	</div>
+
+{% endblock %}
