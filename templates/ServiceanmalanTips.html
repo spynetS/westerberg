@@ -9,11 +9,11 @@
 				<li>Tips & Råd</li>
 			</ul>
 			<div class="flex flex-col items-center" >
-				<h1 class="w-[800px] text-lg font-semibold" >Om du har problem med något i din lägenhet kan du enkelt göra en  serviceanmälan här.
-					Du kan dock själv enkelt  avhjälpa eventuella problem, här nedan följer några tips.</h1>
+				<h1 class="w-[800px] text-lg font-semibold" >Om du har problem med något i din lägenhet kan du enkelt göra en  serviceanmälan <a href="/serviceanmalan/annat" class="link link-primary" >här</a>.
+						Du kan dock själv enkelt  avhjälpa eventuella problem, här nedan följer några tips.</h1>
 			</div>
 		</div>
-		<div class="bg-gradient-to-b from-white to-[#1D467A] h-full" >
+		<div class="bg-gradient-to-b from-white to-blue-800 h-full" >
 			<div class="container mx-auto flex flex-row p-5 join join-vertical w-full">
 				{% include 'components/Collapse.html' with checked="checked" title="1. Trasiga lampor och lysrör" desc="Du byter själv lampor och lysrör i lägenheten. Om du är osäker på hur man går tillväga kontakta oss." %}
 				{% include 'components/Collapse.html' with title="2. Trasiga elsäkringar eller huvudsäkring" desc="Öppna ditt säkringsskåp och leta upp de säkringar som gått sönder. Ser du ingen trasig så börja med att kontrollera vilken del av lägenheten som elen är borta i och jämför med elsäkrings schemat du normalt har under elmätaren/säkringsskåpet. Tänk på att en spis kan ha flera säkringar. Om du har jordfelsbrytare till lägenheten så kontrollera även den. Byter du propp var noga med att kontrollera mot säkringsschemat att rätt propp sitter i säkringsskåpet." %}
