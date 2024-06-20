@@ -1,5 +1,5 @@
 {% if sucess %}
-	<div class="flex flex-col items-center gap-5 bg-white shadow-lg rounded-xl absolute md:1/2 lg:w-1/3 z-20 rouned-t-xl" >
+	<div class="mt-32 flex flex-col items-center gap-5 bg-white shadow-lg rounded-xl absolute md:1/2 lg:w-1/3 z-20 rouned-t-xl" >
 		<div class="h-[12px] bg-green-300 w-full" >
 		</div>
 		<div class="flex flex-col items-center gap-4 p-5" >
@@ -15,9 +15,9 @@
 <form
 	hx-post="/servicereport/createreport/"
 	hx-swap="outerHTML"
-	class="grid grid-cols-2 gap-5 bg-white shadow-lg rounded-xl absolute lg:1/2 xl:w-1/3 p-12 z-10 ">
+	class="grid grid-cols-2 gap-5 bg-white mt-32 shadow-lg rounded-xl absolute lg:1/2 xl:w-1/3 p-12 z-10 ">
 
-	<h1 class="col-span-2 font-semibold text-lg" >Fyll i formuläret för att skicka en serviceanmälan om <a href="/serviceanmalan/tips" class="link link-primary">detta</a> inte hjälpte</h1>
+	<h1 class="col-span-2 font-semibold text-lg"> Här kan ni skicka en anmälan till oss. Ta en tit under för vanliga problem!</h1>
 	<input name="Namn" type="text" placeholder="Namn" class="input input-bordered w-full max-w-xs" value="{{Namn}}" />
 	<input name="Epost" type="email" placeholder="E-post" class="input input-bordered w-full max-w-xs" value="{{Epost}}" />
 

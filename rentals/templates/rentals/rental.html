@@ -18,7 +18,7 @@
 			<h1 class="text-4xl font-bold" >{{rental.building.adress}}</h1>
 			<h2 class="text-xl  font-bold">{{rental.building.get_area_display}}</h2>
 		</div>
-		<div class=" grid grid-cols-6 gap-5 justify-around w-full">
+		<div class=" flex flex-col md:grid grid-cols-6 gap-5 justify-around w-full">
 			<div class="cardcomp col gap-5 col-span-4 p-5 rounded-lg shadow-lg">
 				<div class="min-h-[200px]" >
 					{% include 'components/slider.html' with image=images %}

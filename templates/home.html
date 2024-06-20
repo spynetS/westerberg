@@ -16,44 +16,44 @@
 			background-position: top;
 			background-size: cover;
 		}
-.video-container {
-    position: relative;
-}
-
-.video-container video {
-
-  position: absolute;
-  top: 0;
-  object-fit: cover;
-  z-index: 0;
-}
-
+		/* #mission-statement {
+		overflow: hidden;
+		position: fixed;
+		height: 100%;
+		width: 100%;
+		top: 0;
+		left: 0;
+		}
+		
+		video#bgvid {
+		height: 100vh;
+		width: 100vw;
+		object-fit: cover;
+		overflow: hidden;
+		position: absolute;
+		top: 0;
+		right: 0;
+		} */
 /* Just styling the content of the div, the *magic* in the previous rules */
-.video-container .caption {
-  z-index: 1;
-  position: relative;
-  text-align: center;
-  color: #dc0000;
-  padding: 10px;
-}
 	</style>
 
 	<div hx-boost="false" class="bg-base-100 w-screen" >
-		<div class="video-container text-center main h-screen w-screen gap-5">
-			<video autoplay muted loop>
-				<source  class="z-10 " src="/media/westerbergs_fastigheter.mp4" type="video/mp4" />
-			</video>
-			<div class="caption bg-black bg-opacity-[25%] h-full" >
+		<div class="video-container text-center h-screen main w-screen gap-5">
+			<div class="absolute w-screen h-screen bg-[url('/media/splash.png')] " >
+				<video class=" w-full h-full object-top object-cover " playsinline autoplay muted loop poster="/media/splash.png" id="bgvid">
+						<source src="/media/westerbergs_fastigheter.mp4" type="video/mp4">
+				</video>
+			</div>
+			<div class="absolute top-0 right-0 w-screen bg-black bg-opacity-[25%] h-full z-10" >
 				<div id="overvideo"class=" justify-start  px-5 h-full flex flex-col" >
-					<h1 class="animate-in fade-in duration-700 pt-24 pb-5 text-white font-semibold text-7xl" >Fam WESTERBERG <br />Fastigheter AB</h1>
+					<h1 class="animate-in fade-in duration-700 pt-24 pb-5 text-white font-semibold text-4xl md:text-7xl" >Fam WESTERBERG <br />Fastigheter AB</h1>
 
 					<div class="w-full flex justify-center" >
-						<p class="animate-in fade-in duration-700 lg:text-2xl md:text-lg text-white w-[400px] " >Vi ser mycket långsiktigt på vårt företagande och vår målsättning är att  även detta skall speglas i långvariga och trevliga kontakter med våra  hyresgäster.</p>
+						<p class="animate-in fade-in duration-200 lg:text-2xl md:text-lg text-white w-[200px] md:w-[400px] " >Vi ser mycket långsiktigt på vårt företagande och vår målsättning är att  även detta skall speglas i långvariga och trevliga kontakter med våra  hyresgäster.</p>
 					</div>
 
-
-					<div class="mt-4 w-full h-full flex flex-col justify-start " >
-						<div class="w-full flex flex-row justify-evenly pb-5" >
+					<div class="mt-4 w-full h-full flex flex-col justify-end " >
+						<div class="w-full flex flex-col md:flex-row gap-4 md:gap-0 md:justify-evenly pb-5" >
 							{% include 'components/HomeButton.html' with delay=200 icon="Home.png" title="Ledigt just nu" url="/ledigt"%}
 							{% include 'components/HomeButton.html' with delay=500 icon="Service.png" title="Serviceärende" url="/serviceanmalan" %}
 							{% include 'components/HomeButton.html' with delay=1000 icon="Search.png" title="Intresseanmälan" %}
@@ -63,13 +63,13 @@
 				</div>
 			</div>
 		</div>
-		<div class=" p-5 flex flex-col gap-12 h-screen " >
+		<div class=" p-5 flex flex-col gap-12 md:h-screen " >
 			<h1 class="text-2xl font-bold" ></h1>
 			{% include 'components/slider.html' with images=images %}
 		</div>
 		<div hx-get="/news/cards/" hx-target="#cardholder" hx-trigger="load" hx-on::after-request="cards()" class="mt-12 p-5 flex flex-col gap-12 min-h-screen items-center w-screen" >
-			<h1 class="text-5xl font-bold" >Nyheter</h1>
-			<div id="cardholder" class="container mx-auto px-5 flex flex-col gap-4">
+			<h1 class="text-3xl md:text-5xl font-bold" >Nyheter</h1>
+			<div id="cardholder" class="container mx-0 md:mx-auto px-0 md:px-5 flex flex-col gap-4">
 
 			</div>
 			<button class="btn btn-secondary" >Visa alla</button>

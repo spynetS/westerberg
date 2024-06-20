@@ -16,12 +16,12 @@
 
 
 {% for card in news %}
-<div class="news-card card card-side h-[300px] fade-in-section w-full bg-base-100 shadow-xl">
+<div class="news-card card md:card-side min-h-[300px] fade-in-section w-full bg-base-100 shadow-xl">
 	{% if card.image %}
-  <figure  ><img  src="{{card.image.url}}" alt=""/></figure>
+  <figure  ><img class="max-h-[300px]" src="{{card.image.url}}" alt=""/></figure>
   {% endif %}
 
-  <div class="card-body w-[80%]">
+  <div class=" p-3 md:p-5  md:w-[80%]">
     <h2 class="card-title">{{card.title}}</h2>
     <p class="font-bold" >{{card.created_at}}</p>
     <p class="" >{{card.description}}</p>

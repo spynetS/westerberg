@@ -21,6 +21,9 @@ def create_report(request):
    if not reg.match(request.POST["Postnummer"]):
       return render(request, "servicereport/form.html",dict({"error":f"Postnummer format stämmer inte. 123 45 eller 12345"}.items()|reqs.items()))
 
+   post = request.POST["Postnummer"]
+   if " " in post:
+      post = post.replace(" ","")
    
    try:
       report = ServiceReport(
@@ -28,7 +31,7 @@ def create_report(request):
          email=request.POST['Epost'],
          phone=request.POST['Telefonnummer'],
          adress=request.POST['Adress'],
-         postnumber=request.POST['Postnummer'],
+         postnumber=post,
          area=request.POST['Ort'],
          homedate=request.POST['Hemmadatum'],
          homefrom=request.POST['Hemmafrom'],
