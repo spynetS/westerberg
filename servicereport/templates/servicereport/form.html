@@ -4,24 +4,24 @@
 	class="grid grid-cols-2 gap-5 bg-white shadow-lg rounded-xl absolute md:1/2 lg:w-1/3 z-20 p-12">
 
 	<h1 class="col-span-2 font-semibold text-lg" >Fyll i formuläret för att skicka en serviceanmälan om <a href="/serviceanmalan/tips" class="link link-primary">detta</a> inte hjälpte</h1>
-	<input name="Namn" type="text" placeholder="Namn" class="input input-bordered w-full max-w-xs" />
-	<input name="E-post" type="email" placeholder="E-post" class="input input-bordered w-full max-w-xs" />
+	<input name="Namn" type="text" placeholder="Namn" class="input input-bordered w-full max-w-xs" value="{{Namn}}" />
+	<input name="Epost" type="email" placeholder="E-post" class="input input-bordered w-full max-w-xs" value="{{Epost}}" />
 
-	<input name="Telefonnummer" type="tel" placeholder="Telefonnummer" class="input input-bordered  col-span-2" />
-	<input name="Adress" type="text" placeholder="Adress" class="input input-bordered  col-span-2" />
+	<input value="{{Telefonnummer}}"  name="Telefonnummer" type="tel" placeholder="Telefonnummer" class="input input-bordered  col-span-2" />
+	<input value="{{Adress}}"  name="Adress" type="text" placeholder="Adress" class="input input-bordered  col-span-2" />
 
-	<input name="Postnummer" type="number" placeholder="Postnummer" class="input input-bordered  " />
-	<input name="Ort" type="text" placeholder="Ort" class="input input-bordered  " />
+	<input value="{{Postnummer}}"  name="Postnummer" type="text" placeholder="Postnummer" class="input input-bordered  " />
+	<input value="{{Ort}}"  name="Ort" type="text" placeholder="Ort" class="input input-bordered  " />
 
-	<input name="Hemmadatum" type="date" placeholder="Hemmadatum" class="input input-bordered  col-span-2" />
+	<input value="{{Hemmadatum}}"  name="Hemmadatum" type="date" placeholder="Hemmadatum" class="input input-bordered  col-span-2" />
 
-	<label for="hemma-from">Hemma fr.o.m. kl.</label>
-	<label for="hemma-to"  >Hemma t.o.m. kl. </label>
+	<label  for="hemma-from">Hemma fr.o.m. kl.</label>
+	<label  for="hemma-to"  >Hemma t.o.m. kl. </label>
 
-	<input name="Hemma fr.o.m. kl" id="hemma-from" type="time" placeholder="hrs:mins" class="input input-bordered  " />
-	<input name="Hemma t.o.m. kl" id="hemma-to"   type="time" placeholder="Hemmadatum" class="input input-bordered  " />
+	<input value="{{Hemmafrom}}"  name="Hemmafrom" id="hemma-from" type="time" placeholder="hrs:mins" class="input input-bordered  " />
+	<input value="{{Hemmato}}"   name="Hemmato" id="hemma-to"   type="time" placeholder="Hemmadatum" class="input input-bordered  " />
 
-	<textarea name="Felbeskrivning" placeholder="Felbeskrivning" class="textarea textarea-bordered textarea-lg col-span-2 " ></textarea>
+	<textarea name="Felbeskrivning" placeholder="Felbeskrivning" class="textarea textarea-bordered textarea-lg col-span-2 " >{{Felbeskrivning}}</textarea>
 
 
 	<div class="flex items-start gap-2 col-span-2">
