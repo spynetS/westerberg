@@ -3589,10 +3589,6 @@ details.collapse summary::-webkit-details-marker {
   height: 40vh;
 }
 
-.h-\[80vh\] {
-  height: 80vh;
-}
-
 .h-full {
   height: 100%;
 }
@@ -3631,10 +3627,6 @@ details.collapse summary::-webkit-details-marker {
 
 .w-10 {
   width: 2.5rem;
-}
-
-.w-2\/3 {
-  width: 66.666667%;
 }
 
 .w-5 {
@@ -3773,6 +3765,11 @@ details.collapse summary::-webkit-details-marker {
   border-radius: 0.75rem;
 }
 
+.rounded-r-lg {
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+}
+
 .border {
   border-width: 1px;
 }
@@ -3833,6 +3830,14 @@ details.collapse summary::-webkit-details-marker {
 
 .bg-opacity-\[25\%\] {
   --tw-bg-opacity: 25%;
+}
+
+.bg-opacity-\[75\%\] {
+  --tw-bg-opacity: 75%;
+}
+
+.bg-opacity-\[70\%\] {
+  --tw-bg-opacity: 70%;
 }
 
 .bg-\[url\(\'\/media\/splash\.png\'\)\] {
@@ -3938,6 +3943,11 @@ details.collapse summary::-webkit-details-marker {
   padding-bottom: 3rem;
 }
 
+.py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
 .pb-32 {
   padding-bottom: 8rem;
 }
@@ -4039,6 +4049,11 @@ details.collapse summary::-webkit-details-marker {
 .text-gray-700 {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity));
+}
+
+.text-gray-800 {
+  --tw-text-opacity: 1;
+  color: rgb(31 41 55 / var(--tw-text-opacity));
 }
 
 .text-white {

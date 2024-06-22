@@ -56,8 +56,8 @@
 <script defer src="/static/slide.js"></script>
 <script src="/media/OpenLayers/OpenLayers.js"></script>
 <script>
-    var lat            = {{rental.lat}};
-    var lon            = {{rental.lon}};
+    var lat            = {{rental.building.lat}};
+    var lon            = {{rental.building.lon}};
     var zoom           = 17;
 
     var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984

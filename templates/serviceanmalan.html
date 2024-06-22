@@ -1,26 +1,75 @@
 {% extends 'base.html' %}
-
-{% block title %}
-	Akut
-{% endblock %}
+{% block title %}Serviceanmälan{% endblock %}
 
 {% block content %}
-	{% include "layouts/homepage.html" %}
-<div class=" bg-base-100 shadow-xl">
-  <div class="container mx-auto px-5">
+	{% include 'layouts/homepage.html' %}
+	<style type="text/css" media="screen">
+	 .main{
+		background-image: url('/media/slides/6.png');
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+	 }
+	</style>
 
-    <h1 class="text-3xl font-bold mb-12" >Serviceanmälan</h1>
-    <div class="h-[80vh]  shadow-lg rounded-lg p-4 flex flex-col items-center  ">
-      <h1 class="text-4xl font-semibold" >Vilken passar bäst</h1>
-      <div class="mx-auto w-2/3 mt-32 z-20 relative flex flex-row justify-around " >
-        {% include 'components/ServiceButton.html' with href="akut" url='/media/High Priority.png' title='Akut' %}
-        {% include 'components/ServiceButton.html' with href="tips" url='/media/Idea.png' title='Tips & råd' %}
-        {% include 'components/ServiceButton.html' with href="annat" url='/media/Help.png' title='Annat' %}
-      </div>
-      <img class="z-10 absolute right-0 bottom-0 w-screen" src="/media/Vector 6.png" alt="" />
-    </div>
-  </div>
+	<div class="h-full" >
+		<div class=" h-[300px] w-full main">
+		</div>
+		<div class="container mx-auto p-5 flex flex-col items-center gap-4 min-h-[50vh]" >
+			<h1 class="text-start w-full text-4xl font-bold" > Kontakta Oss</h1>
+			<div class="w-full flex flex-col gap-4" >
+				<h1 class="text-start w-full text-2xl font-semibold" >Vid akuta besvär</h1>
+				<h2 class="text-gray-700 sm:text-sm md:text-lg font-semibold" >OBS! Var god ring oss om felet är akut – För telefonnummer se nedan.  Om något akut inträffar en helg, alternativt efter arbetstid, så har du  möjlighet att kontakta jour-entreprenören ÖFS på telefon 011-130024.</h2>
+				<div class="flex flex-col lg:grid lg:grid-cols-2 gap-5" >
+					<div>
+						<h2 class="text-xl font-bold" >Norrköping</h2>
+						<p>Lars Zetterblom, tel: 0708-171342</p>
+						<p>Kontoret 011-181340</p>
+					</div>
+					<div>
+						<h2 class="text-xl font-bold" >Åby</h2>
+						<p>Anders Brandström, tel: 0705-318480</p>
+					</div>
+					<div>
+						<h2 class="text-xl font-bold" >Söderköping</h2>
+						<p>Kalle Malmberg, tel: 0708-171341</p>
+						<p>Utvändig miljö:</p>
+						<p>Mats Sandberg, tel: 0708-171343</p>
+						<p>Gunilla Filipsson 0705-152499</p>
+					</div>
+					<div>
+						<h2 class="text-xl font-bold" >Kontoret: Söderköping</h2>
+						<p>Telefontid 08:45 – 09:30, 0121-15610</p>
+						<p>Kontoret 011-181340</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="lg:pt-0 pt-32 relative flex h-screen justify-center bg-gradient-to-b from-white to-blue-200 md:to-black " >
+			<div class="container mx-auto p-5" >
+				<h1 class="text-start w-full text-2xl font-semibold" >Felanmälan</h1>
+				<p>Om du har ett specifikt problem som inte nämns <a class="link link-primary" href="#tips">nedanför</a> skicka gärna en felanmälan i formuläret under.</p>
+			</div>
+			<div hx-get="/servicereport/getform" hx-trigger="load" hx-swap="outerHTML">
 
-</div>
+			</div>
+			<img class="absolute bottom-0 right-0 w-screen" src="/media/Vector 5.png" alt="" />
+		</div>
+
+		<div id="tips" class="pt-72 bg-gradient-to-b from-[#1D467A] to-[#3581E0] min-h-screen pb-32" >
+			<div class="mb-12 text-white flex flex-col items-center" >
+				<h1 class=" mt-12 max-w-[800px] text-lg font-semibold" >Om du har problem med något i din lägenhet kan du enkelt göra en  serviceanmälan <a href="/serviceanmalan/annat" class="link link-secondary" >här</a>.
+						Du kan dock själv enkelt  avhjälpa eventuella problem, här nedan följer några tips.</h1>
+			</div>
+			<div class="bg-[#fefefe] container mx-auto flex flex-row join join-vertical w-full">
+				{% include 'components/Collapse.html' with checked="checked" title="1. Trasiga lampor och lysrör" desc="Du byter själv lampor och lysrör i lägenheten. Om du är osäker på hur man går tillväga kontakta oss." %}
+				{% include 'components/Collapse.html' with title="2. Trasiga elsäkringar eller huvudsäkring" desc="Öppna ditt säkringsskåp och leta upp de säkringar som gått sönder. Ser du ingen trasig så börja med att kontrollera vilken del av lägenheten som elen är borta i och jämför med elsäkrings schemat du normalt har under elmätaren/säkringsskåpet. Tänk på att en spis kan ha flera säkringar. Om du har jordfelsbrytare till lägenheten så kontrollera även den. Byter du propp var noga med att kontrollera mot säkringsschemat att rätt propp sitter i säkringsskåpet." %}
+				{% include 'components/Collapse.html' with title="3. Stopp i avloppet" desc="Golvbrunnen gör du enkelt rent. Lyft på locket och plocka bort hår m.m. Kvarstår stoppet kontakta oss." %}
+				{% include 'components/Collapse.html' with title="4. Stopp i diskbänk" desc="Töm ut vattnet från vasken. Prova därefter med att spola riktigt hett vatten direkt ner i vasken. Blir det inte bättre kontakta oss." %}
+				{% include 'components/Collapse.html' with title="5. Stopp i toaletten" desc="Börja med att ta bort vatten eller låt det sjunka undan. Fyll en hink med vatten och häll den från så hög höjd du kan direkt ner i WC-stolen. Släpper det inte då gör en serviceanmälan eller ring oss." %}
+				{% include 'components/Collapse.html' with title="6. Det kommer upp vatten i kök eller badrum utan att du spolar" desc="Då är det frågan om ett ”stamstopp” troligen är det stopp precis under ditt våningsplan och vattnet tvingas därför upp i ditt badrum eller kök. Säg omedelbart till grannarna ovanpå att de måste sluta spola vatten. Ring oss direkt på 011-181340, alternativt direkt till respektive skötselansvarig." %}
+			</div>
+		</div>
+	</div>
 
 {% endblock %}

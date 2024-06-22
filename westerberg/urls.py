@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from buildings.views import fast
-from rentals.views import ledigt
+from rentals.views import ledigt, ledigt_lokaler
 
 from news.models import News
 
@@ -48,15 +48,15 @@ urlpatterns = [
     path('superadmin/', adm.site.urls),
     path("fastigheter/", fast, name="fastigheter"),
     path("ledigt/", ledigt, name="fastigheter"),
+    path("ledigt/lokaler", ledigt_lokaler, name="fastigheter"),
     path("nyheter/", NewsView.as_view(template_name="news.html"), name="fastigheter"),
     path("serviceanmalan/", TemplateView.as_view(template_name="serviceanmalan.html"), name="fastigheter"),
-    path("serviceanmalan/tips", TemplateView.as_view(template_name="ServiceanmalanTips.html"), name="fastigheter"),
-    path("serviceanmalan/annat", TemplateView.as_view(template_name="ServiceanmalanAnnat.html"), name="fastigheter"),
+    path("intresseanmalan/", TemplateView.as_view(template_name="intressreport.html"), name="fastigheter"),
 
     path("accounts/", include("accounts.urls")),
     path("accounts/", include("django.contrib.auth.urls")),
     path("buildings/", include("buildings.urls")),
     path("news/", include("news.urls")),
     path("rentals/", include("rentals.urls")),
-    path("serviceanmalan/", include("rentals.urls")),
+    path("servicereport/", include("servicereport.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)

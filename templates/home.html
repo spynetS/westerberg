@@ -22,7 +22,7 @@
 		<div class="video-container text-center h-screen main w-screen gap-5">
 			<div class="absolute w-screen h-screen bg-[url('/media/splash.png')] " >
 				<video class=" w-full h-full object-top object-cover " playsinline autoplay muted loop poster="/media/splash.png" id="bgvid">
-						<source src="/media/westerbergs_fastigheter.mp4" type="video/mp4">
+						<source src="/media/westerbergs_fastigheter_high.mp4" type="video/mp4">
 				</video>
 			</div>
 			<div class="absolute top-0 right-0 w-screen bg-black bg-opacity-[25%] h-full z-10" >
@@ -37,7 +37,7 @@
 						<div class="w-full flex flex-col md:flex-row gap-4 md:gap-0 md:justify-evenly pb-5" >
 							{% include 'components/HomeButton.html' with delay=200 icon="Home.png" title="Ledigt just nu" url="/ledigt"%}
 							{% include 'components/HomeButton.html' with delay=500 icon="Service.png" title="Serviceärende" url="/serviceanmalan" %}
-							{% include 'components/HomeButton.html' with delay=1000 icon="Search.png" title="Intresseanmälan" %}
+							{% include 'components/HomeButton.html' with delay=1000 icon="Search.png" title="Intresseanmälan" url="/intresseanmalan" %}
 						</div>
 					</div>
 

@@ -26,6 +26,10 @@ class Building(models.Model):
     area        = models.CharField(max_length=2,choices=Area.choices)
     city        = models.CharField(max_length=2,choices=City.choices, default=City.NORRKOPING)
     adress      = models.TextField()
+
+    lon = models.DecimalField(max_digits=10,decimal_places=6,default=0)
+    lat = models.DecimalField(max_digits=10,decimal_places=6,default=0)
+
     description = models.TextField()
     images      = models.ManyToManyField(to=Images, related_name='images', blank=True)
 

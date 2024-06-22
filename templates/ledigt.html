@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 
-{% block title %}Fastigheter{% endblock %}
+{% block title %}Lediga lägenheter{% endblock %}
 
 {% block content %}
 
 	{% include "layouts/homepage.html" %}
-	<div hx-get="/rentals/select/{{select}}" hx-trigger="load" hx-swap="innerHTML" hx-indicator="#loading" ></div>
+	<div hx-get="/rentals/select{% if lokaler %}/lokaler{% endif %}{{select}}" hx-trigger="load" hx-swap="innerHTML" hx-indicator="#loading" ></div>
 	{% include 'components/LoadingOverlay.html' %}
 
 {% endblock %}

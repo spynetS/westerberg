@@ -18,8 +18,6 @@ class Rental(models.Model):
     features = models.TextField() # json list ["Diskmakin", "Tv"]
     images = models.ManyToManyField(Image,related_name="images",blank=True)
 
-    lon = models.DecimalField(max_digits=10,decimal_places=6,default=0)
-    lat = models.DecimalField(max_digits=10,decimal_places=6,default=0)
-
+    lokal = models.BooleanField(default=False)
 
     avalible_from = models.DateField()
