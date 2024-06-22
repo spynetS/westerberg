@@ -1,29 +1,45 @@
 <div id="outer">
-
-<form hx-post="/news/create/" hx-target="#outer" hx-swap="outerHTML" hx-indicator="#loading"  enctype="multipart/form-data">
-<label class="form-control w-full max-w-xs">
-  <div class="label">
-    <span class="label-text">Titel</span>
-  </div>
-  <input type="text" placeholder="Type here" name="title" class="input input-bordered w-full max-w-xs" />
-</label>
-<label class="form-control w-full max-w-xs">
-  <div class="label">
-    <span class="label-text">Beskrivning</span>
-  </div>
-  <textarea placeholder="Type here" name="description" class="input input-bordered w-full max-w-xs" ></textarea>
-</label>
-<label class="form-control w-full max-w-xs">
-  <div class="label">
-    <span class="label-text">Pick a file</span>
-  </div>
-  <input type="file" name="image" class="file-input file-input-bordered w-full max-w-xs" />
-</label>
-<button type="submit" accept="image/*" class="btn btn-primary">Primary</button>
-
+  <form
+    hx-post="/news/create/"
+    hx-target="#outer"
+    hx-swap="outerHTML"
+    hx-indicator="#loading"
+    enctype="multipart/form-data"
+  >
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-text">Titel</span>
+      </div>
+      <input
+        type="text"
+        placeholder="Type here"
+        name="title"
+        class="input input-bordered w-full max-w-xs"
+      />
+    </label>
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-text">Beskrivning</span>
+      </div>
+      <textarea
+        placeholder="Type here"
+        name="description"
+        class="input input-bordered w-full max-w-xs"
+      ></textarea>
+    </label>
+    <label class="form-control w-full max-w-xs">
+      <div class="label">
+        <span class="label-text">Pick a file</span>
+      </div>
+      <input
+        type="file"
+        name="image"
+        class="file-input file-input-bordered w-full max-w-xs"
+      />
+    </label>
+    <button type="submit" accept="image/*" class="btn btn-primary">
+      Primary
+    </button>
   </form>
 
-  <div class="flex flex-col gap-5">
-{% include 'news/card.html' %}
-  </div>
-  </div>
+</div>

@@ -6,4 +6,5 @@
 This website is written in Django 4.2.11 using templates and htmx. The pages of the website is in the //templates// directory and the apps contains the responses needed for the pages. If the page /buildings/ needs a list of buildings the page will get the list from the building's app which returns a list of buildings as html.
 
 * Notes
-toggle on listings
+**  toggle on listings
+** skapa nyhets modal

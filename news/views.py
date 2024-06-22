@@ -11,10 +11,25 @@ def create_news(request):
         news = News.objects.all()
         return render(request,'news/form.html',{'news':news,"msg":"Du måste fylla i titel och beskrivning"})
 
-    news = News(title=req['title'],description=req['description'],image=request.FILES['image'])
+    if 'image' in request.FILES:
+        news = News(title=req['title'],description=req['description'],image=request.FILES['image'])
+    else:
+        news = News(title=req['title'],description=req['description'])
     news.save()
     news = News.objects.all()
     return render(request,'news/form.html',{'news':news,"msg":"Nyheten har lagts till"})
+
+def edit(request):
+    if request.user.is_superuser:
+        return render(request,"components/Alert.html",{"type":"success", "msg":"Nyheten har ändrats"})
+    return render(request,"components/Alert.html",{"type":"Error", "msg":"You are not admin"})
+
+def delete(request):
+    if request.user.is_superuser:
+        news = News.objects.get(pk=request.POST["pk"])
+        news.delete()
+        return render(request,"components/Alert.html",{"type":"success", "msg":"Nyheten har tagitsbort"})
+    return render(request,"components/Alert.html",{"type":"Error", "msg":"You are not admin"})
 
 def page(request):
     news = News.objects.all()

@@ -42,9 +42,13 @@ class NewsView(TemplateView):
         context['news'] = News.objects.all()
         return context
 
+
+
 urlpatterns = [
     path("", HomeView.as_view(template_name="home.html"), name="home"),
     path("admin/", TemplateView.as_view(template_name="admin/admin.html"), name="admin"),
+    path("admin/nyheter", NewsView.as_view(template_name="admin/news.html"), name="admin"),
+
     path('superadmin/', adm.site.urls),
     path("fastigheter/", fast, name="fastigheter"),
     path("ledigt/", ledigt, name="fastigheter"),
