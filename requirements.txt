@@ -1,0 +1,8 @@
+asgiref==3.8.1
+Django==5.0.6
+django3-livesync==1
+pillow==10.3.0
+sqlparse==0.5.0
+tornado==6.4.1
+watchdog==4.0.1
+websocket-client==1.8.0

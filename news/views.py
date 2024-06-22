@@ -21,5 +21,5 @@ def page(request):
     return render(request,'news/form.html',{'news':news})
 
 def cards(request):
-    news = News.objects.all()
+    news = News.objects.all()[:3]
     return render(request,'news/card.html',{'news':news})
