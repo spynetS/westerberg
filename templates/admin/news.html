@@ -1,4 +1,4 @@
-{% extends "components/AdminNavbar.html" %}
+{% extends "components/AdminNavbar.html"  %}
 
 {% block title %}Admin{% endblock %}
 
@@ -20,6 +20,7 @@
 					<th>Beskrivning</th>
 					<th>Redigera</th>
 					<th>Tabort</th>
+					<th>Uppladat</th>
 
 				</tr>
 				</thead>
@@ -27,7 +28,11 @@
 					{% for ne in news %}
 						<tr  class="bg-base-100 hover:bg-base-200 cursor-pointer ">
 							<th>{{forloop.counter}}</th>
-							<td><img class="w-[500px] overflow-visible " src="/media/slides/1.png" alt="" /></td>
+							<td>
+							{% if ne.image %}
+								<img class="w-[500px] overflow-visible " src="{{ne.image.url}}" alt="" />
+							{% endif %}
+							</td>
 							<td>{{ne.title}}</td>
 							<td>{{ne.description}}</td>
 							<td onclick="open_modal('{{ne.title}}','{{ne.description}}','/media/slides/1.png','{{ne.pk}}')" class="hover:scale-110 duration-75 cursor-pointer" >
@@ -42,31 +47,46 @@
 									<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
 								</svg>
 							</td>
+							<td>{{ne.created_at}}</td>
 						</tr>
 					{% endfor %}
 				</tbody>
 			</table>
-			<button class="btn w-full" >Skapa ny</button>
+			<button onclick="document.getElementById('add_modal').checked=true" class="btn w-full"  >Skapa ny</button>
 			<!-- Open the modal using ID.showModal() method -->
 			<input type="checkbox" id="my_modal_1" class="modal-toggle" />
 			<div class="modal" role="dialog">
-				<form hx-post="/news/edit/" hx-target="#msg" class="modal-box col gap-2 items-center ">
+				<form hx-post="/news/edit/" hx-trigger="submit" hx-target="#alert" class="modal-box col gap-2 items-center ">
 					<input name="pk" id="pk" class="hidden" ></input>
-					<img id="img" src="{{ne.image.url}}" alt="" />
+					<img id="img" src="" alt="" />
 					<input name="title" id="title" class="input input-bordered w-full "></h3>
 					<textarea name="description" id="description" class="h-72 textarea textarea-bordered w-full"></textarea>
-					<div id="msg" >
-
-					</div>
 					<div class="w-full flex flex-row justify-center gap-3" >
-						<button type="submit" class="btn btn-primary " >Spara</button>
-						<button onclick="close_modal()" class="btn" >Stäng</button>
+						<button type="submit" accept="image/*" class="btn btn-primary " >Spara</button>
+						<label class="btn" for="my_modal_1">Stäng</label>
 					</div>
 				</form>
-				<label class="modal-backdrop" for="my_modal_1">Close</label>
 			</div>
-			<input type="checkbox" id="remove_modal" class="modal-toggle" />
 
+			<input type="checkbox" id="add_modal" class="modal-toggle" />
+			<div class="modal" role="dialog">
+				<form enctype="multipart/form-data" hx-post="/news/create/" hx-target="#alert" hx-on::after-request="close_modal('add_modal');window.location.reload()" hx-trigger="submit" class="modal-box col gap-2 items-center ">
+
+
+					<h1>Skapa ny nyhet</h1>
+					<input name="pk" id="pk" class="hidden" ></input>
+					<img id="img" src="" alt="" />
+					<input name="title" placeholder="Titel" id="title" class="input input-bordered w-full "></h3>
+					<textarea name="description" placeholder="Beskrivning" id="description" class="h-72 textarea textarea-bordered w-full"></textarea>
+					<input type="file" name="image" id="image" class="file-input w-full max-w-xs" />
+					<div class="w-full flex flex-row justify-center gap-3" >
+						<button type="submit" accept="image/*" class="btn btn-primary " >Lägg till</button>
+						<label class="btn" for="add_modal">Stäng</label>
+					</div>
+				</form>
+			</div>
+
+			<input type="checkbox" id="remove_modal" class="modal-toggle" />
 			<div class="modal  " id="remove_modal_div"  role="dialog" >
 				<form hx-post="/news/delete/" hx-target="#alert" hx-on::after-request="removed()" class="modal-box col items-center ">
 					<input name="pk" id="delete-pk" class="hidden" ></input>
@@ -93,8 +113,8 @@
 		 document.getElementById("img").src = img;
 		 document.getElementById("my_modal_1").checked = true;
 	 }
-	 function close_modal(){
-		 document.getElementById("my_modal_1").checked = false;
+	 function close_modal(id){
+		 document.getElementById(id).checked = false;
 	 }
 	 function open_delete(pk){
 		 document.getElementById("remove_modal").checked = true;
