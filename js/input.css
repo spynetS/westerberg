@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.cardcomp {
+	@apply bg-base-100 p-4 shadow-lg border-2 rounded-box border-gray-200;
+}

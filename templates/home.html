@@ -44,17 +44,19 @@
 				</div>
 			</div>
 		</div>
-		<div class=" p-5 flex flex-col gap-12 md:h-screen " >
-			<h1 class="text-2xl font-bold" ></h1>
+		<div class=" p-5 flex flex-col gap-12 md:min-h-screen " >
 			{% include 'components/slider.html' with images=images %}
 		</div>
-		<div hx-get="/news/cards/" hx-target="#cardholder" hx-trigger="load" hx-on::after-request="cards()" class="mt-12 p-5 flex flex-col gap-12 min-h-screen items-center w-screen" >
+		<div hx-get="/news/cards/" hx-target="#cardholder" hx-trigger="load" hx-on::after-request="cards()" class="relative mt-12 p-5 flex flex-col gap-12 min-h-screen items-center w-screen" >
+
+			<img class="absolute bottom-0 right-0  " src="/media/Vector 9.png" alt="" />
+			<img class="absolute bottom-0 left-0" src="/media/Vector 8.png" alt="" />
+
 			<h1 class="text-3xl md:text-5xl font-bold" >Nyheter</h1>
-			<div id="cardholder" class="container mx-0 md:mx-auto px-0 md:px-5 flex flex-col gap-4">
+			<div id="cardholder" class="container mx-0 md:mx-auto px-0 md:px-16 flex flex-col gap-4">
 
 			</div>
-			<a href="/nyheter" class="btn btn-secondary" >Visa alla</a>
-
+			<a href="/nyheter" class="z-10 btn btn-secondary" >Visa alla</a>
 		</div>
 	</div>
 

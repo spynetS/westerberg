@@ -33,16 +33,8 @@
 
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
-
-    {% block navbar %}
-    {% endblock %}
-
-	  <div class="h-full" >
       {% block content %}
       {% endblock %}
-      {% block page %}
-      {% endblock %}
-	  </div>
 </body>
 
 <footer class="footer p-10 bg-base-300 text-base-content">

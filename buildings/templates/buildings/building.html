@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{building.adress}}
+{% endblock %}
+{% block content %}
+	{% include "layouts/homepage.html"  %}
+
+	<div class=" relative h-full w-full pb-12" >
+
+	<img class="absolute bottom-0 -z-10 w-screen right-0"  src="/media/Vector 7.png" alt="" />
+
+		<div  class="col h-full w-full container mx-auto gap-5  min-h-screen ">
+			<div class="text-sm breadcrumbs">
+				<ul>
+					<li><a href="/">Startsida</a></li>
+					<li><a href="/fastigheter">Fastigheter</a></li>
+					<li><a href="#">{{building.adress}}</a></li>
+				</ul>
+			</div>
+
+			<div>
+				<h1 class="text-4xl font-bold" >{{building.adress}}</h1>
+				<h2 class="text-xl  font-bold">{{building.get_city_display}}</h2>
+				<h2 class="text-lg  font-bold">{{building.get_area_display}}</h2>
+			</div>
+			<div class=" flex flex-col md:grid grid-cols-6 gap-5 justify-around w-full">
+				<div class="cardcomp col gap-5 col-span-4 p-5 rounded-lg shadow-lg">
+					<div class="min-h-[200px] max-w-[80%] mx-auto container" >
+						{% include 'components/slider.html' with image=images %}
+					</div>
+					<div class="px-12  justifty-evenly" >
+						<h2 class="text-xl font-semibold" >Beskrivning</h2>
+						<p>{{building.description}}</p>
+					</div>
+				</div>
+				<div class="col col-span-2">
+					<div class="cardcomp flex flex-col text-end">
+						<div id="Map" style="height:250px"></div>
+						<a class="link link-primary" href="https://maps.google.com/?q={{rental.building.adress}}">Google maps länk</a>
+					</div>
+					<div class="cardcomp flex flex-col text-end">
+						<ul class="menu w-full">
+							<li>
+								<h2 class="menu-title">Lediga obejekt i denna byggnad</h2>
+								<ul>
+									{% if rentals|length == 0  %}
+										<p>Inga lediga obejekt i denna bostad</p>
+									{% endif %}
+
+									{% for item in rentals %}
+										<li><a href="/rentals/rental/{{building.adress}}/{{item.pk}}" > {{item.rooms}} rum och kök {{item.size}} kvm {{item.rent}}/månad </a></li>
+									{% endfor %}
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	<script defer src="/static/slide.js"></script>
+	<script src="/media/OpenLayers/OpenLayers.js"></script>
+	<script>
+		var lat            = {{building.lat}};
+		var lon            = {{building.lon}};
+		var zoom           = 17;
+
+		var fromProjection = new OpenLayers.Projection("EPSG:4326");   // Transform from WGS 1984
+		var toProjection   = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+		var position       = new OpenLayers.LonLat(lon, lat).transform( fromProjection, toProjection);
+
+		map = new OpenLayers.Map("Map");
+		var mapnik         = new OpenLayers.Layer.OSM();
+		map.addLayer(mapnik);
+
+		var markers = new OpenLayers.Layer.Markers( "Markers" );
+		map.addLayer(markers);
+		markers.addMarker(new OpenLayers.Marker(position));
+
+		map.setCenter(position, zoom);
+	</script>
+</div>
+
+
+{% endblock %}

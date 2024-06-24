@@ -3,7 +3,10 @@
 
 import time
 from django.db.models import options
+from django.http import Http404, HttpResponseNotFound
 from django.shortcuts import render
+
+from rentals.models import Rental
 
 from .models import Building
 
@@ -52,3 +55,18 @@ def fast(request):
         return render(request, "fastigheter.html",{"select":"?select="+request.GET['select']})
     else:
         return render(request, "fastigheter.html",{})
+
+def building_adress(request, adress):
+
+    try:
+        building = Building.objects.get(adress=adress)
+    except:
+        return HttpResponseNotFound()
+    rentals = Rental.objects.filter(building=building)
+
+    images = []
+    for img in building.images.all():
+        print(img.image.url)
+        images.append(img.image.url)
+
+    return render(request, "buildings/building.html",{"building":building,"images":images,"rentals":rentals})
