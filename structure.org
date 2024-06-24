@@ -14,4 +14,6 @@ This website is written in Django 4.2.11 using templates and htmx. The pages of 
 ** admin byggnader
 ** admin anonser
 
+** news should come newest first
+
 ** få tag på databasen som finns

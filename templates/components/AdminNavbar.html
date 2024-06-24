@@ -7,6 +7,10 @@
     <a href="/admin/byggnader" class="btn btn-natrual">Byggnader</a>
     <a href="/admin/legenheter" class="btn btn-natrual">Lägenhets annonser</a>
     <a href="/admin/lokaler" class="btn btn-natrual">Lokal annonser</a>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button class="btn " type="submit">Log Out</button>
+    </form>
   </div>
   <div class="p-5 w-full">{% block admin_content %} {% endblock %}</div>
 </div>
