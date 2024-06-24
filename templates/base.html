@@ -44,9 +44,11 @@
 {% endblock %}
 
 </head>
-<body hx-boost="true" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+<body hx-boost="false" hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+  <div>
       {% block content %}
       {% endblock %}
+  </div>
 </body>
 
 <footer class="footer p-10 bg-base-300 text-base-content">
