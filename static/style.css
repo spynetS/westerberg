@@ -3643,9 +3643,19 @@ details.collapse summary::-webkit-details-marker {
   display: none;
 }
 
+.size-96 {
+  width: 24rem;
+  height: 24rem;
+}
+
 .size-\[50px\] {
   width: 50px;
   height: 50px;
+}
+
+.size-32 {
+  width: 8rem;
+  height: 8rem;
 }
 
 .h-10 {
@@ -3746,10 +3756,6 @@ details.collapse summary::-webkit-details-marker {
 
 .w-screen {
   width: 100vw;
-}
-
-.max-w-\[600px\] {
-  max-width: 600px;
 }
 
 .max-w-\[80\%\] {
@@ -3886,9 +3892,23 @@ details.collapse summary::-webkit-details-marker {
   border-width: 1px;
 }
 
+.border-2 {
+  border-width: 2px;
+}
+
 .border-base-300 {
   --tw-border-opacity: 1;
   border-color: var(--fallback-b3,oklch(var(--b3)/var(--tw-border-opacity)));
+}
+
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgb(0 0 0 / var(--tw-border-opacity));
+}
+
+.border-gray-200 {
+  --tw-border-opacity: 1;
+  border-color: rgb(229 231 235 / var(--tw-border-opacity));
 }
 
 .bg-\[\#5563E4\] {
@@ -3929,6 +3949,11 @@ details.collapse summary::-webkit-details-marker {
 .bg-primary {
   --tw-bg-opacity: 1;
   background-color: var(--fallback-p,oklch(var(--p)/var(--tw-bg-opacity)));
+}
+
+.bg-red-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
 }
 
 .bg-white {
@@ -4070,10 +4095,6 @@ details.collapse summary::-webkit-details-marker {
 
 .pt-2 {
   padding-top: 0.5rem;
-}
-
-.pt-24 {
-  padding-top: 6rem;
 }
 
 .pt-32 {
@@ -4223,10 +4244,6 @@ details.collapse summary::-webkit-details-marker {
   transition-duration: 150ms;
 }
 
-.duration-200 {
-  transition-duration: 200ms;
-}
-
 .duration-300 {
   transition-duration: 300ms;
 }
@@ -4267,6 +4284,10 @@ details.collapse summary::-webkit-details-marker {
   --tw-enter-opacity: 0;
 }
 
+.fade-out {
+  --tw-exit-opacity: 0;
+}
+
 .zoom-in {
   --tw-enter-scale: 0;
 }
@@ -4275,12 +4296,12 @@ details.collapse summary::-webkit-details-marker {
   --tw-enter-translate-y: 12rem;
 }
 
-.duration-150 {
-  animation-duration: 150ms;
+.slide-in-from-left-72 {
+  --tw-enter-translate-x: -18rem;
 }
 
-.duration-200 {
-  animation-duration: 200ms;
+.duration-150 {
+  animation-duration: 150ms;
 }
 
 .duration-300 {
@@ -4465,12 +4486,12 @@ details.collapse summary::-webkit-details-marker {
     display: none;
   }
 
-  .lg\:w-1\/3 {
-    width: 33.333333%;
-  }
-
   .lg\:w-1\/2 {
     width: 50%;
+  }
+
+  .lg\:w-1\/3 {
+    width: 33.333333%;
   }
 
   .lg\:grid-cols-2 {

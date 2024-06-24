@@ -33,9 +33,9 @@ def delete(request):
     return render(request,"components/Alert.html",{"type":"Error", "msg":"You are not admin"})
 
 def page(request):
-    news = reversed(News.objects.all())
+    news = News.objects.order_by('-created_at')
     return render(request,'news/form.html',{'news':news})
 
 def cards(request):
-    news = reversed(News.objects.all()[:3])
+    news = News.objects.order_by('-created_at')[:3]
     return render(request,'news/card.html',{'news':news})

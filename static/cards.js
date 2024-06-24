@@ -6,7 +6,6 @@ function cards() {
       } else {
         entry.target.classList.remove("is-visible");
       }
-      console.log("asdasd");
     });
   };
 
@@ -17,11 +16,11 @@ function cards() {
     threshold: 0.1, // Trigger if at least 10% of the element is visible
   });
 
-  // Get all the div elements to be observed
-  const divs = document.querySelectorAll("div");
+  // Get all the div elements to be observee
+  const divs = document.getElementsByClassName("news-card");
 
-  // Start observing each div
-  divs.forEach((div) => {
+  // Convert HTMLCollection to an array and then use forEach
+  Array.prototype.forEach.call(divs, (div) => {
     observer.observe(div);
   });
 }

@@ -4,4 +4,19 @@
 
 {% block content %}
 	{% include 'layouts/homepage.html' %}
+	<div class="min-h-screen w-screen relative" >
+		<div class="col items-center container gap-12 mx-auto p-5" >
+		<h1 class="text-5xl font-bold" >Vad letar du efter?</h1>
+
+		<div class='z-10 text-xl flex flex-row justify-center gap-5 w-full ' >
+			<a href="bostad" class="cardcomp cursor-pointer hover:bg-base-200 flex flex-col items-center justify-center duration-75  size-32" >
+				<h1>Bostad</h1>
+			</a>
+			<a href="lokal" class="cardcomp cursor-pointer hover:bg-base-200 flex flex-col items-center justify-center duration-75  size-32" >
+				<h1>Lokal</h1>
+			</a>
+		</div>
+		</div>
+		<img class="absolute bottom-0 right-0" src="/media/Vector 9.png" alt="" />
+	</div>
 {% endblock %}
