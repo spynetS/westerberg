@@ -4,21 +4,22 @@
 	{% include 'layouts/homepage.html' %}
 
 	<template rapid-name="anch" >
-		<a name="nava" class="link " onclick="fixheight()" href="#{url}">{children}</a>
+		<a name="nava" class=" " onclick="fixheight()" href="#{url}">{children}</a>
 	</template>
 
 	<div>
 		<div  class="w-screen min-h-[200px] bg-[url('/media/slides/5.png')] bg-center ">
 		</div>
 		<div class="flex flex-row w-full " >
-			<nav style="top:0px;" id="nav" class="fixed w-1/6 min-h-1/2 flex flex-col gap-3 bg-white border-2 left-0 " >
-				<ul id="list" class="menu bg-base-200 rounded-box h-full">
+			<nav style="top:0px;" id="nav" class="sm:left-0 -left-[100%] rounded-box fixed w-screen w-1/6 min-h-1/2 flex flex-row md:flex-col gap-3 bg-white border-2 left-0 shadow-lg " >
+				<ul id="list" class=" menu bg-base-200 text-base-content min-h-full p-4">
 				</ul>
-
-
+				<button id="shower" onclick="show()" class="left-0 sm:hidden flex fixed btn btn-primary" >
+					>
+				</button>
 			</nav>
-			<div class="w-full h-full px-[20%] pt-5 flex flex-col gap-5 " >
-				<h1 class="text-4xl font-bold" >Hyresgästsinformation</h1>
+			<div class="w-full h-full px-6 sm:px-[20%] pt-5 flex flex-col gap-5">
+				<h1 class="md:text-4xl text-2xl font-bold sm:mt-0 mt-12" >Hyresgästsinformation</h1>
 				<section id="aboutus" >
 					<h2 class="text-2xl font-semibold" >Om oss</h2>
 					<div class="p-4" >
@@ -115,11 +116,11 @@
 						<p>Tillsammans skapar vi ett trivsamt boende.</p>
 					</div>
 				</section>
-
 			</div>
 		</div>
 	<script type="text/javascript">
-	 let toppx = 200+document.getElementById("navbar").offsetHeight;
+	 	let toppx = 200+document.getElementById("navbar").offsetHeight;
+	 	let section = document.getElementsByTagName("section")[0]
 		var scrollPosition = window.scrollY || window.pageYOffset;
 		console.log(scrollPosition)
 		if(scrollPosition < toppx){
@@ -173,60 +174,57 @@
 			document.getElementById("nav").style.top = "0px";
 		 }
 
-		 let most_viewed = getMostVisibleElement(document.getElementsByTagName('section'))
+		 let most_viewed = logSectionInView()
 		 let a_tags = document.getElementsByName("nava")
 		 for(let i =0 ;i < a_tags.length;i++){
-			 a_tags[i].className = "link"
+			 a_tags[i].className = ""
 		 }
 		 let matchedATag = document.querySelectorAll(`a[href*="#${most_viewed.id}"]`)[0]
 		 console.log(most_viewed.id)
-		 matchedATag.className = "link link-primary"
+		 matchedATag.className = "btn btn-primary"
 	 }
+     // Function to determine if a section is in view
+        function isInView(element) {
+            const rect = element.getBoundingClientRect();
+            return rect.top >= 0 && rect.top <= (window.innerHeight || document.documentElement.clientHeight)/10;
+        }
 
+     // Function to log the section in view
+     function logSectionInView() {
+         const sections = document.querySelectorAll('section');
+         sections.forEach(sec => {
+             if (isInView(sec)) {
+				 section = sec
+             }
+         });
+		 return section;
+     }
 	 window.addEventListener('scroll', function() {
 		 fixheight()
+         // logSectionInView();
      });
 
-	function getMostVisibleElement (els) {
+	 function show(){
+		 let nav = document.getElementById("nav")
+		 nav.classList.remove("-left-[100%]")
+		 let list = document.getElementById("list")
+		 list.classList.add("pt-12")
 
-	var viewportHeight = window.innerHeight
+		 let button = document.getElementById("shower")
+		 button.innerHTML = "Stäng visare"
+		 button.onclick=hide
 
-	var max = 0
-	var mostVisibleEl = null
+	 }
+	 function hide(){
+		 let nav = document.getElementById("nav")
+		 nav.classList.add("-left-[100%]")
+		 let list = document.getElementById("list")
+		 list.classList.remove("pt-12")
+		 let button = document.getElementById("shower")
+		 button.innerHTML = "Öppna visare"
+		 button.onclick=show
+	 }
 
-	for (var el of Array.from(els)) {
-
-		var rect = el.getBoundingClientRect()
-		var height = rect.bottom - rect.top
-		var visible = {
-		top: rect.top >= 0 && rect.top < viewportHeight,
-		bottom: rect.bottom > 0 && rect.bottom < viewportHeight
-		}
-
-		var visiblePx = 0
-		if ( visible.top && visible.bottom ) {
-		visiblePx = height // Whole element is visible
-		} else if ( visible.top ) {
-		visiblePx = viewportHeight - rect.top
-		} else if ( visible.bottom ) {
-		visiblePx = rect.bottom
-		} else if ( height > viewportHeight && rect.top < 0 ) {
-		var absTop = Math.abs( rect.top )
-		if ( absTop < height ) {
-			visiblePx = height - absTop // Part of the element is visible
-		}
-		}
-
-		if ( visiblePx > max ) {
-		max = visiblePx
-		mostVisibleEl = el
-		}
-
-	}
-
-	return mostVisibleEl
-
-	}
 	</script>
 
 	</div>
