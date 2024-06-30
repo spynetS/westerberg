@@ -4,7 +4,7 @@
 	{% include 'layouts/homepage.html' %}
 
 	<template rapid-name="anch" >
-		<a name="nava" class=" " onclick="fixheight()" href="#{url}">{children}</a>
+		<a name="nava" class="" onclick="fixheight()" href="#{url}">{children}</a>
 	</template>
 
 	<div>
@@ -157,6 +157,8 @@
 				textnode.innerHTML = h3.textContent
 
 				node.appendChild(textnode);
+				node.classList.add("sm:flex")
+				node.classList.add("hidden")
 				sublist.appendChild(node);
 			});
 			const sublistitem = document.createElement("li")
