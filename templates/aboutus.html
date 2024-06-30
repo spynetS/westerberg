@@ -1,0 +1,234 @@
+{% extends 'base.html' %}
+
+{% block content %}
+	{% include 'layouts/homepage.html' %}
+
+	<template rapid-name="anch" >
+		<a name="nava" class="link " onclick="fixheight()" href="#{url}">{children}</a>
+	</template>
+
+	<div>
+		<div  class="w-screen min-h-[200px] bg-[url('/media/slides/5.png')] bg-center ">
+		</div>
+		<div class="flex flex-row w-full " >
+			<nav style="top:0px;" id="nav" class="fixed w-1/6 min-h-1/2 flex flex-col gap-3 bg-white border-2 left-0 " >
+				<ul id="list" class="menu bg-base-200 rounded-box h-full">
+				</ul>
+
+
+			</nav>
+			<div class="w-full h-full px-[20%] pt-5 flex flex-col gap-5 " >
+				<h1 class="text-4xl font-bold" >Hyresgästsinformation</h1>
+				<section id="aboutus" >
+					<h2 class="text-2xl font-semibold" >Om oss</h2>
+					<div class="p-4" >
+						<p>Familjen Westerberg Fastigheter AB är ett familjeägt fastighetsbolag med ca 600 bostäder och lokaler i Norrköping, Åby och Söderköping. Vi ser långsiktigt på vårt företagande och vår målsättning är att även detta skall speglas i långvariga och trevliga kontakter med våra hyresgäster. Kontakten med hyresgästerna har varit viktig ända sedan 1972 då Ulf Westerberg köpte sin första fastighet.</p>
+						<p>Vår ambition är att vara ett av de ledande bostadsföretagen i Söderköping och i Åby. I Norrköping är vår ambition att förknippas med fastigheter i bra lägen. Vi kan erbjuda både bostäder, kontor och butikslokaler i samtliga våra orter.</p>
+						<p>Vi har en egen förvaltningsorganisation med personal lokalt, som ansvarar för sitt skötselområde. Hyresgästerna ska känna trygghet med vem som kommer till deras lägenhet. Familjen Westerberg Fastigheter har ett långsiktigt perspektiv med målsättningen att hålla våra fastigheter i gott skick i nära samråd med hyresgästerna.</p>
+					</div>
+
+				</section>
+				<section id="hyresinbetalningar" >
+					<h2 class="text-2xl font-semibold" >Hyresinbetalningar</h2>
+					<div class="p-4" >
+						<p>Du får tre hyresavier varje kvartal med förtryckt inbetalningsbelopp samt OCR-nummer. Du kan också få dem via mail. Det går att betala in hyran via bank, internetbank eller via posten. Du kan också ansöka om autogiro (kontakta kontoret 011-181340) alt carin@westerbergfastigheter.se för mer info.</p>
+					</div>
+					<div class="p-4" >
+						<h3 class="text-lg font-bold" >Vad händer om jag inte betalar i tid?</h3>
+						<p>Har du problem med en hyresinbetalning kontakta oss omedelbart på telefon 011-181340 mån-fredag 08.00-12.00 alt via vår hemsida www.westerbergfastigheter.se. Carin Boiertz hos oss är det som du skall prata med i första hand. Om du inte betalar in hyran i tid får du en påminnelse och vi debiterar då en påminnelseavgift. Dröjer du ytterligare med hyran sänder vi ett kravbrev, med kravavgift. Därefter ansöker vi om betalningsföreläggande och avhysning via Kronofogden. Återkommande sena betalningar kan leda till att du mister ditt hyreskontrakt.</p>
+					</div>
+
+				</section>
+				<section id="inflyttning" >
+					<h2 class="text-2xl font-semibold" >Inflyttning</h2>
+					<div class="p-4" >
+						<p>Dags för inflyttning i din nya lägenhet. Vi besiktar alltid lägenheten före din inflyttning och upprättar ett protokoll. Helst vill vi att du kommer till avflyttningsbesiktningen och då genomför en inflyttningsbesiktning med oss. Det är därför klokt att hålla kontakt med den avflyttande hyresgästen, dels för att få kunskap om när denne avser att avflytta, samt även enas om en besiktningstid som kan meddelas oss. Om något i besiktningsprotokollet är felaktigt bör du ta kontakt med oss inom skälig tid. Åtta dagar anser vi är skäligt. Tänk också på att göra en adressändring i god tid. Följande länk är användbar https://www.skatteverket.se/privat/folkbokforing/flyttanmalan</p>
+					<div class="p-4" >
+					</div>
+						<h3 class="text-lg font-bold" >Gällande hemförsäkring</h3>
+						<p>Hemförsäkringen är ett viktigt skydd för dig. För att undvika ekonomiska förluster vid inbrott, brand, översvämning eller annan skada, bör du teckna en hemförsäkring.</p>
+					</div>
+
+				</section>
+				<section id="diverse-abonnemang" >
+					<h2 class="text-2xl font-semibold" >Diverse abonnemang</h2>
+					<div class="p-4" >
+						<h3 class="text-lg font-bold" >El abonnemanget</h3>
+						<p>Var ute i god tid och beställ el abonnemang. Det är du som måste teckna ett sådant. I våra samtliga områden är det EON du beställer nätabonnemanget ifrån. Kontakta EON kundtjänst. Det är bra om du då vet vem/vilka som bott innan dig i lägenheten. Vi har tyvärr inte uppgifter om anläggningsid m m för varje lägenhet.</p>
+					<div class="p-4" >
+					</div>
+						<h3 class="text-lg font-bold" >Kabel-TV och Bredband</h3>
+						<p>I våra fastigheter finns iTUX öppna bredbandsnät, oppnabredbandsnat.itux.se för mer information. Uttagen sitter vanligtvis i hallarna. Via antennätet erhåller du ett utökat digitalt tv-utbud som ingår i hyran.</p>
+					</div>
+
+				</section>
+				<section id="sophantering" >
+					<h2 class="text-2xl font-semibold" >Sophantering</h2>
+					<div class="p-4" >
+						<p>Vår ambition är att ha så stor sortering och uppdelning av sopor vid fastigheten som möjligt, detta för att du som boende skall kunna ta ditt miljöansvar. Vi önskar att du som bor hos oss respekterar detta och blir en återvinnare du med.</p>
+						<p>Skrymmande sopor sk, grovsopor ber vi dig i möjligaste mån lämna på Returpunkterna. Då kan soporna sorteras bäst och möjliggör bästa återvinningen och miljönyttan. Dessutom är det kostnadsfritt. Detsamma gäller för el-skrot och farligt avfall. För frågor runt sophantering i övrigt ber vi dig kontakta respektive skötselansvarig eller vända dig till kontoret 011-18 13 40, alternativt mailar du din fråga till oss.</p>
+					</div>
+
+				</section>
+				<section id="disk" >
+					<h2 class="text-2xl font-semibold" >Disk- och tvättmaskin</h2>
+					<div class="p-4" >
+						<p>I de lägenheter som är förberedda för disk och eller tvättmaskin kan installation ske. Var noga med fuktskydd och dylikt. Vi rekommenderar att en behörig person gör installationen. Vill du få hjälp med en installation av diskmaskin kan vår personal utföra detta mot en avgift.</p>
+					</div>
+				</section>
+				<section id="tavlor" >
+					<h3 class="text-lg font-semibold" >Uppfästning av tavlor mm.</h3>
+					<div class="p-4" >
+						<p>Använd rätt typ av fästkrokar när du hänger upp tavlor, så att tapet och vägg skadas så lite som möjligt. Fäster du upp te x en TV på väggen måste du vara beredd att laga efter dig.</p>
+						<p>OBS! det är inte tillåtet att borra eller spika i våtutrymme där ytskiktet och tätskikt kan skadas.</p>
+					</div>
+				</section>
+				<section id="trygghet" >
+					<h2 class="text-2xl font-semibold" >Trygghet och trivsel</h2>
+					<div class="p-4" >
+						<p>För att alla skall trivas med sina boenden, bör man respektera och komma överens med sina grannar. Du som flyttar in kanske kan hälsa på de du möter och förklara var du skall flytta in. Normalt får man säkert ett svar var de bor o s v. Om du skall ha en bjudning informera dina grannar om det. Nedan följer några övergripande regler som gäller i våra fastigheter.</p>
+					<div class="p-4" >
+					</div>
+						<h3 class="text-lg font-semibold" >Oljud och fest</h3>
+						<p>Det som är skön musik för dig kan mycket väl vara oljud för andra. Mellan 22.00-07.00 skall det vara lugnt i fastigheten. Det innebär att musik och fest skall dämpas efter 22.00. Förvarna dina grannar om du skall ha en bjudning genom att sätta en lapp i t e x trapphuset. Respektera tiderna ovan. Oavsett dag så kan din granne vara på väg mot tävling, tentor, extra jobb, barn som har svårt att sova o s v. Tänk på att du enligt hyreslagen ansvarar för dina gästers uppträdande och handlingar.</p>
+					</div>
+					<div class="p-4" >
+						<h3 class="text-lg font-semibold" >Trapphusen</h3>
+						<p>Trapphusen är viktiga utrymningsvägar om en brand inträffar. Rök och brandutveckling minskas om inget brännbart förvaras i trapphusen. Hushålls sopor får inte förvaras i trapphuset i väntan på borttransport till soprum. Det ser illa ut men sprider framförallt lukt och ohyra. Det är inte tillåtet att röka i trapphuset.</p>
+					</div>
+					<div class="p-4" >
+						<h3 class="text-lg font-semibold" >Tvättstugan</h3>
+						<p>Tvättstugan skall alltid rengöras efter användandet. Om den som tvättat före dig missat det. Tveka inte om att påpeka detta. Normalt krävs rengöring av maskiner och golv. Se även anslag i tvättstugan.</p>
+						<p>Vind och källare. Här gäller liknande som för trapphusen. I förråd får inte brandfarlig vätska förvaras. Tänk på att alltid stänga dörrar efter dig. Det minskar inbrott och brandspridning om olyckan är framme. Normalt är att du blivit tilldelad ett förråd vid din inflyttning. Oavsett om du använder det eller inte bör du låsa det. Detta för att ingen annan skall börja använda det eller placera saker där.</p>
+					</div>
+					<div class="p-4" >
+						<h3 class="text-lg font-semibold" >Husdjur</h3>
+						<p>Husdjur kräver vårt tillstånd och är förenade med villkor. Kort kan sägas att villkoren är följande:</p>
+						<p>Husdjuret skall vara kopplat när det vistas på gården och i trapphus. Rastning får ej förekomma på gården och runt lekplatser. Är husdjuret en katt gäller att den skall vara en innekatt.</p>
+					</div>
+					<div class="p-4" >
+						<h3 class="text-lg font-semibold" >Övrigt</h3>
+						<p>Om du vill ha en bjudning, -informera grannarna om dina planer. Tänk på att sänka volymen senast 22.00.</p>
+						<p>Hjälp till att hålla trapphuset rent. Detsamma gäller vindar och källare.</p>
+						<p>Rengör tvättstuga och torkrum efter användandet. Se även de anslag som finns där.</p>
+						<p>Sortera sopor enligt anvisningarna.</p>
+						<p>Tillsammans skapar vi ett trivsamt boende.</p>
+					</div>
+				</section>
+
+			</div>
+		</div>
+	<script type="text/javascript">
+	 let toppx = 200+document.getElementById("navbar").offsetHeight;
+		var scrollPosition = window.scrollY || window.pageYOffset;
+		console.log(scrollPosition)
+		if(scrollPosition < toppx){
+			document.getElementById("nav").style.top = toppx+"px";
+		}
+
+		const sections = document.querySelectorAll('section');
+	 	let list = document.getElementById("list");
+		// Loop through each section
+		sections.forEach(section => {
+			// Get the h2 element inside the section
+			const h2 = section.querySelector('h2');
+			if (h2) {
+				const node = document.createElement("li");
+				const textnode = document.createElement("anch");
+				textnode.setAttribute("url",section.id)
+				textnode.innerHTML = h2.textContent
+
+				node.appendChild(textnode);
+
+				list.appendChild(node);
+
+			}
+
+			// Get all h3 elements inside the section
+			const h3s = section.querySelectorAll('h3');
+			const sublist = document.createElement('ul');
+
+			h3s.forEach(h3 => {
+				console.log('H3:', h3.textContent);
+				const node = document.createElement("li");
+				const textnode = document.createElement("anch");
+				textnode.setAttribute("url",section.id)
+				textnode.innerHTML = h3.textContent
+
+				node.appendChild(textnode);
+				sublist.appendChild(node);
+			});
+			const sublistitem = document.createElement("li")
+			sublistitem.appendChild(sublist)
+			list.appendChild(sublistitem)
+		});
+
+	 function fixheight(){
+		 var scrollPosition = window.scrollY || window.pageYOffset;
+		 console.log(scrollPosition,"\n")
+		 if(scrollPosition < toppx){
+			document.getElementById("nav").style.top = toppx-scrollPosition+"px";
+		 }
+		 else{
+			document.getElementById("nav").style.top = "0px";
+		 }
+
+		 let most_viewed = getMostVisibleElement(document.getElementsByTagName('section'))
+		 let a_tags = document.getElementsByName("nava")
+		 for(let i =0 ;i < a_tags.length;i++){
+			 a_tags[i].className = "link"
+		 }
+		 let matchedATag = document.querySelectorAll(`a[href*="#${most_viewed.id}"]`)[0]
+		 console.log(most_viewed.id)
+		 matchedATag.className = "link link-primary"
+	 }
+
+	 window.addEventListener('scroll', function() {
+		 fixheight()
+     });
+
+	function getMostVisibleElement (els) {
+
+	var viewportHeight = window.innerHeight
+
+	var max = 0
+	var mostVisibleEl = null
+
+	for (var el of Array.from(els)) {
+
+		var rect = el.getBoundingClientRect()
+		var height = rect.bottom - rect.top
+		var visible = {
+		top: rect.top >= 0 && rect.top < viewportHeight,
+		bottom: rect.bottom > 0 && rect.bottom < viewportHeight
+		}
+
+		var visiblePx = 0
+		if ( visible.top && visible.bottom ) {
+		visiblePx = height // Whole element is visible
+		} else if ( visible.top ) {
+		visiblePx = viewportHeight - rect.top
+		} else if ( visible.bottom ) {
+		visiblePx = rect.bottom
+		} else if ( height > viewportHeight && rect.top < 0 ) {
+		var absTop = Math.abs( rect.top )
+		if ( absTop < height ) {
+			visiblePx = height - absTop // Part of the element is visible
+		}
+		}
+
+		if ( visiblePx > max ) {
+		max = visiblePx
+		mostVisibleEl = el
+		}
+
+	}
+
+	return mostVisibleEl
+
+	}
+	</script>
+
+	</div>
+
+{% endblock %}
