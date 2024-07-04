@@ -6,6 +6,7 @@ module.exports = {
     "../news/templates/**/*.html",
     "../rentals/templates/**/*.html",
     "../servicereport/templates/**/*.html",
+    "../intrestreport/templates/**/*.html",
   ],
   theme: {
     extend: {},
