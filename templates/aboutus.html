@@ -10,15 +10,14 @@
 	<div>
 		<div  class="w-screen min-h-[200px] bg-[url('/media/slides/5.png')] bg-center ">
 		</div>
-		<div class="flex flex-row w-full " >
-			<nav style="top:0px;" id="nav" class="sm:left-0 -left-[100%] rounded-box fixed w-screen w-1/6 min-h-1/2 flex flex-row md:flex-col gap-3 bg-white border-2 left-0 shadow-lg " >
+		<div class="flex flex-row w-full " > <nav style="top:0px;" id="nav" class="md:left-0 -left-[400px] rounded-box fixed w-400px min-h-1/2 flex flex-row md:flex-col gap-3 bg-white border-2 left-0 shadow-lg " >
 				<ul id="list" class=" menu bg-base-200 text-base-content min-h-full p-4">
 				</ul>
-				<button id="shower" onclick="show()" class="left-0 sm:hidden flex fixed btn btn-primary" >
+				<button id="shower" onclick="show()" class="left-0 md:hidden flex fixed btn " >
 					>
 				</button>
 			</nav>
-			<div class="w-full h-full px-6 sm:px-[20%] pt-5 flex flex-col gap-5">
+			<div class="w-full h-full px-6 md:pl-[400px] pl-6 pt-5 flex flex-col gap-5">
 				<h1 class="md:text-4xl text-2xl font-bold sm:mt-0 mt-12" >Hyresgästsinformation</h1>
 				<section id="aboutus" >
 					<h2 class="text-2xl font-semibold" >Om oss</h2>
@@ -208,7 +207,7 @@
 
 	 function show(){
 		 let nav = document.getElementById("nav")
-		 nav.classList.remove("-left-[100%]")
+		 nav.classList.remove("-left-[400px]")
 		 let list = document.getElementById("list")
 		 list.classList.add("pt-12")
 
@@ -219,7 +218,7 @@
 	 }
 	 function hide(){
 		 let nav = document.getElementById("nav")
-		 nav.classList.add("-left-[100%]")
+		 nav.classList.add("-left-[400px]")
 		 let list = document.getElementById("list")
 		 list.classList.remove("pt-12")
 		 let button = document.getElementById("shower")
