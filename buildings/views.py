@@ -70,3 +70,6 @@ def building_adress(request, adress):
         images.append(img.image.url)
 
     return render(request, "buildings/building.html",{"building":building,"images":images,"rentals":rentals})
+
+def select_areas(request):
+    return render(request,  "buildings/select.html",{"areas":Building.get_area_list()})

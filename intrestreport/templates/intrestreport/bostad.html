@@ -1,0 +1,103 @@
+<div class="relative w-screen min-h-screen bg-center bg-cover bg-no-repeat bg-[url('/media/norr.jpg')]">
+	<img class="absolute top-0 h-full w-full z-0" src="/media/Vector 8.png" alt="" />
+	<div class="container relative mx-auto p-2 z-10 ">
+		<h1 class="text-3xl text-white font-bold">Intresseanmälan</h1>
+		<form hx-put="/intrestreport/" hx-swap="" class="flex flex-col items-center gap-12" >
+			<div  class="mt-8 grid grid-cols-2 grid-row-2 gap-16  w-full ">
+				<div class="cardcomp flex flex-col items-center gap-4 ">
+					<h1 class="text-black text-2xl font-bold  " >Sökande</h1>
+					<div class='w-full h-full grid grid-cols-2 gap-3 ' >
+						<input class="input input-bordered" placeholder="Namn*" name="name" required/>
+						<input type="text" id="personal-number" name="personal_number" placeholder="YYYYMMDDXXXX*" class="input input-bordered" pattern="\d{10}|\d{12}" required>
+						<input class="input input-bordered" placeholder="Nuvarande bostadsadress*" name="adress" required/>
+						<input class="input input-bordered" placeholder="Nuvarande hyresvärd" name="landlord" />
+						<input class="input input-bordered" placeholder="Syselsettning*" name="employment" required/>
+						<input class="input input-bordered" placeholder="E-post*" name="email" type="email" required/>
+						<input class="input input-bordered" placeholder="Telefon*" name="phone" type="phonenumber" required/>
+						<input class="input input-bordered" placeholder="Tel Arbetsgivare" name="phone_employer" type="text" required/>
+					</div>
+				</div>
+				<div class="text-white font-bold flex flex-col gap-3" >
+					<p class="p-3 bg-black bg-opacity-10 inset-0 shadow-lg">Vi tillämpar inte något kösystem i formell  mening, men grundkravet är att samtliga gör en intresseanmälan. Vi  försöker prioritera de som sökt en längre tid hos oss. Det gäller dock  att du som intressent är aktiv i ditt sökande av lägenhet och förnyar  din intresseanmälan varje månadsskifte.</p>
+					<p class="p-3 bg-black bg-opacity-10 inset-0 shadow-lg">För  att erhålla lägenhet hos oss skall du ha inkomst av tjänst eller  pension, inga betalningsanmärkningar samt referenser från tidigare  boende. En borgensman kan uppväga bristen på t ex fast arbete eller  referenser från tidigare boenden. Vi gör alltid en individuell prövning  och förbehåller oss rätten att själva välja hyresgäst.</p>
+					<p class="p-3 bg-black bg-opacity-10 inset-0 shadow-lg">Genom  att fylla i och skicka in en intresseanmälan godkänner du att vi sparar  dina personuppgifter i anmälan. Vi sparar din intresseanmälan i högst  fyra månader, därefter raderas den. Vid erbjudande om lägenheten  genomför vi en kreditupplysning hos ett kreditupplysningsföretag</p>
+				</div>
+
+				<div class="cardcomp flex flex-col items-center gap-4 ">
+					<h1 class="text-black text-2xl font-bold  " >Medsökande</h1>
+					<div class='w-full h-full grid grid-cols-2 gap-3 ' >
+						<input class="input input-bordered" placeholder="Namn" name="name" />
+						<input type="text" id="personal-number" name="personal_number" placeholder="YYYYMMDDXXXX" class="input input-bordered" pattern="\d{10}|\d{12}" >
+						<input class="input input-bordered" placeholder="Nuvarande bostadsadress" name="adress" />
+						<input class="input input-bordered" placeholder="Nuvarande hyresvärd" name="landlord" />
+						<input class="input input-bordered" placeholder="Syselsettning" name="employment" />
+						<input class="input input-bordered" placeholder="E-post" name="email" type="email" />
+						<input class="input input-bordered" placeholder="Telefon" name="phone" type="phonenumber" />
+						<input class="input input-bordered" placeholder="Tel Arbetsgivare" name="phone_employer" type="text" />
+					</div>
+				</div>
+
+				<div class="cardcomp flex flex-col items-center gap-4 ">
+					<h1 class="text-black text-2xl font-bold  " >Önskemål beträffande bostad</h1>
+					<div class='w-full h-full flex flex-col gap-3 ' >
+
+						<div>
+							<label>Antal rum*</label>
+							<div class="flex flex-row justify-evenly form-control">
+								<label class="cursor-pointer label">
+									<span class="label-text">Etta</span>
+									<input type="checkbox" name="one" class="checkbox checkbox-primary" />
+								</label>
+								<label class="cursor-pointer label">
+									<span class="label-text">Tvåa</span>
+									<input type="checkbox" name="two" class="checkbox checkbox-primary" />
+								</label>
+								<label class="cursor-pointer label">
+									<span class="label-text">Trea</span>
+									<input type="checkbox" name="three" class="checkbox checkbox-primary" />
+								</label>
+								<label class="cursor-pointer label">
+									<span class="label-text">Fyra</span>
+									<input type="checkbox" name="four" class="checkbox checkbox-primary" />
+								</label>
+								<label class="cursor-pointer label">
+									<span class="label-text">Större</span>
+									<input type="checkbox" name="bigger" class="checkbox checkbox-primary" />
+								</label>
+							</div>
+						</div>
+
+						<div class="flex flex-col" >
+							<label>Inflyttningsdatum*</label>
+							<input class="input input-bordered" placeholder="Inflyttningsdatum*" name="movein" type="date" />
+						</div>
+
+						<div>
+							<label>Stad*</label>
+							<div class="flex flex-row form-control">
+								{% for city in cities %}
+								<label class="cursor-pointer label">
+									<span class="label-text">{{city.1}}</span>
+									<input type="checkbox" name="{{city.1}}" class="checkbox checkbox-primary" />
+								</label>
+								{% endfor %}
+							</div>
+						</div>
+
+						<div hx-get="/buildings/select_areas/" hx-trigger="load" >
+						</div>
+
+						<textarea name="other" rows="" cols="" placeholder="Övrigt" class="w-full textarea textarea-bordered"></textarea>
+
+					</div>
+				</div>
+			</div>
+			<button type="submit" class="btn" >
+				Skicka intresseanmälan
+			</button>
+		</fom>
+	</div>
+	{% if success %}
+		{% include "components/Alert.html" with type="success" msg="Intresseanmälan har skickats!" %}
+	{% endif %}
+</div>

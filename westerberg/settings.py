@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'news',
     'rentals',
     'servicereport',
+    'intrestreport',
 ]
 
 MIDDLEWARE = [

@@ -2,9 +2,6 @@
 {% block title %}Intresseanmälan bostad{% endblock %}
 {% block content %}
 	{% include "layouts/homepage.html" %}
-	<div class="w-screen min-h-screen" >
-		<div class="container mx-auto p-5" >
-			<h1>Hello</h1>
-		</div>
+	<div hx-get="/intrestreport/" hx-swap="outerHTML" hx-trigger="load" >
 	</div>
 {% endblock %}

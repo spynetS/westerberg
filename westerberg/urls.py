@@ -56,7 +56,7 @@ urlpatterns = [
     path("nyheter/", NewsView.as_view(template_name="news.html"), name="fastigheter"),
     path("serviceanmalan/", TemplateView.as_view(template_name="serviceanmalan.html"), name="fastigheter"),
     path("intresseanmalan/", TemplateView.as_view(template_name="intressreport.html"), name="fastigheter"),
-    path("intresseanmalan/bostad", TemplateView.as_view(template_name="intrestreportbostad.html"), name="fastigheter"),
+    path("intresseanmalan/bostad", TemplateView.as_view(template_name="bostad.html"), name="fastigheter"), #
     path("hyresgastinformation", TemplateView.as_view(template_name="aboutus.html"), name="fastigheter"),
 
     path("accounts/", include("accounts.urls")),
@@ -65,4 +65,5 @@ urlpatterns = [
     path("news/", include("news.urls")),
     path("rentals/", include("rentals.urls")),
     path("servicereport/", include("servicereport.urls")),
+    path("intrestreport/", include("intrestreport.urls")),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)

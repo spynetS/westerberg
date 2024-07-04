@@ -23,6 +23,14 @@ class Building(models.Model):
         SODERKOPING = "5", "Söderköping"
         ABY         = "6", "Åby"
 
+    @classmethod
+    def get_city_list(cls):
+        return [(choice.value, choice.label) for choice in cls.City]
+
+    @classmethod
+    def get_area_list(cls):
+        return [(choice.value, choice.label) for choice in cls.Area]
+
     area        = models.CharField(max_length=2,choices=Area.choices)
     city        = models.CharField(max_length=2,choices=City.choices, default=City.NORRKOPING)
     adress      = models.TextField()

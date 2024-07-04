@@ -7,18 +7,26 @@
 		<a name="nava" class="" onclick="fixheight()" href="#{url}">{children}</a>
 	</template>
 
+	<style type="text/css" media="screen">
+	 	section{
+            border-bottom: 2px solid #777; /* Adjust the color and width as needed */
+		}
+	</style>
+
+
 	<div>
-		<div  class="w-screen min-h-[200px] bg-[url('/media/slides/5.png')] bg-center ">
+		<div  class="w-screen min-h-[200px] bg-[url('/media/slides/2.png')] bg-center ">
 		</div>
-		<div class="flex flex-row w-full " > <nav style="top:0px;" id="nav" class="md:left-0 -left-[400px] rounded-box fixed w-400px min-h-1/2 flex flex-row md:flex-col gap-3 bg-white border-2 left-0 shadow-lg " >
-				<ul id="list" class=" menu bg-base-200 text-base-content min-h-full p-4">
+		<div class="flex flex-row w-full " >
+			<nav style="top:0px;" id="nav" class="md:left-0 z-30 -left-[400px] rounded-box fixed w-400px min-h-1/2 flex flex-row md:flex-col gap-3 bg-white border-2 left-0 shadow-lg " >
+				<ul id="list" class=" menu bg-base-200  text-base-content min-h-full p-4">
 				</ul>
 				<button id="shower" onclick="show()" class="left-0 md:hidden flex fixed btn " >
 					>
 				</button>
 			</nav>
 			<div class="w-full h-full px-6 md:pl-[400px] pl-6 pt-5 flex flex-col gap-5">
-				<h1 class="md:text-4xl text-2xl font-bold sm:mt-0 mt-12" >Hyresgästsinformation</h1>
+				<h1 class="md:text-4xl text-2xl font-bold md:mt-0 mt-12" >Hyresgästsinformation</h1>
 				<section id="aboutus" >
 					<h2 class="text-2xl font-semibold" >Om oss</h2>
 					<div class="p-4" >
@@ -118,113 +126,108 @@
 			</div>
 		</div>
 	<script type="text/javascript">
-	 	let toppx = 200+document.getElementById("navbar").offsetHeight;
-	 	let section = document.getElementsByTagName("section")[0]
-		var scrollPosition = window.scrollY || window.pageYOffset;
-		console.log(scrollPosition)
-		if(scrollPosition < toppx){
-			document.getElementById("nav").style.top = toppx+"px";
-		}
+		document.addEventListener('DOMContentLoaded', () => {
+			const navbar = document.getElementById("navbar");
+			const nav = document.getElementById("nav");
+			const list = document.getElementById("list");
+			const showerButton = document.getElementById("shower");
+			const toppx = 200 + navbar.offsetHeight;
 
-		const sections = document.querySelectorAll('section');
-	 	let list = document.getElementById("list");
-		// Loop through each section
-		sections.forEach(section => {
-			// Get the h2 element inside the section
-			const h2 = section.querySelector('h2');
-			if (h2) {
-				const node = document.createElement("li");
-				const textnode = document.createElement("anch");
-				textnode.setAttribute("url",section.id)
-				textnode.innerHTML = h2.textContent
+			const updateNavPosition = () => {
+				const scrollPosition = window.scrollY || window.pageYOffset;
+				if (scrollPosition < toppx) {
+					nav.style.top = (toppx - scrollPosition) + "px";
+				} else {
+					nav.style.top = "0px";
+				}
+			};
 
-				node.appendChild(textnode);
+			const isInView = (element) => {
+				const rect = element.getBoundingClientRect();
+				return rect.top >= 0 && rect.top <= (window.innerHeight || document.documentElement.clientHeight) / 10;
+			};
 
-				list.appendChild(node);
+			const logSectionInView = () => {
+				let mostViewedSection = null;
+				const sections = document.querySelectorAll('section');
+				sections.forEach(section => {
+					if (isInView(section)) {
+						mostViewedSection = section;
+					}
+				});
+				return mostViewedSection;
+			};
 
-			}
+			const highlightNav = () => {
+				const mostViewed = logSectionInView();
+				if (mostViewed) {
+					const aTags = document.getElementsByName("nava");
+					aTags.forEach(tag => tag.className = "");
+					const matchedATag = document.querySelector(`a[href*="#${mostViewed.id}"]`);
+					if (matchedATag) {
+						matchedATag.className = "btn btn-primary";
+					}
+				}
+			};
 
-			// Get all h3 elements inside the section
-			const h3s = section.querySelectorAll('h3');
-			const sublist = document.createElement('ul');
+			const fixHeight = () => {
+				updateNavPosition();
+				highlightNav();
+			};
 
-			h3s.forEach(h3 => {
-				console.log('H3:', h3.textContent);
-				const node = document.createElement("li");
-				const textnode = document.createElement("anch");
-				textnode.setAttribute("url",section.id)
-				textnode.innerHTML = h3.textContent
+			const populateNavList = () => {
+				const sections = document.querySelectorAll('section');
+				sections.forEach(section => {
+					const h2 = section.querySelector('h2');
+					if (h2) {
+						const li = document.createElement("li");
+						const anchor = document.createElement("a");
+						anchor.setAttribute("href", `#${section.id}`);
+						anchor.setAttribute("name", "nava");
+						anchor.textContent = h2.textContent;
+						li.appendChild(anchor);
+						list.appendChild(li);
+					}
 
-				node.appendChild(textnode);
-				node.classList.add("sm:flex")
-				node.classList.add("hidden")
-				sublist.appendChild(node);
-			});
-			const sublistitem = document.createElement("li")
-			sublistitem.appendChild(sublist)
-			list.appendChild(sublistitem)
+					const h3s = section.querySelectorAll('h3');
+					if (h3s.length > 0) {
+						const sublist = document.createElement('ul');
+						h3s.forEach(h3 => {
+							const subli = document.createElement("li");
+							const subanchor = document.createElement("a");
+							subanchor.setAttribute("href", `#${section.id}`);
+							subanchor.setAttribute("name", "nava");
+							subanchor.textContent = h3.textContent;
+							subli.appendChild(subanchor);
+							sublist.appendChild(subli);
+						});
+						const sublistItem = document.createElement("li");
+						sublistItem.appendChild(sublist);
+						list.appendChild(sublistItem);
+					}
+				});
+			};
+
+			const showNav = () => {
+				nav.classList.remove("-left-[400px]");
+				list.classList.add("pt-12");
+				showerButton.textContent = "<";
+				showerButton.onclick = hideNav;
+			};
+
+			const hideNav = () => {
+				nav.classList.add("-left-[400px]");
+				list.classList.remove("pt-12");
+				showerButton.textContent = ">";
+				showerButton.onclick = showNav;
+			};
+
+			window.addEventListener('scroll', fixHeight);
+			showerButton.onclick = showNav;
+
+			populateNavList();
+			updateNavPosition();
 		});
-
-	 function fixheight(){
-		 var scrollPosition = window.scrollY || window.pageYOffset;
-		 console.log(scrollPosition,"\n")
-		 if(scrollPosition < toppx){
-			document.getElementById("nav").style.top = toppx-scrollPosition+"px";
-		 }
-		 else{
-			document.getElementById("nav").style.top = "0px";
-		 }
-
-		 let most_viewed = logSectionInView()
-		 let a_tags = document.getElementsByName("nava")
-		 for(let i =0 ;i < a_tags.length;i++){
-			 a_tags[i].className = ""
-		 }
-		 let matchedATag = document.querySelectorAll(`a[href*="#${most_viewed.id}"]`)[0]
-		 console.log(most_viewed.id)
-		 matchedATag.className = "btn btn-primary"
-	 }
-     // Function to determine if a section is in view
-        function isInView(element) {
-            const rect = element.getBoundingClientRect();
-            return rect.top >= 0 && rect.top <= (window.innerHeight || document.documentElement.clientHeight)/10;
-        }
-
-     // Function to log the section in view
-     function logSectionInView() {
-         const sections = document.querySelectorAll('section');
-         sections.forEach(sec => {
-             if (isInView(sec)) {
-				 section = sec
-             }
-         });
-		 return section;
-     }
-	 window.addEventListener('scroll', function() {
-		 fixheight()
-         // logSectionInView();
-     });
-
-	 function show(){
-		 let nav = document.getElementById("nav")
-		 nav.classList.remove("-left-[400px]")
-		 let list = document.getElementById("list")
-		 list.classList.add("pt-12")
-
-		 let button = document.getElementById("shower")
-		 button.innerHTML = "Stäng visare"
-		 button.onclick=hide
-
-	 }
-	 function hide(){
-		 let nav = document.getElementById("nav")
-		 nav.classList.add("-left-[400px]")
-		 let list = document.getElementById("list")
-		 list.classList.remove("pt-12")
-		 let button = document.getElementById("shower")
-		 button.innerHTML = "Öppna visare"
-		 button.onclick=show
-	 }
 
 	</script>
 
