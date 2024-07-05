@@ -47,21 +47,22 @@
 						<div>
 							<label>Antal rum*</label>
 							<div class="flex flex-row justify-evenly form-control">
+
 								<label class="cursor-pointer flex flex-row gap-2 label">
 									<span class="label-text">Etta</span>
-									<input type="checkbox" name="one" class="checkbox checkbox-primary" />
+									<input type="checkbox" name="1" class="checkbox checkbox-primary" />
 								</label>
 								<label class="cursor-pointer flex flex-row gap-2 label">
 									<span class="label-text">Tvåa</span>
-									<input type="checkbox" name="two" class="checkbox checkbox-primary" />
+									<input type="checkbox" name="2" class="checkbox checkbox-primary" />
 								</label>
 								<label class="cursor-pointer flex flex-row gap-2 label">
 									<span class="label-text">Trea</span>
-									<input type="checkbox" name="three" class="checkbox checkbox-primary" />
+									<input type="checkbox" name="3" class="checkbox checkbox-primary" />
 								</label>
 								<label class="cursor-pointer flex flex-row gap-2 label">
 									<span class="label-text">Fyra</span>
-									<input type="checkbox" name="four" class="checkbox checkbox-primary" />
+									<input type="checkbox" name="4" class="checkbox checkbox-primary" />
 								</label>
 								<label class="cursor-pointer flex flex-row gap-2 label">
 									<span class="label-text">Större</span>
@@ -72,7 +73,7 @@
 
 						<div class="flex flex-col" >
 							<label>Inflyttningsdatum*</label>
-							<input class="input input-bordered" placeholder="Inflyttningsdatum*" name="movein" type="date" />
+							<input id="inflyttning" class="input input-bordered" placeholder="Inflyttningsdatum*" name="movein" type="date" />
 						</div>
 
 						<div>
@@ -81,7 +82,7 @@
 								{% for city in cities %}
 								<label class="cursor-pointer flex flex-row gap-2 label">
 									<span class="label-text">{{city.1}}</span>
-									<input type="checkbox" name="{{city.1}}" class="checkbox checkbox-primary" />
+									<input type="checkbox" id="{{city.1}}" name="{{city.1}}" class="checkbox checkbox-primary" />
 								</label>
 								{% endfor %}
 							</div>
@@ -107,3 +108,56 @@
 		{% include "components/Alert.html" with type="error" msg="{{error}}" under=True %}
 	{% endif %}
 </div>
+
+<script type="text/javascript">
+        function getQueryParams() {
+            const queryString = window.location.search;
+            const params = {};
+
+            if (queryString) {
+                const query = queryString.substring(1);
+                const pairs = query.split("&");
+
+                pairs.forEach(pair => {
+                    const [key, value] = pair.split("=");
+                    params[decodeURIComponent(key)] = decodeURIComponent(value);
+                });
+            }
+
+            return params;
+        }
+
+        function updateElements() {
+            const params = getQueryParams();
+
+            if (params["rum"]) {
+                const value = params["rum"];
+                let element = document.querySelector(`input[type="checkbox"][name="${value}"]`);
+                if (element) {
+                    element.checked = true;
+                }
+            }
+
+            if (params["inflyttning"]) {
+                document.getElementById("inflyttning").value = new Date(params['inflyttning']).toISOString().split('T')[0];
+            }
+
+            if (params["stad"]) {
+                document.getElementById(params["stad"]).checked = true;
+            }
+
+            if (params["omrade"]) {
+                document.getElementById("select_areas").value = params["omrade"];
+            }
+        }
+
+        // Listen for the HTMX afterOnLoad event
+        document.body.addEventListener('htmx:afterOnLoad', function(evt) {
+            updateElements();
+        });
+
+        // Run once on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateElements();
+        });
+</script>
