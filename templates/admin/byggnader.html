@@ -1,0 +1,79 @@
+
+{% extends "components/AdminNavbar.html"  %}
+
+{% block title %}Admin{% endblock %}
+
+{% block admin_content %}
+
+	<template rapid-name="popup" >
+		<dialog id="{id}" class="modal">
+		<div class="modal-box">
+			{children}
+		</div>
+		</dialog>
+	</template>
+
+
+	{% if user.is_superuser %}
+		<div id="outer" class="overflow-x-auto">
+			<table class="table">
+				<!-- head -->
+				<thead>
+				<tr>
+					<th></th>
+					<th>Adress</th>
+					<th>Stad</th>
+					<th>Område</th>
+					<th>Beskrivning</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for building in buildings %}
+					<tr>
+						<td></td>
+						<th>{{building.adress}}</th>
+						<td>{{building.get_city_display}}</td>
+						<td>{{building.get_area_display}}</td>
+						<td>{{building.description}}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+			<button onclick="" class="btn w-full"  >Skapa ny</button>
+			<button class="btn" onclick="my_modal_1.showModal()">open modal</button>
+		</div>
+
+		<popup id="my_modal_1" >
+			<form
+				class="flex flex-col gap-2"
+				method="dialog"
+				hx-trigger="submit"
+				hx-post="/buildings/"
+				hx-swap="beforebegin"
+				hx-on::after-request="my_modal_1.close()">
+
+				<input class="input input-bordered" placeholder="Adress" name="adress" value="" />
+				<input class="input input-bordered" placeholder="lon" name="lon" value="" />
+				<input class="input input-bordered" placeholder="lat" name="lat" value="" />
+
+				<input class="input input-bordered" placeholder="Stad" name="city" value="" />
+
+				<div hx-get="/buildings/select_areas/" hx-trigger="load" ></div>
+
+				<textarea name="description" rows="" cols="" placeholder="Beskrivning" class="textarea textarea-bordered" ></textarea>
+
+				<input type="file" class="file-input file-input-bordered w-full max-w-xs" multiple="multiple" />
+
+				<input value="Lägg till" type="submit" class="btn btn-primary" />
+			</form>
+			<button onclick="my_modal_1.close()" class="btn w-full">
+				Stäng
+			</button>
+		</popup>
+
+	{% else %}
+	<!-- if we are not loged in go to login -->
+	<div><meta http-equiv="refresh" content="0; url=/accounts/login/"></div>
+	{% endif %}
+
+{% endblock %}

@@ -20,9 +20,11 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from buildings.views import fast
+from buildings.models import Building
 from rentals.views import ledigt, ledigt_lokaler
 
 from news.models import News
+
 
 from django.views.generic.base import TemplateView
 
@@ -42,12 +44,20 @@ class NewsView(TemplateView):
         context['news'] = reversed(News.objects.all())
         return context
 
+class BuildingView(TemplateView):
+    template_name = "news.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['buildings'] = Building.objects.all()
+        return context
 
 
 urlpatterns = [
     path("", HomeView.as_view(template_name="home.html"), name="home"),
     path("admin/", TemplateView.as_view(template_name="admin/admin.html"), name="admin"),
     path("admin/nyheter", NewsView.as_view(template_name="admin/news.html"), name="admin"),
+    path("admin/byggnader", BuildingView.as_view(template_name="admin/byggnader.html"), name="admin"),
 
     path('superadmin/', adm.site.urls),
     path("fastigheter/", fast, name="fastigheter"),

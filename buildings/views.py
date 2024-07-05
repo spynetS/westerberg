@@ -5,6 +5,7 @@ import time
 from django.db.models import options
 from django.http import Http404, HttpResponseNotFound
 from django.shortcuts import render
+import json
 
 from rentals.models import Rental
 
@@ -73,3 +74,22 @@ def building_adress(request, adress):
 
 def select_areas(request):
     return render(request,  "buildings/select.html",{"areas":Building.get_area_list()})
+
+def main(request):
+    if request.method == "POST":
+        for item in request.POST:
+            if request.POST[item] == "":
+                return render(request,"components/Alert.html",{"type":"error","msg":"Fyll i alla fält!"})
+        building = Building(
+            adress=request.POST['adress'],
+            city=request.POST['city'],
+            area=request.POST['select_areas'],
+            description=request.POST['description'],
+            lon=request.POST['lon'],
+            lat=request.POST['lat'],
+        )
+        building.save()
+
+
+        return render(request,"components/Alert.html",{"type":"success","msg":"Byggnaden lades till"})
+    return page(request)
