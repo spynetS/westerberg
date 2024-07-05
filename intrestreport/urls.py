@@ -6,4 +6,5 @@ from .views import *
 
 urlpatterns = [
     path("", main, name=""),
+    path("lokal/", lokal, name=""),
 ]

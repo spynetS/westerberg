@@ -1,0 +1,102 @@
+<div id="outer" class="relative w-screen min-h-screen bg-center bg-cover bg-no-repeat bg-[url('/media/norr.jpg')]">
+	<div class="absolute inset-0 bg-black opacity-[30%]"></div>
+	<img class="scale-x-[-100%] absolute top-0 h-full w-full z-0" src="/media/Vector 8.png" alt="" />
+	<div class="container relative mx-auto p-2 z-10 ">
+		<h1 class="mt-16 text-3xl text-white font-bold">Intresseanmälan</h1>
+		<form hx-put="/intrestreport/" hx-target="#outer" hx-swap="outerHTML" class="flex flex-col items-center gap-12" >
+			<div  class="mt-2 flex flex-col md:grid grid-cols-2 grid-row-2 gap-16  w-full ">
+
+				<div class="text-white font-bold flex flex-col gap-3" >
+					<p class="p-3 inset-0 drop-shadow-xl">Vi tillämpar inte något kösystem i formell  mening, men grundkravet är att samtliga gör en intresseanmälan. Vi  försöker prioritera de som sökt en längre tid hos oss. Det gäller dock  att du som intressent är aktiv i ditt sökande av lägenhet och förnyar  din intresseanmälan varje månadsskifte.</p>
+					<p class="p-3 inset-0 drop-shadow-xl">För  att erhålla lägenhet hos oss skall du ha inkomst av tjänst eller  pension, inga betalningsanmärkningar samt referenser från tidigare  boende. En borgensman kan uppväga bristen på t ex fast arbete eller  referenser från tidigare boenden. Vi gör alltid en individuell prövning  och förbehåller oss rätten att själva välja hyresgäst.</p>
+					<p class="p-3 inset-0 drop-shadow-xl">Genom  att fylla i och skicka in en intresseanmälan godkänner du att vi sparar  dina personuppgifter i anmälan. Vi sparar din intresseanmälan i högst  fyra månader, därefter raderas den. Vid erbjudande om lägenheten  genomför vi en kreditupplysning hos ett kreditupplysningsföretag</p>
+				</div>
+
+				<div class="cardcomp flex flex-col items-center gap-4 ">
+					<h1 class="text-black text-2xl font-bold  " >Sökande</h1>
+					<div class='w-full h-full flex flex-col gap-3 ' >
+						<div  >
+							<label>Stad*</label>
+							<div class="flex flex-row form-control">
+								{% for city in cities %}
+								<label class="cursor-pointer flex flex-row gap-2 label">
+									<span class="label-text">{{city.1}}</span>
+									<input type="checkbox" name="{{city.1}}" class="checkbox checkbox-primary" />
+								</label>
+								{% endfor %}
+							</div>
+						</div>
+						<div>
+							<label>Typ av lokal*</label>
+							<div class="flex flex-row form-control">
+								{% for lokal in lokaler %}
+								<label class="cursor-pointer flex flex-row gap-2 label">
+									<span class="label-text">{{lokal.1}}</span>
+									<input type="checkbox" name="{{lokal.1}}" class="checkbox checkbox-primary" />
+								</label>
+								{% endfor %}
+							</div>
+						</div>
+
+						<div class="flex flex-col">
+							<label for="area">
+								Area*
+							</label>
+							<select name="area" class="select select-bordered w-full max-w-xs">
+								<option selected >1-200 kvm</option>
+								<option>200-500 kvm</option>
+								<option>500-1000 kvm</option>
+								<option>1000-2000 kvm</option>
+								<option>Större</option>
+							</select>
+						</div>
+
+						<div class="flex flex-col">
+							<label for="area">
+								Inflyttning*
+							</label>
+							<select name="area" class="select select-bordered w-full max-w-xs">
+								<option selected >Inom 3 månader</option>
+								<option>Inom 3 månader</option>
+								<option>Inom 6 månader</option>
+								<option>Inom 9 månader</option>
+								<option>Inom 12 månader</option>
+								<option>Inom 18 månader</option>
+								<option>Inom 24 månader</option>
+							</select>
+						</div>
+
+						<div class="flex flex-col">
+							<label for="area">
+								Önskat kontraktlägnd*
+							</label>
+							<select name="area" class="select select-bordered w-full max-w-xs">
+								<option selected>6 månader</option>
+								<option>12 månader</option>
+								<option>18 månader</option>
+								<option>24 månader</option>
+							</select>
+						</div>
+
+						<textarea name="other" rows="" cols="" placeholder="Övrigt" class="w-full textarea textarea-bordered"></textarea>
+
+						<input class="input input-bordered" placeholder="Företagsnamn*"   name="companyname" required/>
+						<input class="input input-bordered" placeholder="Referensperson*" name="refrenceperson" required/>
+						<input class="input input-bordered" placeholder="Tel referensperson*"   name="tel_refrenceperson" required/>
+						<input class="input input-bordered" placeholder="E-post referensperson*"   name="email_refrenceperson" required/>
+
+						<button type="submit" class="btn btn-primary" >
+							Skicka intresseanmälan
+						</button>
+					</div>
+				</div>
+
+		</fom>
+	</div>
+	{% if success %}
+		{% include "components/Alert.html" with type="success" msg="Intresseanmälan har skickats!" under=True %}
+	{% endif %}
+	{% if error %}
+		{% include "components/Alert.html" with type="error" msg="{{error}}" under=True %}
+	{% endif %}
+</div>

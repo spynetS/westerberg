@@ -57,6 +57,7 @@ urlpatterns = [
     path("serviceanmalan/", TemplateView.as_view(template_name="serviceanmalan.html"), name="fastigheter"),
     path("intresseanmalan/", TemplateView.as_view(template_name="intressreport.html"), name="fastigheter"),
     path("intresseanmalan/bostad", TemplateView.as_view(template_name="bostad.html"), name="fastigheter"), #
+    path("intresseanmalan/lokal", TemplateView.as_view(template_name="lokal.html"), name="fastigheter"), #
     path("hyresgastinformation", TemplateView.as_view(template_name="aboutus.html"), name="fastigheter"),
 
     path("accounts/", include("accounts.urls")),

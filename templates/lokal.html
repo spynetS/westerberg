@@ -2,6 +2,6 @@
 {% block title %}Intresseanmälan bostad{% endblock %}
 {% block content %}
 	{% include "layouts/homepage.html" with fixed=True %}
-	<div hx-get="/intrestreport/" hx-swap="outerHTML" hx-trigger="load" >
+	<div hx-get="/intrestreport/lokal" hx-swap="outerHTML" hx-trigger="load" >
 	</div>
 {% endblock %}

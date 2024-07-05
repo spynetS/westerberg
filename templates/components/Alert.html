@@ -10,7 +10,7 @@ function showAlert() {
     // Create the alert div
     const alertDiv = document.createElement('div');
     alertDiv.setAttribute('role', 'alert');
-    alertDiv.className = 'animate-in fade-in fixed w-1/3 top-2 right-2 alert alert-{{type}}';
+    alertDiv.className = 'animate-in fade-in fixed w-1/3 z-50 {% if under %} top-[88px] {% else %} top-2 {% endif %} right-2 alert alert-{{type}}';
     alertDiv.id = uid;
 
     // Set the inner HTML of the alert div
@@ -31,7 +31,7 @@ function showAlert() {
         if (element) {
             element.remove();
         }
-    }, 40000);
+    }, 4000);
 }
 
 // Call the showAlert function to display the alert
