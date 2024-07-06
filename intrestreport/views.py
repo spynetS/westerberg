@@ -28,8 +28,16 @@ def main(request):
         return render(request, "intrestreport/bostad.html",{"success":True,"cities":cities})
     return render(request, "intrestreport/bostad.html",{"cities":cities})
 
+
 def lokal(request):
     cities = Building.get_city_list()
     lokaler = Rental.get_lokaltype_list()
+    if request.method == "POST":
+        for item in request.POST:
+            if item != 'other' and request.POST[item] == "":
+                return render(request, "intrestreport/lokal.html",{"error":"Fyll i alla fält'","cities":cities,"lokaler":lokaler})
+
+        return render(request, "intrestreport/lokal.html",{"success":True,"cities":cities,"lokaler":lokaler})
+
 
     return render(request, "intrestreport/lokal.html",{"cities":cities,"lokaler":lokaler})
