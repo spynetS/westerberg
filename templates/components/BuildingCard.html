@@ -1,6 +1,14 @@
 <a href="/buildings/building/{{building.adress}}" class="card   bg-base-200 shadow-xl">
 	{% with building.images.all|first as img  %}
-		<figure><img src="{{img.image.url}}" alt="Ingen bild finns" /></figure>
+		{% if img and img.thumbnail %}
+			<figure>
+				<img width="200" src="{{ img.medium.url }}" alt="Ingen bild finns" />
+			</figure>
+		{% else %}
+			<figure>
+				<img src="{{ img.image.url }}" alt="Ingen bild finns" />
+			</figure>
+		{% endif %}
 	{% endwith %}
 	<div class="card-body ">
 		<h2 class="card-title">{{building.adress}}</h2>

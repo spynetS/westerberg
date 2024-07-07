@@ -1,6 +1,6 @@
 <select id="select_areas" name="select_areas" class="select select-bordered w-full max-w-xs">
 	<option disabled selected>Område</option>
-	{% for option in areas %}
-	<option name="{{option.0}}" id="{{option.1}}" >{{option.1}}</option>
+	{% for value, label in areas %}
+	<option value="{{value}}" id="{{label}}" >{{label}}</option>
 	{% endfor %}
 </select>

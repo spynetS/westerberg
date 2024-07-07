@@ -5,7 +5,8 @@ import time
 from django.db.models import options
 from django.http import Http404, HttpResponseNotFound
 from django.shortcuts import render
-import json
+
+from buildings.models import Images
 
 from rentals.models import Rental
 
@@ -75,21 +76,46 @@ def building_adress(request, adress):
 def select_areas(request):
     return render(request,  "buildings/select.html",{"areas":Building.get_area_list()})
 
-def main(request):
+def select_cities(request):
+    return render(request,  "buildings/select_city.html",{"cities":Building.get_city_list()})
+
+def delete(request):
     if request.method == "POST":
-        for item in request.POST:
-            if request.POST[item] == "":
-                return render(request,"components/Alert.html",{"type":"error","msg":"Fyll i alla fält!"})
-        building = Building(
-            adress=request.POST['adress'],
-            city=request.POST['city'],
-            area=request.POST['select_areas'],
-            description=request.POST['description'],
-            lon=request.POST['lon'],
-            lat=request.POST['lat'],
-        )
-        building.save()
+        try:
+            building = Building.objects.get(pk=request.POST["pk"])
+            building.delete()
+            return render(request,"components/Alert.html",{"type":"success","msg":"Byggnaden togsbort"})
+        except:
+            return render(request,"components/Alert.html",{"type":"error","msg":"något gick fel!"})
+    return HttpResponseNotFound()
 
 
-        return render(request,"components/Alert.html",{"type":"success","msg":"Byggnaden lades till"})
-    return page(request)
+
+def main(request):
+    try:
+        if request.method == "POST":
+            for item in request.POST:
+                if request.POST[item] == "":
+                    return render(request,"components/Alert.html",{"type":"error","msg":"Fyll i alla fält!"})
+
+            building = Building(
+                adress=request.POST['adress'],
+                city=request.POST['select_cities'],
+                area=request.POST['select_areas'],
+                description=request.POST['description'],
+                lon=request.POST['lon'],
+                lat=request.POST['lat'],
+            )
+            building.save()
+
+            files = request.FILES.getlist('images')
+
+            for file in files:
+                image = Images(image=file)
+                image.save()
+                building.images.add(image)
+
+            return render(request,"components/Alert.html",{"type":"success","msg":"Byggnaden lades till"})
+        return page(request)
+    except Exception as e:
+        return render(request,"components/Alert.html",{"type":"error","msg":"Något gick fel! "+str(e)})

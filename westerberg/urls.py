@@ -45,11 +45,13 @@ class NewsView(TemplateView):
         return context
 
 class BuildingView(TemplateView):
-    template_name = "news.html"
+    template_name = "byggnad.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['buildings'] = Building.objects.all()
+        context['areas'] = Building.get_area_list()
+        context['cities'] = Building.get_city_list()
         return context
 
 

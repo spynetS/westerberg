@@ -1,9 +1,45 @@
 from django.conf import empty
 from django.db import models
 from django.template.defaultfilters import default, slugify
+from PIL import Image as PilImage
+from io import BytesIO
+from django.core.files.base import ContentFile
+import os
+
 # Create your models here.
 class Images(models.Model):
-    image = models.ImageField()
+    image = models.ImageField(upload_to='images/original/')
+    thumbnail = models.ImageField(upload_to='images/thumbnail/', null=True, blank=True)
+    medium = models.ImageField(upload_to='images/medium/', null=True, blank=True)
+
+    def save(self, *args, **kwargs):
+        # Call the image save method to save the image image
+        super().save(*args, **kwargs)
+        if self.image and not self.thumbnail:
+            self.create_thumbnails()
+
+    def create_thumbnails(self):
+        img = PilImage.open(self.image)
+
+        # Create and save thumbnail
+        self.thumbnail = self.resize_image(img, (100, 100), 'thumbnail')
+        self.medium = self.resize_image(img, (300, 300), 'medium')
+
+        super().save()
+
+    def resize_image(self, img, size, prefix):
+        # Create a copy of the image to avoid modifying the image image
+        img_copy = img.copy()
+        img_copy.thumbnail(size, PilImage.LANCZOS)
+
+        thumb_io = BytesIO()
+        img_copy.save(thumb_io, format=img.format)
+
+        # Create a new filename for the thumbnail/medium image
+        base, ext = os.path.splitext(os.path.basename(self.image.name))
+        filename = f"{base}{ext}"
+        return ContentFile(thumb_io.getvalue(), filename)
+
     def __str__(self):
             return self.image.name
 

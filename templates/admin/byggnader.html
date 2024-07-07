@@ -1,79 +1,224 @@
+{% extends "components/AdminNavbar.html" %} {% block title %}Admin{% endblock %}
+{% block admin_content %} {% if user.is_superuser %}
+<div id="outer" class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th>Adress</th>
+        <th>Stad</th>
+        <th>Område</th>
+        <th>Beskrivning</th>
+        <th>Tabort</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for building in buildings %}
+      <tr class="hover:bg-base-200 cursor-pointer">
+        <td></td>
+        <th>{{building.adress}}</th>
+        <td>{{building.get_city_display}}</td>
+        <td>{{building.get_area_display}}</td>
+        <td>{{building.description}}</td>
+        <td
+          onclick="remove_modal.showModal();document.getElementById('delete-pk').value={{building.pk}}"
+          class="text-red-500 hover:scale-110 duration-75 cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-trash"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"
+            />
+            <path
+              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"
+            />
+          </svg>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button onclick="my_modal_1.showModal()" class="btn w-full">Skapa ny</button>
+</div>
 
-{% extends "components/AdminNavbar.html"  %}
+<dialog id="remove_modal" class="modal">
+  <div class="modal-box">
+		<form hx-post="/buildings/delete/" hx-swap="beforebegin" hx-on::after-request="remove_modal.close();window.location.reload();" class="modal-box col items-center ">
+			<input name="pk" id="delete-pk" class="hidden" ></input>
+			<h3 class="font-bold text-lg">Varning vill du värkligen tabort denna byggnad?</h3>
+			<h3 class="font-bold text-md">Byggnaden går inte att få tillbaka</h3>
+			<svg class="text-yellow-500" xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+				<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+				<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+			</svg>
+			<div class="modal-action">
+				<button type="submitt" class="btn btn-error " >Tabort</button>
+				<label for="remove_modal" class="btn">Stäng</label>
+			</div>
+		</form>
+	</div>
+</dialog>
 
-{% block title %}Admin{% endblock %}
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+    <form
+      enctype="multipart/form-data"
+      class="flex flex-col gap-2"
+      method="dialog"
+      hx-trigger="submit"
+      hx-post="/buildings/"
+      hx-swap="beforebegin"
+ 	  hx-on::after-request="my_modal_1.close();window.location.reload()"
+    >
+      <input
+        class="input input-bordered"
+        placeholder="Adress"
+        name="adress"
+        id="adress"
+      />
+      <div id="Map" style="height: 250px"></div>
+      <div id="next" class="btn" onclick="changeAdress()">Sök plats</div>
+      <h1>
+        Om markören inte stämmer helt navigera med musen och klicka vart
+        adressen ligger
+      </h1>
 
-{% block admin_content %}
+      <input type="hidden" name="lat" id="latitude" />
+      <input type="hidden" name="lon" id="longitude" />
 
-	<template rapid-name="popup" >
-		<dialog id="{id}" class="modal">
-		<div class="modal-box">
-			{children}
-		</div>
-		</dialog>
-	</template>
+	  {% include 'buildings/select_city.html' with cities=cities %}
+	  {% include 'buildings/select.html' with areas=areas %}
+      <!-- <div hx-get="/buildings/select_cities/" hx-trigger="load"></div> -->
 
+      <!-- <div hx-get="/buildings/select_areas/" hx-trigger="load"></div> -->
 
-	{% if user.is_superuser %}
-		<div id="outer" class="overflow-x-auto">
-			<table class="table">
-				<!-- head -->
-				<thead>
-				<tr>
-					<th></th>
-					<th>Adress</th>
-					<th>Stad</th>
-					<th>Område</th>
-					<th>Beskrivning</th>
-				</tr>
-				</thead>
-				<tbody>
-				{% for building in buildings %}
-					<tr>
-						<td></td>
-						<th>{{building.adress}}</th>
-						<td>{{building.get_city_display}}</td>
-						<td>{{building.get_area_display}}</td>
-						<td>{{building.description}}</td>
-					</tr>
-				{% endfor %}
-				</tbody>
-			</table>
-			<button onclick="" class="btn w-full"  >Skapa ny</button>
-			<button class="btn" onclick="my_modal_1.showModal()">open modal</button>
-		</div>
+      <textarea
+        name="description"
+        rows=""
+        cols=""
+        placeholder="Beskrivning"
+        class="textarea textarea-bordered"
+      ></textarea>
 
-		<popup id="my_modal_1" >
-			<form
-				class="flex flex-col gap-2"
-				method="dialog"
-				hx-trigger="submit"
-				hx-post="/buildings/"
-				hx-swap="beforebegin"
-				hx-on::after-request="my_modal_1.close()">
+      <input
+        name="images"
+        type="file"
+        class="file-input file-input-bordered w-full max-w-xs"
+        multiple="multiple"
+      />
 
-				<input class="input input-bordered" placeholder="Adress" name="adress" value="" />
-				<input class="input input-bordered" placeholder="lon" name="lon" value="" />
-				<input class="input input-bordered" placeholder="lat" name="lat" value="" />
+      <input value="Lägg till" type="submit" class="btn btn-primary" />
+    </form>
+    <button onclick="my_modal_1.close()" class="btn w-full">Stäng</button>
+  </div>
+</dialog>
 
-				<input class="input input-bordered" placeholder="Stad" name="city" value="" />
+<script src="/media/OpenLayers/OpenLayers.js"></script>
+<script type="text/javascript">
+  var latitude = 12;
+  var longitude = 58;
+  var places = [];
+  let place = 0;
+  let query = "";
 
-				<div hx-get="/buildings/select_areas/" hx-trigger="load" ></div>
+  function saveLonLat(lon, lat) {
+    document.getElementById("longitude").value = lon;
+    document.getElementById("latitude").value = lat;
+  }
+  function updateMap(lon, lat) {
+    // latitude = lat;
+    // 				longitude = lon;
+    saveLonLat(lon, lat);
+    document.getElementById("Map").innerHTML = "";
+    var zoom = 17;
 
-				<textarea name="description" rows="" cols="" placeholder="Beskrivning" class="textarea textarea-bordered" ></textarea>
+    var fromProjection = new OpenLayers.Projection("EPSG:4326"); // Transform from WGS 1984
+    var toProjection = new OpenLayers.Projection("EPSG:900913"); // to Spherical Mercator Projection
+    var position = new OpenLayers.LonLat(lon, lat).transform(
+      fromProjection,
+      toProjection,
+    );
 
-				<input type="file" class="file-input file-input-bordered w-full max-w-xs" multiple="multiple" />
+    var map = new OpenLayers.Map("Map");
+    var mapnik = new OpenLayers.Layer.OSM();
+    map.addLayer(mapnik);
 
-				<input value="Lägg till" type="submit" class="btn btn-primary" />
-			</form>
-			<button onclick="my_modal_1.close()" class="btn w-full">
-				Stäng
-			</button>
-		</popup>
+    var markers = new OpenLayers.Layer.Markers("Markers");
+    map.addLayer(markers);
+    var marker = new OpenLayers.Marker(position);
+    markers.addMarker(marker);
 
-	{% else %}
-	<!-- if we are not loged in go to login -->
-	<div><meta http-equiv="refresh" content="0; url=/accounts/login/"></div>
-	{% endif %}
+    map.setCenter(position, zoom);
 
-{% endblock %}
+    map.events.register("click", map, function (evt) {
+      var lonlat = map
+        .getLonLatFromViewPortPx(evt.xy)
+        .transform(toProjection, fromProjection);
+      saveLonLat(lonlat.lon, lonlat.lat);
+
+      // Remove the previous marker
+      markers.clearMarkers();
+
+      // Add a new marker at the clicked location
+      var newPosition = new OpenLayers.LonLat(lonlat.lon, lonlat.lat).transform(
+        fromProjection,
+        toProjection,
+      );
+      var newMarker = new OpenLayers.Marker(newPosition);
+      markers.addMarker(newMarker);
+    });
+  }
+  function nextMap() {
+    document.getElementById("next").innerHTML =
+      `Nästa (${place + 1}/${places.length})`;
+    updateMap(places[place].lon, places[place].lat);
+    place++;
+  }
+  async function changeAdress() {
+    const adress = document.getElementById("adress").value.replaceAll(" ", "+");
+    if (adress == query && place < places.length) {
+      nextMap();
+      return;
+    }
+    place = 0;
+    query = adress;
+    const apiKey = "6689723d954a1022618730fgb1cc23c";
+    const url = `https://geocode.maps.co/search?q=${encodeURIComponent(adress)}&api_key=${apiKey}`;
+
+    try {
+      const response = await fetch(url, {
+        method: "GET", // 'GET' is usually used for this type of request
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok " + response.statusText);
+      }
+
+      const data = await response.json();
+      if (data.length == 0) {
+        alert("Hittade inget resultat för " + adress);
+      }
+      places = data;
+    } catch (error) {
+      console.error(
+        "There has been a problem with your fetch operation:",
+        error,
+      );
+    }
+  }
+
+  updateMap(0, 0);
+</script>
+
+{% else %}
+<!-- if we are not loged in go to login -->
+<div><meta http-equiv="refresh" content="0; url=/accounts/login/" /></div>
+{% endif %} {% endblock %}
+https://geocode.maps.co/search?q=Link%C3%B6pingsv%C3%A4gen%2024&api_key=

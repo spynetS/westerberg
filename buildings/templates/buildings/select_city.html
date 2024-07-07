@@ -1,0 +1,6 @@
+<select id="select_cities" name="select_cities" class="select select-bordered w-full max-w-xs">
+	<option disabled selected>Stad</option>
+	{% for value, label in cities %}
+	<option value="{{value}}" id="{{label}}" >{{label}}</option>
+	{% endfor %}
+</select>
