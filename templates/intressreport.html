@@ -1,6 +1,17 @@
 {% extends "base.html" %}
 
-{% block title %}Intresseanmälan{% endblock %}
+
+{% block title %}Intresseanmälan - Westerberg Fastigheter AB{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="Skicka in din intresseanmälan för att hyra en fastighet hos Westerberg Fastigheter AB. Vi erbjuder ett brett utbud av fastigheter i Norrköping, Söderköping och Åby.">
+    <meta name="keywords" content="Intresseanmälan, Westerberg Fastigheter, Hyresfastigheter, Norrköping, Söderköping, Åby, Hyra">
+    <meta property="og:title" content="Intresseanmälan - Westerberg Fastigheter AB">
+    <meta property="og:description" content="Skicka in din intresseanmälan för att hyra en fastighet hos Westerberg Fastigheter AB. Vi erbjuder ett brett utbud av fastigheter i Norrköping, Söderköping och Åby.">
+    <meta property="og:image" content="/media/slides/5.png">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="website">
+{% endblock %}
 
 {% block content %}
 	{% include 'layouts/homepage.html' with fixed=True %}

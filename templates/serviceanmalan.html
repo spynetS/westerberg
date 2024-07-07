@@ -1,5 +1,15 @@
 {% extends 'base.html' %}
-{% block title %}Serviceanmälan{% endblock %}
+{% block title %}Serviceanmälan - Westerberg Fastigheter AB{% endblock %}
+
+{% block meta %}
+    <meta name="description" content="Gör en serviceanmälan hos Westerberg Fastigheter AB. Vi hanterar snabbt och effektivt dina serviceärenden för fastigheter i Norrköping, Söderköping och Åby.">
+    <meta name="keywords" content="Serviceanmälan, Westerberg Fastigheter, Fastighetsservice, Norrköping, Söderköping, Åby, Hyresgäster, Serviceärende">
+    <meta property="og:title" content="Serviceanmälan - Westerberg Fastigheter AB">
+    <meta property="og:description" content="Gör en serviceanmälan hos Westerberg Fastigheter AB. Vi hanterar snabbt och effektivt dina serviceärenden för fastigheter i Norrköping, Söderköping och Åby.">
+    <meta property="og:image" content="/media/slides/2.png">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="website">
+{% endblock %}
 
 {% block content %}
 	{% include 'layouts/homepage.html' %}
