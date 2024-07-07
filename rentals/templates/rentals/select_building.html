@@ -1,0 +1,6 @@
+<select id="select_building" name="select_building" class="select select-bordered w-full max-w-xs">
+	<option disabled selected>Fastighet</option>
+	{% for value, label in buildings %}
+	<option value="{{value}}" id="{{label}}" >{{label}}</option>
+	{% endfor %}
+</select>

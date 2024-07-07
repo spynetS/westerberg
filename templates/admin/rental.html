@@ -1,0 +1,104 @@
+{% extends "components/AdminNavbar.html" %} {% block title %}Admin{% endblock %}
+{% block admin_content %} {% if user.is_superuser %}
+<div id="outer" class="overflow-x-auto">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th>Adress</th>
+        <th>Stad</th>
+        <th>Område</th>
+        <th>Beskrivning</th>
+        <th>Tabort</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for rental in rentals %}
+      <tr class="hover:bg-base-200 cursor-pointer">
+        <td></td>
+        <th>{{rental.building.adress}}</th>
+        <td>{{rental.building.get_city_display}}</td>
+        <td>{{rental.building.get_area_display}}</td>
+        <td>{{rental.description}}</td>
+        <td
+          onclick="remove_modal.showModal();document.getElementById('delete-pk').value={{building.pk}}"
+          class="text-red-500 hover:scale-110 duration-75 cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-trash"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"
+            />
+            <path
+              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"
+            />
+          </svg>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <button onclick="my_modal_1.showModal()" class="btn w-full">Skapa ny</button>
+</div>
+
+<dialog id="remove_modal" class="modal">
+  <div class="modal-box">
+		<form hx-post="/rental/delete/" hx-swap="beforebegin" hx-on::after-request="remove_modal.close();window.location.reload();" class="modal-box col items-center ">
+			<input name="pk" id="delete-pk" class="hidden" ></input>
+			<h3 class="font-bold text-lg">Varning vill du värkligen tabort denna annons?</h3>
+			<h3 class="font-bold text-md">Annonsen går inte att få tillbaka</h3>
+			<svg class="text-yellow-500" xmlns="http://www.w3.org/2000/svg" width="200" height="200" fill="currentColor" class="bi bi-exclamation-circle" viewBox="0 0 16 16">
+				<path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+				<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
+			</svg>
+			<div class="modal-action">
+				<button type="submitt" class="btn btn-error " >Tabort</button>
+				<label for="remove_modal" class="btn">Stäng</label>
+			</div>
+		</form>
+	</div>
+</dialog>
+
+<dialog id="my_modal_1" class="modal">
+  <div class="modal-box">
+    <form
+      enctype="multipart/form-data"
+      class="flex flex-col gap-2"
+      method="dialog"
+      hx-trigger="submit"
+      hx-post="/rentals/"
+      hx-swap="beforebegin"
+ 	  hx-on::after-request="my_modal_1.close();window.location.reload()"
+    >
+      {% include 'rentals/select_building.html' with buildings=buildings %}
+      <input type="number" name="size" placeholder="Storlek (kvm)" class="input input-bordered" />
+
+        <label class=" flex flex-row gap-3 items-center cursor-pointer">
+          <span class="label-text">Lokal</span>
+          <input type="checkbox" checked="checked" class="checkbox" />
+        </label>
+
+      <input type="number" name="rooms" placeholder="Antal rum" class="input input-bordered" />
+      <input type="number" name="rent" placeholder="Hyra" class="input input-bordered" />
+
+      <input type="date" name="availible_from" class="input input-bordered" />
+
+      <textarea name="description" class="textarea textarea-bordered" placeholder="Beskrivning"></textarea>
+
+    </form>
+    <button onclick="my_modal_1.close()" class="btn w-full">Stäng</button>
+  </div>
+</dialog>
+
+{% else %}
+<!-- if we are not loged in go to login -->
+<div><meta http-equiv="refresh" content="0; url=/accounts/login/" /></div>
+{% endif %} {% endblock %}
+https://geocode.maps.co/search?q=Link%C3%B6pingsv%C3%A4gen%2024&api_key=

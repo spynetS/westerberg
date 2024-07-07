@@ -23,6 +23,7 @@ from buildings.views import fast
 from buildings.models import Building
 from rentals.views import ledigt, ledigt_lokaler
 
+from rentals.models import Rental
 from news.models import News
 
 
@@ -54,12 +55,22 @@ class BuildingView(TemplateView):
         context['cities'] = Building.get_city_list()
         return context
 
+class RentalView(TemplateView):
+    template_name = "byggnad.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rentals'] = Rental.objects.all()
+        context['buildings'] = [(building.pk, building.adress) for building in Building.objects.all()]
+        return context
+
 
 urlpatterns = [
     path("", HomeView.as_view(template_name="home.html"), name="home"),
     path("admin/", TemplateView.as_view(template_name="admin/admin.html"), name="admin"),
     path("admin/nyheter", NewsView.as_view(template_name="admin/news.html"), name="admin"),
     path("admin/byggnader", BuildingView.as_view(template_name="admin/byggnader.html"), name="admin"),
+    path("admin/legenheter", RentalView.as_view(template_name="admin/rental.html"), name="admin"),
 
     path('superadmin/', adm.site.urls),
     path("fastigheter/", fast, name="fastigheter"),
