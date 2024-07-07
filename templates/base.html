@@ -17,9 +17,16 @@
         <link rel="canonical" href="{{ request.build_absolute_uri }}">
     {% endblock %}
 
+    {% block scripts %}{% endblock %}
+
     <script src="https://unpkg.com/htmx.org@1.9.12" integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2" crossorigin="anonymous"></script>
     <script defer src="/static/RapidElements.js"></script>
     <link rel="stylesheet" href="/static/style.css" type="text/css" media="screen" />
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/media/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/media/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/media/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 
     {% block head %}
     {% endblock %}

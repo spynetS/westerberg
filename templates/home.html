@@ -1,10 +1,20 @@
 {% extends "base.html" %}
 
-{% block title %}Westerberg Fastigheter AB - Startsida{% endblock %}
+{% block title %}Fam Westerberg Fastigheter AB - Startsida{% endblock %}
 
 {% block meta %}
-	<meta name="description" content="Hyr lägenheter i Norrköping, Söderköping och Åby med vår pålitliga uthyrningsfirma. Vi erbjuder bekväma och prisvärda boenden för alla behov. Kontakta oss idag för mer information!">
-	<meta name="keywords" content="hyra lägenheter, Norrköping, Söderköping, Åby, uthyrningsfirma, boende, hyreslägenheter, lägenhet i Norrköping, lägenhet i Söderköping, lägenhet i Åby, prisvärda lägenheter">
+	<meta name="description" content="Hyr lägenheter i Norrköping, Söderköping och Åby med vår pålitliga uthyrningsfirma. Vi erbjuder bekväma och prisvärda boenden för alla behov.">
+	<meta name="keywords" content="hyra lägenheter, norrköping, söderköping, åby, uthyrningsfirma, boende, hyreslägenheter, lägenhet i norrköping, lägenhet i söderköping, lägenhet i åby, prisvärda lägenheter">
+    <meta property="og:title" content="Westerberg Fastigheter AB - Startsida">
+    <meta property="og:description" content="Hyr lägenheter i Norrköping, Söderköping och Åby med vår pålitliga uthyrningsfirma. Vi erbjuder bekväma och prisvärda boenden för alla behov. Kontakta oss idag för mer information!">
+    <meta property="og:image" content="/media/splash.png">
+    <meta property="og:url" content="{{ request.build_absolute_uri }}">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Westerberg Fastigheter AB - Startsida">
+    <meta name="twitter:description" content="Hyr lägenheter i Norrköping, Söderköping och Åby med vår pålitliga uthyrningsfirma. Vi erbjuder bekväma och prisvärda boenden för alla behov. Kontakta oss idag för mer information!">
+    <meta name="twitter:image" content="/media/slides/5.png">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
 {% endblock %}
 
 {% block content %}

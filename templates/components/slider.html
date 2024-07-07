@@ -100,7 +100,7 @@
 	{% for img in images %}
 	<div class="mySlides fade ">
 		<div class="numbertext">{{forloop.counter}} / {{images|length}}</div>
-		<img src="{{img}}" style="width:100%">
+		<img src="{{img}}" alt="Slide {{forloop.counter}}" style="width:100%">
 		{% if caption %}
 		<div class="text">{{caption}}</div>
 		{% endif %}

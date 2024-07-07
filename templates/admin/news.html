@@ -30,7 +30,7 @@
 							<th>{{forloop.counter}}</th>
 							<td>
 							{% if ne.image %}
-								<img class="w-[500px] overflow-visible " src="{{ne.image.url}}" alt="" />
+								<img class="w-[500px] overflow-visible " src="{{ne.image.url}}" alt="News iamge" />
 							{% endif %}
 							</td>
 							<td>{{ne.title}}</td>
@@ -58,7 +58,7 @@
 			<div class="modal" role="dialog">
 				<form hx-post="/news/edit/" hx-trigger="submit" hx-target="#alert" class="modal-box col gap-2 items-center ">
 					<input name="pk" id="pk" class="hidden" ></input>
-					<img id="img" src="" alt="" />
+					<img id="img" src="" alt="Nyhets bild" />
 					<input name="title" id="title" class="input input-bordered w-full "></h3>
 					<textarea name="description" id="description" class="h-72 textarea textarea-bordered w-full"></textarea>
 					<div class="w-full flex flex-row justify-center gap-3" >
@@ -75,7 +75,7 @@
 
 					<h1>Skapa ny nyhet</h1>
 					<input name="pk" id="pk" class="hidden" ></input>
-					<img id="img" src="" alt="" />
+					<img id="img" src="" alt="Nyhets bild" />
 					<input name="title" placeholder="Titel" id="title" class="input input-bordered w-full "></h3>
 					<textarea name="description" placeholder="Beskrivning" id="description" class="h-72 textarea textarea-bordered w-full"></textarea>
 					<input type="file" name="image" id="image" class="file-input w-full max-w-xs" />
