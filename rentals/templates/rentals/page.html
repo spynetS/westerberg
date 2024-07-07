@@ -30,7 +30,7 @@
 	</div>
 
 	<div class="w-screen gap-3 flex flex-col justify-between px-12">
-		<h1 class="text-3xl font-semibold" >{{rentals.0.0.building.get_city_display}}</h1>
+		<h2 class="text-3xl font-semibold" >{{rentals.0.0.building.get_city_display}}</h2>
 		<select name="select" hx-push-url="true" hx-get="/ledigt" hx-target="#outer" hx-swap="outerHTML" hx-headers='{"refresh":true}' class="select select-bordered w-full max-w-xs">
 			<option selected>Välj stad</option>
 			<option value="alla">Alla</option>
@@ -44,7 +44,7 @@
 
 	{% for areabuildings in rentals %}
 		<div class="shadow-xl p-8 gap-4 w-screen flex flex-col  " >
-			<h1 class="text-1xl font-semibold" >Område: {{areabuildings.0.building.get_area_display}}</h1>
+			<h3 class="text-1xl font-semibold" >Område: {{areabuildings.0.building.get_area_display}}</h3>
 			<div class="flex gap-5 justify-start" >
 
 			{% for building in areabuildings %}
@@ -55,8 +55,8 @@
 						<figure><img src="{{img.image.url}}" alt="Ingen bild finns" /></figure>
 					{% endwith %}
 					<div class="card-body">
-						<h2 class="card-title">{{building.building.adress}}</h2>
-						<h3 class="font-semibold" >{{building.rent}} på {{building.size}} m2</h3>
+						<h4 class="card-title">{{building.building.adress}}</h4>
+						<h5 class="font-semibold" >{{building.rent}} på {{building.size}} m2</h5>
 						<p class="line-clamp-3" >{{building.description}}</p>
 						<button class="mt-2 btn btn-secondary" >Visa mer</button>
 					</div>
