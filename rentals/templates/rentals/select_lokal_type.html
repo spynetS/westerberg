@@ -1,0 +1,6 @@
+<select id="select_lokal_type" name="select_lokal_type" class="select select-bordered w-full max-w-xs">
+	<option disabled selected>Typ av lokal</option>
+	{% for value, label in types %}
+	<option value="{{value}}" id="{{label}}" >{{label}}</option>
+	{% endfor %}
+</select>

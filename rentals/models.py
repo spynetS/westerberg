@@ -33,5 +33,6 @@ class Rental(models.Model):
     lokal = models.BooleanField(default=False)
     lokal_type = models.CharField(max_length=2,choices=LokalType.choices,default=LokalType.LAGER)
 
+    available_from = models.DateField()
 
-    avalible_from = models.DateField()
+    public = models.BooleanField(default=True)

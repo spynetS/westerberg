@@ -10,7 +10,7 @@
         <th>Stad</th>
         <th>Område</th>
         <th>Beskrivning</th>
-        <th>Synlig</th>
+        <th>Typ</th>
         <th>Tabort</th>
       </tr>
     </thead>
@@ -22,11 +22,7 @@
         <td>{{rental.building.get_city_display}}</td>
         <td>{{rental.building.get_area_display}}</td>
         <td>{{rental.description}}</td>
-        <td>
-          <form hx-post="/rentals/setpublic/{{rental.pk}}/" hx-swap="beforebegin" hx-trigger="change once">
-              <input type="checkbox" name="is_public" class="checkbox checkbox-bordered" {%  if rental.public %}checked{% endif %}/>
-          </form>
-        </td>
+        <td>{{rental.get_lokal_type_display}}</td>
         <td
           onclick="remove_modal.showModal();document.getElementById('delete-pk').value={{building.pk}}"
           class="text-red-500 hover:scale-110 duration-75 cursor-pointer"
@@ -79,7 +75,7 @@
       class="flex flex-col gap-2"
       method="dialog"
       hx-trigger="submit"
-      hx-post="/rentals/create/rental"
+      hx-post="/rentals/create/lokal"
       hx-swap="beforebegin"
  	  hx-on::after-request="my_modal_1.close();//window.location.reload()"
     >
@@ -90,6 +86,8 @@
       <input type="number" name="rent" placeholder="Hyra" class="input input-bordered" />
 
       <input type="text" name="features" placeholder="Bekvämligheter (Tvättmaskin,Diskmaskin,Hiss...)" class="input input-bordered" />
+
+      {% include 'rentals/select_lokal_type.html' with type=type %}
 
       <input type="date" name="available_from" class="input input-bordered" />
 

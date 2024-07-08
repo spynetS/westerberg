@@ -60,8 +60,18 @@ class RentalView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['rentals'] = Rental.objects.all()
+        context['rentals'] = Rental.objects.filter(lokal=False)
         context['buildings'] = [(building.pk, building.adress) for building in Building.objects.all()]
+        return context
+
+class LokalerView(TemplateView):
+    template_name = "byggnad.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['rentals'] = Rental.objects.filter(lokal=True)
+        context['buildings'] = [(building.pk, building.adress) for building in Building.objects.all()]
+        context['types'] = Rental.get_lokaltype_list()
         return context
 
 
@@ -71,6 +81,7 @@ urlpatterns = [
     path("admin/nyheter", NewsView.as_view(template_name="admin/news.html"), name="admin"),
     path("admin/byggnader", BuildingView.as_view(template_name="admin/byggnader.html"), name="admin"),
     path("admin/legenheter", RentalView.as_view(template_name="admin/rental.html"), name="admin"),
+    path("admin/lokaler", LokalerView.as_view(template_name="admin/lokaler.html"), name="admin"),
 
     path('superadmin/', adm.site.urls),
     path("fastigheter/", fast, name="fastigheter"),

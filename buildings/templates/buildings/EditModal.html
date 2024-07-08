@@ -1,5 +1,51 @@
 <dialog id="edit_building_modal" class="modal">
   <div class="modal-box">
+    <form
+      enctype="multipart/form-data"
+      class="flex flex-col gap-2"
+      method="dialog"
+      hx-trigger="submit"
+      hx-post="/buildings/"
+      hx-swap="beforebegin"
+      hx-on::after-request="my_modal_1.close()"
+    >
+      <input
+        class="input input-bordered"
+        placeholder="Adress"
+        name="adress"
+        id="adress"
+		value="{{building.adress}}"
+      />
+      <div id="Map" style="height: 250px"></div>
+      <div id="next" class="btn" onclick="changeAdress()">Sök plats</div>
+      <h1>
+        Om markören inte stämmer helt navigera med musen och klicka vart
+        adressen ligger
+      </h1>
+
+      <input type="hidden" name="lat" id="latitude" />
+      <input type="hidden" name="lon" id="longitude" />
+
+      <div hx-get="/buildings/select_cities/" hx-trigger="load"></div>
+
+      <div hx-get="/buildings/select_areas/" hx-trigger="load"></div>
+
+      <textarea
+        name="description"
+        rows=""
+        cols=""
+        placeholder="Beskrivning"
+        class="textarea textarea-bordered"
+      ></textarea>
+
+      <input
+        name="images"
+        type="file"
+        class="file-input file-input-bordered w-full max-w-xs"
+        multiple="multiple"
+      />
+
+      <input value="Lägg till" type="submit" class="btn btn-primary" />
 
   </div>
 </dialog>

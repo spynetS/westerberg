@@ -1,5 +1,6 @@
-from django.http import Http404, HttpResponse, HttpResponseNotFound
+from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
 from django.shortcuts import render
+from datetime import datetime
 
 from buildings.models import Building
 from rentals.models import Rental
@@ -12,9 +13,9 @@ def admin(request):
 
 def rental_adress(request, adress,pk):
     try:
-        rental = Rental.objects.get(building__adress=adress,pk=pk)
+        rental = Rental.objects.get(building__adress=adress,pk=pk,public=True)
         rental.rent = rental.rent;
-        rental.features = json.loads(rental.features)
+        rental.features = rental.features.split(",")
 
         images = []
         for img in rental.building.images.all():
@@ -30,9 +31,9 @@ def page(request, lokaler=False):
         lokaler = request.headers["lokaler"]
 
     if "select" in request.GET and request.GET["select"] != "alla":
-        rentals = Rental.objects.filter(building__city=request.GET['select'],lokal=lokaler)
+        rentals = Rental.objects.filter(building__city=request.GET['select'],lokal=lokaler,public=True)
     else:
-        rentals = Rental.objects.filter(lokal=lokaler)
+        rentals = Rental.objects.filter(lokal=lokaler,public=True)
 
 
     sorted_rentals = {}
@@ -68,3 +69,46 @@ def ledigt_lokaler(request):
         return render(request, "ledigt.html",{"select":"?select="+request.GET['select'], "lokaler":True})
     else:
         return render(request, "ledigt.html",{"lokaler":True})
+
+def create_annons(request,lokal):
+    available_from_str = request.POST["available_from"]
+    available_from_date = datetime.strptime(available_from_str, "%Y-%m-%d").date()
+
+    rental = Rental(
+        building=Building.objects.get(pk=request.POST["select_building"]),
+        size=request.POST["size"],
+        rooms=request.POST["rooms"],
+        description=request.POST["description"],
+        rent=request.POST["rent"],
+        features=request.POST["features"],
+        available_from=available_from_date,
+        lokal = lokal,
+        lokal_type = request.POST["select_lokal_type"] if lokal else Rental.LokalType.OVRIGT
+    )
+    rental.save()
+    return rental;
+
+def create_rental(request):
+    if request.method == "POST":
+        create_annons(request,False)
+        return render(request, "components/Alert.html",{"type":"success","msg":"Annons tillagged"})
+    return HttpResponseNotFound()
+
+def create_lokal(request):
+    if request.method == "POST":
+        create_annons(request,True)
+        return render(request, "components/Alert.html",{"type":"success","msg":"Annons tillagged"})
+
+    return HttpResponseNotFound()
+
+def setpublic(request,pk):
+    if request.method == "POST":
+        # try:
+        print(request.POST)
+        rental = Rental.objects.get(pk=pk)
+        rental.public = True if request.POST["is_public"] == "on" else False
+        rental.save()
+        return render(request, "components/Alert.html",{"type":"success","msg":"Annons är nu " + "synlig" if request.POST["is_public"] == "on" else "osynlig"})
+        # except:
+        #     return HttpResponseBadRequest()
+    return HttpResponseNotFound()
