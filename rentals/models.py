@@ -36,3 +36,5 @@ class Rental(models.Model):
     available_from = models.DateField()
 
     public = models.BooleanField(default=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)  # Add this line

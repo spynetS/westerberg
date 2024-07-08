@@ -11,7 +11,9 @@
         <th>Område</th>
         <th>Beskrivning</th>
         <th>Typ</th>
+        <th>Synlig</th>
         <th>Tabort</th>
+        <th>Skapad</th>
       </tr>
     </thead>
     <tbody>
@@ -23,8 +25,13 @@
         <td>{{rental.building.get_area_display}}</td>
         <td>{{rental.description}}</td>
         <td>{{rental.get_lokal_type_display}}</td>
+        <td>
+          <form hx-post="/rentals/setpublic/{{ rental.pk }}/" hx-swap="beforebegin" hx-trigger="change from:input[name='is_public']">
+              <input type="checkbox" name="is_public" class="checkbox checkbox-bordered" {% if rental.public %}checked{% endif %} />
+          </form>
+        </td>
         <td
-          onclick="remove_modal.showModal();document.getElementById('delete-pk').value={{building.pk}}"
+          onclick="remove_modal.showModal();document.getElementById('delete-pk').value={{rental.pk}}"
           class="text-red-500 hover:scale-110 duration-75 cursor-pointer"
         >
           <svg
@@ -43,6 +50,7 @@
             />
           </svg>
         </td>
+        <td>{{rental.created_at}}</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -52,7 +60,7 @@
 
 <dialog id="remove_modal" class="modal">
   <div class="modal-box">
-		<form hx-post="/rental/delete/" hx-swap="beforebegin" hx-on::after-request="remove_modal.close();window.location.reload();" class="modal-box col items-center ">
+		<form hx-post="/rentals/delete/" hx-swap="beforebegin" hx-on::after-request="remove_modal.close();//window.location.reload();" class="modal-box col items-center ">
 			<input name="pk" id="delete-pk" class="hidden" ></input>
 			<h3 class="font-bold text-lg">Varning vill du värkligen tabort denna annons?</h3>
 			<h3 class="font-bold text-md">Annonsen går inte att få tillbaka</h3>
@@ -61,8 +69,8 @@
 				<path d="M7.002 11a1 1 0 1 1 2 0 1 1 0 0 1-2 0M7.1 4.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0z"/>
 			</svg>
 			<div class="modal-action">
-				<button type="submitt" class="btn btn-error " >Tabort</button>
-				<label for="remove_modal" class="btn">Stäng</label>
+				<button type="submit" class="btn btn-error " >Tabort</button>
+				<button onclick="remove_modal.close()" class="btn">Stäng</button>
 			</div>
 		</form>
 	</div>

@@ -1,6 +1,7 @@
 from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from datetime import datetime
+from django.views.decorators.http import require_POST
 
 from buildings.models import Building
 from rentals.models import Rental
@@ -101,14 +102,17 @@ def create_lokal(request):
 
     return HttpResponseNotFound()
 
-def setpublic(request,pk):
-    if request.method == "POST":
-        # try:
-        print(request.POST)
-        rental = Rental.objects.get(pk=pk)
-        rental.public = True if request.POST["is_public"] == "on" else False
-        rental.save()
-        return render(request, "components/Alert.html",{"type":"success","msg":"Annons är nu " + "synlig" if request.POST["is_public"] == "on" else "osynlig"})
-        # except:
-        #     return HttpResponseBadRequest()
-    return HttpResponseNotFound()
+@require_POST
+def delete(request):
+    rental = get_object_or_404(Rental,pk=request.POST["pk"])
+    rental.delete()
+    return render(request, "components/Alert.html",{"type":"success","msg":"Annonsen är nu bortagen"})
+
+
+@require_POST
+def set_public(request, pk):
+    rental = get_object_or_404(Rental, pk=pk)
+    is_public = request.POST.get('is_public') == 'on'
+    rental.public = is_public
+    rental.save()
+    return render(request, "components/Alert.html",{"type":"success","msg":"Annons är nu " + ("synlig" if rental.public else "osynlig")})
