@@ -9,7 +9,7 @@
     <a href="/admin/lokaler" class="btn btn-natrual">Lokal annonser</a>
     <form action="{% url 'logout' %}" method="post">
       {% csrf_token %}
-      <button class="btn " type="submit">Log Out</button>
+      <button class="btn " type="submit">Loga ut</button>
     </form>
   </div>
   <div class="p-5 w-full">{% block admin_content %} {% endblock %}</div>

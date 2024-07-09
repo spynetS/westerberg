@@ -91,14 +91,21 @@ def create_annons(request,lokal):
 
 def create_rental(request):
     if request.method == "POST":
-        create_annons(request,False)
-        return render(request, "components/Alert.html",{"type":"success","msg":"Annons tillagged"})
+        try:
+            create_annons(request,False)
+            return render(request, "components/Alert.html",{"type":"success","msg":"Annons tillagged"})
+        except:
+            return render(request, "components/Alert.html",{"type":"error","msg":"Något gick fel"})
+
     return HttpResponseNotFound()
 
 def create_lokal(request):
     if request.method == "POST":
-        create_annons(request,True)
-        return render(request, "components/Alert.html",{"type":"success","msg":"Annons tillagged"})
+        try:
+            create_annons(request,True)
+            return render(request, "components/Alert.html",{"type":"success","msg":"Annons tillagged"})
+        except:
+            return render(request, "components/Alert.html",{"type":"error","msg":"Något gick fel"})
 
     return HttpResponseNotFound()
 

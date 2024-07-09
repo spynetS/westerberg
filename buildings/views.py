@@ -76,6 +76,11 @@ def building_adress(request, adress):
 def select_areas(request):
     return render(request,  "buildings/select.html",{"areas":Building.get_area_list()})
 
+def select_areas_with_all(request):
+    areas = Building.get_area_list()
+    areas.insert(0,(0,'Alla'))
+    return render(request,  "buildings/select.html",{"areas":areas})
+
 def select_cities(request):
     return render(request,  "buildings/select_city.html",{"cities":Building.get_city_list()})
 
