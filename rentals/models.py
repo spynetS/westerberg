@@ -20,11 +20,12 @@ class Rental(models.Model):
 
     class LokalType(models.TextChoices):
         BUTIK           = "1", "Butik"
-        KONTOR          = "2", "Kontor"
-        KONTORSHOTELL   = "3", "Kontorshotell"
-        LAGER           = "4", "Lager/Föråd"
-        P_PLATS         = "5", "P-plats/Garage"
-        OVRIGT          = "6", "Övrigt"
+        RESTURANG       = "2", "Resturang"
+        KONTOR          = "3", "Kontor"
+        KONTORSHOTELL   = "4", "Kontorshotell"
+        LAGER           = "5", "Lager/Föråd"
+        P_PLATS         = "6", "P-plats/Garage"
+        OVRIGT          = "7", "Övrigt"
 
     @classmethod
     def get_lokaltype_list(cls):
