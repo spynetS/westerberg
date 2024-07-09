@@ -13,13 +13,13 @@ from rentals.models import Rental
 def main(request):
     cities = Building.get_city_list()
     if request.method == "POST":
-        # if request.body.get("name") == "" or \
-        #    request.body.get("personal_number")  == "" or \
-        #    request.body.get("adress")  == "" or \
-        #    request.body.get("employment")  == "" or \
-        #    request.body.get("email")  == "" or \
-        #    request.body.get("phone")  == "":
-        #     return render(request, "intrestreport/bostad.html",{"error":"Fyll i de behövliga","cities":cities})
+        if request.POST["name"] == "" or \
+           request.POST["personal_number"]  == "" or \
+           request.POST["adress"]  == "" or \
+           request.POST["employment"]  == "" or \
+           request.POST["email"]  == "" or \
+           request.POST["phone"]  == "":
+            return render(request, "intrestreport/bostad.html",{"error":"Fyll i de behövliga","cities":cities})
 
 
         data = request.POST.copy()
@@ -29,15 +29,15 @@ def main(request):
 
         data['city'] = selected_city_labels
 
-        data['area'] = Building.Area(request.POST['select_areas']).label if data['select_areas'] != '0' else "Alla"
+        data['area'] = data["Ort"]
 
         body = render_to_string("intrestreport/intrestreport_mail.html",context=data,request=request)
 
         email = EmailMessage(
-            'Test mail',
+            f'Intreseanmälan {data["area"]}',
             body,
             settings.EMAIL_HOST_USER,
-            ['alfred@stensatter.se'],
+            [settings.INTRESTREPORT_EMAIL],
         )
         email.content_subtype = "html"  # Ensure the email content type is set to HTML
         email.send()
