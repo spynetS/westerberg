@@ -3597,6 +3597,14 @@ details.collapse summary::-webkit-details-marker {
   cursor: pointer;
 }
 
+.list-disc {
+  list-style-type: disc;
+}
+
+.list-decimal {
+  list-style-type: decimal;
+}
+
 .grid-flow-col {
   grid-auto-flow: column;
 }
@@ -3949,6 +3957,10 @@ details.collapse summary::-webkit-details-marker {
 
 .pt-72 {
   padding-top: 18rem;
+}
+
+.pl-5 {
+  padding-left: 1.25rem;
 }
 
 .text-center {
@@ -4305,6 +4317,10 @@ details.collapse summary::-webkit-details-marker {
 }
 
 @media (min-width: 640px) {
+  .sm\:flex-row {
+    flex-direction: row;
+  }
+
   .sm\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -4363,6 +4379,10 @@ details.collapse summary::-webkit-details-marker {
 
   .md\:w-\[80\%\] {
     width: 80%;
+  }
+
+  .md\:w-1\/4 {
+    width: 25%;
   }
 
   .md\:flex-row {

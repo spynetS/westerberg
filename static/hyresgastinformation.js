@@ -5,6 +5,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const showerButton = document.getElementById("shower");
   const toppx = 200 + navbar.offsetHeight;
 
+  let currentActiveSection = null;
+  let currentActiveParent = null;
+  let currentActiveSublist = null;
+
   const updateNavPosition = () => {
     const scrollPosition = window.scrollY || window.pageYOffset;
     if (scrollPosition < toppx) {
@@ -36,14 +40,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const highlightNav = () => {
     const mostViewed = logSectionInView();
-    if (mostViewed) {
-      const aTags = document.getElementsByName("nava");
-      aTags.forEach((tag) => (tag.className = ""));
+    if (mostViewed && mostViewed !== currentActiveSection) {
+      // Update active section and corresponding nav item
+      currentActiveSection = mostViewed;
       const matchedATag = document.querySelector(
         `a[href*="#${mostViewed.id}"]`,
       );
       if (matchedATag) {
-        matchedATag.className = "btn btn-primary";
+        // Remove active class from previous nav item
+        if (currentActiveParent) {
+          currentActiveParent.classList.remove("btn", "btn-primary");
+        }
+        // Add active class to current nav item
+        matchedATag.classList.add("btn", "btn-primary");
+
+        // Show sublist for current section and hide previous sublist
+        const newSublist = matchedATag.nextElementSibling;
+        if (newSublist && newSublist.tagName === "UL") {
+          newSublist.style.display = "block";
+          if (currentActiveSublist && currentActiveSublist !== newSublist) {
+            currentActiveSublist.style.display = "none";
+          }
+          currentActiveSublist = newSublist;
+        }
+
+        // Update current active parent
+        currentActiveParent = matchedATag;
       }
     }
   };
@@ -65,36 +87,35 @@ document.addEventListener("DOMContentLoaded", () => {
         anchor.textContent = h2.textContent;
         li.appendChild(anchor);
         list.appendChild(li);
-      }
 
-      const h3s = section.querySelectorAll("h3");
-      if (h3s.length > 0) {
-        const sublist = document.createElement("ul");
-        h3s.forEach((h3) => {
-          const subli = document.createElement("li");
-          const subanchor = document.createElement("a");
-          subanchor.setAttribute("href", `#${section.id}`);
-          subanchor.setAttribute("name", "nava");
-          subanchor.textContent = h3.textContent;
-          subli.appendChild(subanchor);
-          sublist.appendChild(subli);
-        });
-        const sublistItem = document.createElement("li");
-        sublistItem.appendChild(sublist);
-        list.appendChild(sublistItem);
+        const h3s = section.querySelectorAll("h3");
+        if (h3s.length > 0) {
+          const sublist = document.createElement("ul");
+          sublist.style.display = "none"; // Hide sublist initially
+          h3s.forEach((h3) => {
+            const subli = document.createElement("li");
+            const subanchor = document.createElement("a");
+            subanchor.setAttribute("href", `#${section.id}`);
+            subanchor.setAttribute("name", "nava");
+            subanchor.textContent = h3.textContent;
+            subli.appendChild(subanchor);
+            sublist.appendChild(subli);
+          });
+          li.appendChild(sublist); // Append sublist to the parent li
+        }
       }
     });
   };
 
   const showNav = () => {
-    nav.classList.remove("-left-[400px]");
+    list.classList.remove("hidden");
     list.classList.add("pt-12");
     showerButton.textContent = "<";
     showerButton.onclick = hideNav;
   };
 
   const hideNav = () => {
-    nav.classList.add("-left-[400px]");
+    list.classList.add("hidden");
     list.classList.remove("pt-12");
     showerButton.textContent = ">";
     showerButton.onclick = showNav;

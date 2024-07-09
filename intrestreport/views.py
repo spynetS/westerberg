@@ -34,7 +34,7 @@ def main(request):
         body = render_to_string("intrestreport/intrestreport_mail.html",context=data,request=request)
 
         email = EmailMessage(
-            f'Serviceanmälan {data["area"]}',
+            f'Serviceanmälan (bostad) {data["area"]}',
             body,
             settings.EMAIL_HOST_USER,
             [settings.INTRESTREPORT_EMAIL],
@@ -57,6 +57,33 @@ def lokal(request):
         for item in request.POST:
             if item != 'other' and request.POST[item] == "":
                 return render(request, "intrestreport/lokal.html",{"error":"Fyll i alla fält'","cities":cities,"lokaler":lokaler})
+
+        if "city" not in request.POST:
+            return render(request, "intrestreport/lokal.html",{"error":"Välj stad","cities":cities,"lokaler":lokaler})
+
+        if "type" not in request.POST:
+            return render(request, "intrestreport/lokal.html",{"error":"Välj typ","cities":cities,"lokaler":lokaler})
+
+        data = request.POST.copy()
+        selected_city_values = request.POST.getlist('city')
+        selected_city_labels = [Building.City(value).label for value in selected_city_values]
+        print(selected_city_labels)
+
+        data['city'] = selected_city_labels
+        data["type"] = [Rental.LokalType(value).label for value in request.POST.getlist("type")]
+
+        data['area'] = Building.Area(request.POST['select_areas']).label if data['select_areas'] != '0' else "Alla"
+
+        body = render_to_string("intrestreport/lokal_email.html",context=data,request=request)
+
+        email = EmailMessage(
+            f'Intresseanmälan (lokal) {data["area"]}',
+            body,
+            settings.EMAIL_HOST_USER,
+            [settings.INTRESTREPORT_EMAIL],
+        )
+        email.content_subtype = "html"  # Ensure the email content type is set to HTML
+        email.send()
 
         return render(request, "intrestreport/lokal.html",{"success":True,"cities":cities,"lokaler":lokaler})
 
