@@ -29,12 +29,12 @@ def main(request):
 
         data['city'] = selected_city_labels
 
-        data['area'] = data["Ort"]
+        data['area'] = Building.Area(request.POST['select_areas']).label if data['select_areas'] != '0' else "Alla"
 
         body = render_to_string("intrestreport/intrestreport_mail.html",context=data,request=request)
 
         email = EmailMessage(
-            f'Intreseanmälan {data["area"]}',
+            f'Serviceanmälan {data["area"]}',
             body,
             settings.EMAIL_HOST_USER,
             [settings.INTRESTREPORT_EMAIL],
