@@ -15,10 +15,10 @@
   transition: opacity 500ms ease-in;
 }
 .htmx-request .htmx-indicator {
-  display: block;
+  display: flex;
 }
 .htmx-request.htmx-indicator {
-  display: block;
+  display: flex;
 }
 .fade-in-section {
   opacity: 0;

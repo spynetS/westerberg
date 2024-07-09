@@ -3,7 +3,7 @@
 
 from django.urls import path
 
-from .views import *
+from .views import create_report, getform
 
 urlpatterns = [
     path("createreport/", create_report, name="list"),

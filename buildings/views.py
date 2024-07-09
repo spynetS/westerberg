@@ -64,7 +64,7 @@ def building_adress(request, adress):
         building = Building.objects.get(adress=adress)
     except:
         return HttpResponseNotFound()
-    rentals = Rental.objects.filter(building=building)
+    rentals = Rental.objects.filter(building=building,public=True)
 
     images = []
     for img in building.images.all():
