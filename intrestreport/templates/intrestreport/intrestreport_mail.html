@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Interest Report Email</title>
+    <style type="text/css" media="screen">
+        body {
+            font-family: Arial, sans-serif; /* Adjust font-family as needed */
+            line-height: 1.6; /* Adjust line height for better readability */
+            margin: 0; /* Remove default margin */
+            padding: 20px; /* Add padding for content spacing */
+        }
+        .section {
+            margin-bottom: 20px; /* Bottom margin for each section */
+        }
+        .section h2 {
+            margin-top: 0; /* Remove top margin for section headings */
+        }
+        .section p {
+            margin-top: 5px; /* Top margin for each paragraph */
+            margin-bottom: 5px; /* Bottom margin for each paragraph */
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h2>Bostad</h2>
+        <p>Storlek: {% for siz in size %} {{ siz }}, {% endfor %}</p>
+        <p>Stad: {% for cit in city %} {{ cit }}, {% endfor %}</p>
+        <p>Område: {{ area.0 }}</p>
+        <pre>Övrigt: {{ other.0 }}</pre>
+    </div>
+
+    <div class="section">
+        <h2>Sökande</h2>
+        <p>Namn: {{ name.0 }}</p>
+        <p>Personnummer: {{ personal_number.0 }}</p>
+        <p>Adress: {{ adress.0 }}</p>
+        <p>E-post: {{ email.0 }}</p>
+        <p>Telefon: {{ phone.0 }}</p>
+        <p>Sysselsättning: {{ employment.0 }}</p>
+        <p>Arbetsgivare: {{ employer.0 }}</p>
+        <p>Tel arbetsgivare: {{ phone_employer.0 }}</p>
+        <p>Nuvarande hyresvärd: {{ landlord.0 }}</p>
+    </div>
+
+    <div class="section">
+        <h2>Medsökande</h2>
+        <p>Namn: {{ name.1 }}</p>
+        <p>Personnummer: {{ personal_number.1 }}</p>
+        <p>Adress: {{ adress.1 }}</p>
+        <p>E-post: {{ email.1 }}</p>
+        <p>Telefon: {{ phone.1 }}</p>
+        <p>Sysselsättning: {{ employment.1 }}</p>
+        <p>Arbetsgivare: {{ employer.1 }}</p>
+        <p>Tel arbetsgivare: {{ phone_employer.1 }}</p>
+        <p>Nuvarande hyresvärd: {{ landlord.1 }}</p>
+    </div>
+</body>
+</html>
