@@ -4195,11 +4195,11 @@ details.collapse summary::-webkit-details-marker {
 }
 
 .htmx-request .htmx-indicator {
-  display: block;
+  display: flex;
 }
 
 .htmx-request.htmx-indicator {
-  display: block;
+  display: flex;
 }
 
 .fade-in-section {

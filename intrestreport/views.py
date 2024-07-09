@@ -1,6 +1,9 @@
+from django.template.loader import render_to_string
+from westerberg import settings
 from django.shortcuts import render
 from buildings.models import Building
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage, send_mail
+
 import urllib.parse
 
 from intrestreport.models import IntrestReport
@@ -9,7 +12,7 @@ from rentals.models import Rental
 # Create your views here.
 def main(request):
     cities = Building.get_city_list()
-    if request.method == "PUT":
+    if request.method == "POST":
         # if request.body.get("name") == "" or \
         #    request.body.get("personal_number")  == "" or \
         #    request.body.get("adress")  == "" or \
@@ -17,13 +20,31 @@ def main(request):
         #    request.body.get("email")  == "" or \
         #    request.body.get("phone")  == "":
         #     return render(request, "intrestreport/bostad.html",{"error":"Fyll i de behövliga","cities":cities})
-        raw_data = request.body.decode('utf-8')
-        data = urllib.parse.parse_qs(raw_data)
-        # Flatten the lists in the parsed data
-        data = {k: v[0] for k, v in data.items()}
+
+
+        data = request.POST.copy()
+        selected_city_values = request.POST.getlist('city')
+        selected_city_labels = [Building.City(value).label for value in selected_city_values]
+        print(selected_city_labels)
+
+        data['city'] = selected_city_labels
+
+        data['area'] = Building.Area(request.POST['select_areas']).label if data['select_areas'] != '0' else "Alla"
+
+        body = render_to_string("intrestreport/intrestreport_mail.html",context=data,request=request)
+
+        email = EmailMessage(
+            'Test mail',
+            body,
+            settings.EMAIL_HOST_USER,
+            ['alfred@stensatter.se'],
+        )
+        email.content_subtype = "html"  # Ensure the email content type is set to HTML
+        email.send()
 
         report = IntrestReport(data=str(data))
         report.save()
+
 
         return render(request, "intrestreport/bostad.html",{"success":True,"cities":cities})
     return render(request, "intrestreport/bostad.html",{"cities":cities})
