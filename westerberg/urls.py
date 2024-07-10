@@ -25,7 +25,10 @@ from rentals.views import ledigt, ledigt_lokaler
 
 from rentals.models import Rental
 from news.models import News
+from westerberg import settings
 
+from django.core.mail import EmailMessage
+from django.shortcuts import render
 
 from django.views.generic.base import TemplateView
 
@@ -74,6 +77,29 @@ class LokalerView(TemplateView):
         context['types'] = Rental.get_lokaltype_list()
         return context
 
+def kontakt(request):
+    try:
+        body = (
+            f"Namn: {request.POST['name']}\n"
+            f"E-post: {request.POST['email']}\n"
+            f"Telefonnummer: {request.POST['phone']}\n"
+            f"Meddelande:\n {request.POST['msg']}"
+        )
+
+        # Create the email
+        email = EmailMessage(
+            subject=f"Info {request.POST['subject']}",
+            body=body,
+            from_email=settings.EMAIL_HOST_USER,
+            to=[settings.INFO_EMAIL],
+            headers={'Reply-To': request.POST['email']} # add to other emails to??
+        )
+
+        # Send the email
+        email.send()
+        return render(request,"components/Alert.html",{"type":"success","msg":"Meddelandet skickat!"})
+    except:
+        return render(request,"components/Alert.html",{"type":"error","msg":"Något gick fel!"})
 
 urlpatterns = [
     path("", HomeView.as_view(template_name="home.html"), name="home"),
@@ -93,6 +119,9 @@ urlpatterns = [
     path("intresseanmalan/bostad", TemplateView.as_view(template_name="bostad.html"), name="fastigheter"), #
     path("intresseanmalan/lokal", TemplateView.as_view(template_name="lokal.html"), name="fastigheter"), #
     path("hyresgastinformation", TemplateView.as_view(template_name="aboutus.html"), name="fastigheter"),
+    path("kontakt",TemplateView.as_view(template_name="kontakt.html")),
+    path("kontakt/skicka/",kontakt),
+
 
     path("accounts/", include("accounts.urls")),
     path("accounts/", include("django.contrib.auth.urls")),

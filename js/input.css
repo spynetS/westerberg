@@ -46,10 +46,21 @@
 	transition: opacity 1s ease-in-out;
 }
 
-.fade-out {
-	opacity: 0;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-.fade-in {
-	opacity: 1;
+/* Apply the animation to the element */
+.fadein {
+  opacity: 0; /* Ensure the element is invisible initially */
+  animation: fadeIn 1s forwards; /* 1s is the duration of the animation */
+}
+
+html, body, label {
+  font-family: 'Arial', sans-serif;
 }
