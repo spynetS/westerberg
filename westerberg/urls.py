@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 
 from buildings.views import fast
 from buildings.models import Building
+from accounts.models import CustomUser
 from rentals.views import ledigt, ledigt_lokaler
 
 from rentals.models import Rental
@@ -77,6 +78,13 @@ class LokalerView(TemplateView):
         context['types'] = Rental.get_lokaltype_list()
         return context
 
+class KontaktView(TemplateView):
+    template_name = "kontakt.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
 def kontakt(request):
     try:
         body = (
@@ -119,7 +127,7 @@ urlpatterns = [
     path("intresseanmalan/bostad", TemplateView.as_view(template_name="bostad.html"), name="fastigheter"), #
     path("intresseanmalan/lokal", TemplateView.as_view(template_name="lokal.html"), name="fastigheter"), #
     path("hyresgastinformation", TemplateView.as_view(template_name="aboutus.html"), name="fastigheter"),
-    path("kontakt",TemplateView.as_view(template_name="kontakt.html")),
+    path("kontakt",KontaktView.as_view(template_name="kontakt.html")),
     path("kontakt/skicka/",kontakt),
 
 
