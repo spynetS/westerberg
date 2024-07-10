@@ -38,7 +38,14 @@ class HomeView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['images'] = ['/media/slides/2.png', '/media/slides/3.png', '/media/slides/4.png','/media/slides/5.png','/media/slides/6.png','/media/slides/7.png']  # Add your images here
+        context['images'] = [
+            ['/media/slides/2.png','Åby. Resturangtorg. Gamla blomaffären blev Resturang fond. Anpassningar för bättre miljö och tillgänglighetet'],
+            ['/media/slides/3.png','Söderköping. Från Creperi till bryggeri. Söderköping gick återigen ett bryggeri. Lock, Hop & Barrel flyttade in i tidigare Bondens loaler. Anpassningen och ombygnaden för ett microbryggeri ingick i det nya konceptet.'],
+            ['/media/slides/4.png','Söderköping. Banklokalen vid Hagatorget blev ett nytt nav för nya affärer och nätverkande. Näringhslivet och kommuninvånarna i Söderköping erhäll en ny mötesplatsm, CoOperate Coffice. Loalerna anpassades med teknik, visningsytor mötesrum samt kontorsytor för längre eller kortare tids hyra.'],
+            ['/media/slides/5.png','Var vill du etablera dig i framtiden?'],
+            ['/media/slides/6.png','I söderköping har vi lokaler från 100 till 600 kvm som kan anpassas och förändras för din verksamhet. Samtliga belägna i gatuplan med bra kommunikation och centrumläge'],
+            ['/media/slides/7.png','I åby har vi mindre kontros och versamhetslokaler från 60 till 100kvm. Dessutom finns en större 600kvm butikslokal. Samtliga belägna i Åby Centrum med god tillgång till parkeringsplatser']
+                            ]
         return context
 
 class NewsView(TemplateView):

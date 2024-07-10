@@ -54,7 +54,7 @@
             </div>
         </div>
         <div class="p-5 flex flex-col gap-12 md:min-h-screen">
-            {% include 'components/slider.html' with images=images %}
+            {% include 'components/slider.html' with images=images alts=alts%}
         </div>
         <div hx-get="/news/cards/" hx-target="#cardholder" hx-trigger="load" hx-on::after-request="cards()" class="relative mt-12 p-5 flex flex-col gap-12 min-h-screen items-center w-screen">
             <img class="absolute bottom-0 right-0" src="/media/Vector 9.png" alt="Decorative Vector 9" />
