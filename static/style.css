@@ -3508,6 +3508,10 @@ details.collapse summary::-webkit-details-marker {
   min-height: 200px;
 }
 
+.min-h-\[20vh\] {
+  min-height: 20vh;
+}
+
 .min-h-\[40vh\] {
   min-height: 40vh;
 }
@@ -3804,20 +3808,20 @@ details.collapse summary::-webkit-details-marker {
   --tw-bg-opacity: 70%;
 }
 
-.bg-\[url\(\'\/media\/norr\.jpg\'\)\] {
-  background-image: url('/media/norr.jpg');
-}
-
-.bg-\[url\(\'\/media\/slides\/2\.png\'\)\] {
-  background-image: url('/media/slides/2.png');
-}
-
-.bg-\[url\(\'\/media\/splash\.png\'\)\] {
-  background-image: url('/media/splash.png');
+.bg-\[url\(\'\/static\/norr\.jpg\'\)\] {
+  background-image: url('/static/norr.jpg');
 }
 
 .bg-\[url\(\'\/static\/norrk\F6ping\.jpg\'\)\] {
   background-image: url('/static/norrköping.jpg');
+}
+
+.bg-\[url\(\'\/static\/slides\/2\.png\'\)\] {
+  background-image: url('/static/slides/2.png');
+}
+
+.bg-\[url\(\'\/static\/splash\.png\'\)\] {
+  background-image: url('/static/splash.png');
 }
 
 .bg-gradient-to-b {
@@ -3929,11 +3933,6 @@ details.collapse summary::-webkit-details-marker {
 .px-6 {
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-}
-
-.py-12 {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
 }
 
 .py-5 {
@@ -4254,7 +4253,7 @@ details.collapse summary::-webkit-details-marker {
 }
 
 .main{
-  background-image: url('/media/westerbergs_fastigheter.mp4');
+  background-image: url('/static/westerbergs_fastigheter.mp4');
   background-repeat: no-repeat;
   background-position: top;
   background-size: cover;

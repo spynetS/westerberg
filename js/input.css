@@ -36,7 +36,7 @@
 }
 
 .main{
-	background-image: url('/media/westerbergs_fastigheter.mp4');
+	background-image: url('/static/westerbergs_fastigheter.mp4');
 	background-repeat: no-repeat;
 	background-position: top;
 	background-size: cover;

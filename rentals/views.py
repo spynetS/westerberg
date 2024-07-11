@@ -21,7 +21,7 @@ def rental_adress(request, adress,pk):
         images = []
         for img in rental.building.images.all():
             print(img.image.url)
-            images.append(img.image.url)
+            images.append([img.image.url,f"slide imge"])
 
         return render(request,'rentals/rental.html',{"rental":rental,"images":images})
     except:
@@ -32,8 +32,10 @@ def page(request, lokaler=False):
         lokaler = request.headers["lokaler"]
 
     if "select" in request.GET and request.GET["select"] != "alla":
+        select = request.GET["select"]
         rentals = Rental.objects.filter(building__city=request.GET['select'],lokal=lokaler,public=True)
     else:
+        select = "alla"
         rentals = Rental.objects.filter(lokal=lokaler,public=True)
 
 
@@ -53,7 +55,7 @@ def page(request, lokaler=False):
     options = Building.City.choices
     options = [[i[0],i[1]] for i in options]
 
-    return render(request, "rentals/page.html",{"rentals": list(sorted_rentals.values()),"options":options,"lokaler":lokaler})
+    return render(request, "rentals/page.html",{"rentals": list(sorted_rentals.values()),"options":options,"lokaler":lokaler,"select":select})
 
 def ledigt(request):
     if "refresh" in request.headers:

@@ -8,7 +8,7 @@
 
 	<div class=" relative h-full w-full pb-12" >
 
-	<img class="absolute bottom-0 -z-10 w-screen right-0"  src="/media/Vector 6.png" alt="Background image" />
+	<img class="absolute bottom-0 -z-10 w-screen right-0"  src="/static/Vector 6.png" alt="Background image" />
 
 		<div  class="col h-full w-full container mx-auto gap-5  min-h-screen ">
 			<div class="text-sm breadcrumbs">
@@ -49,7 +49,11 @@
 									{% endif %}
 
 									{% for item in rentals %}
-										<li><a href="/rentals/rental/{{building.adress}}/{{item.pk}}" > {{item.rooms}} rum och kök {{item.size}} kvm {{item.rent}}/månad </a></li>
+										{% if item.lokal %}
+										<li><a href="/rentals/rental/{{building.adress}}/{{item.pk}}" >Lokal: {{item.rooms}} rum {{item.size}} kvm {{item.rent}}/månad </a></li>
+											{% else %}
+										<li><a href="/rentals/rental/{{building.adress}}/{{item.pk}}" >Bostad: {{item.rooms}} rum {{item.size}} kvm {{item.rent}}/månad </a></li>
+											{% endif %}
 									{% endfor %}
 								</ul>
 							</li>

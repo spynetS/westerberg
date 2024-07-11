@@ -28,8 +28,10 @@ def building_options(request):
 
 def page(request):
     if "select" in request.GET and request.GET["select"] != "alla":
+        select = request.GET["select"]
         buildings = Building.objects.filter(city=request.GET['select'])
     else:
+        select = "alla"
         buildings = Building.objects.all()
 
     sorted_buildings = {}
@@ -48,7 +50,8 @@ def page(request):
     options = Building.City.choices
     options = [[i[0],i[1]] for i in options]
 
-    return render(request, "buildings/page.html",{"buildings": list(sorted_buildings.values()),"options":options})
+    return render(request, "buildings/page.html",{"buildings": list(sorted_buildings.values()),"options":options,"select":select})
+
 
 def fast(request):
     if "refresh" in request.headers:
@@ -69,7 +72,7 @@ def building_adress(request, adress):
     images = []
     for img in building.images.all():
         print(img.image.url)
-        images.append(img.image.url)
+        images.append([img.image.url,f"slide imge"])
 
     return render(request, "buildings/building.html",{"building":building,"images":images,"rentals":rentals})
 

@@ -1,11 +1,11 @@
-<div id="outer" class="relative w-screen min-h-screen bg-center bg-cover bg-no-repeat bg-[url('/media/norr.jpg')]">
+<div id="outer" class="relative w-screen min-h-screen bg-center bg-cover bg-no-repeat bg-[url('/static/norr.jpg')]">
 
 	<div id="loading" class="items-center htmx-indicator flex justify-center fixed h-screen w-screen bg-black bg-opacity-25 top-0 right-0 z-50 " >
 		<span  class="text-base-200 loading loading-spinner loading-lg"></span>
 	</div>
 
 	<div class="absolute inset-0 bg-black opacity-[30%]"></div>
-	<img class="absolute top-0 h-full w-full z-0" src="/media/Vector 8.png" alt="Background image" />
+	<img class="absolute top-0 h-full w-full z-0" src="/static/Vector 8.png" alt="Background image" />
 	<div class="container relative mx-auto p-2 z-10 ">
 		<h1 class="mt-16 text-3xl text-white font-bold">Intresseanmälan bostad</h1>
 		<form hx-indicator="#loading" hx-post="/intrestreport/" hx-target="#outer" hx-swap="outerHTML" class="flex flex-col items-center gap-12" >

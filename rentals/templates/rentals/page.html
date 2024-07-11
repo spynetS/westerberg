@@ -1,7 +1,18 @@
 <div id="outer" class=" gap-2 flex flex-col items-start justify-start w-screen" >
 	<style type="text/css" media="screen">
 	 .headering{
-		 background-image: url("/media/soderkoping.png");
+		 {% if select == "1" %}
+		 	background-image: url("/static/norrköping.jpg");
+		 {% endif %}
+		 {% if select == "2" %}
+		 	background-image: url("/static/soderkoping.png");
+		 {% endif %}
+		 {% if select == "3" %}
+		 	background-image: url("/static/åby.jpg");
+		 {% endif %}
+		 {% if select == "alla" %}
+		 	background-image: url("/static/norr.jpg");
+		 {% endif %}
 		 background-size: cover;
 		 background-position: center;
 	 }
