@@ -9,6 +9,8 @@
         <th>Adress</th>
         <th>Stad</th>
         <th>Område</th>
+        <th>Rum</th>
+        <th>Kvm</th>
         <th>Beskrivning</th>
         <th>Synlig</th>
         <th>Tabort</th>
@@ -22,6 +24,8 @@
         <th>{{rental.building.adress}}</th>
         <td>{{rental.building.get_city_display}}</td>
         <td>{{rental.building.get_area_display}}</td>
+        <td>{{rental.rooms}}</td>
+        <td>{{rental.size}}</td>
         <td>{{rental.description}}</td>
         <td>
           <form hx-post="/rentals/setpublic/{{ rental.pk }}/" hx-swap="beforebegin" hx-trigger="change from:input[name='is_public']">
