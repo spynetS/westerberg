@@ -3320,6 +3320,10 @@ details.collapse summary::-webkit-details-marker {
   top: 88px;
 }
 
+.left-\[400px\] {
+  left: 400px;
+}
+
 .-z-10 {
   z-index: -10;
 }
@@ -4386,6 +4390,14 @@ html, body, label {
     left: 0px;
   }
 
+  .md\:left-\[400px\] {
+    left: 400px;
+  }
+
+  .md\:right-0 {
+    right: 0px;
+  }
+
   .md\:order-1 {
     order: 1;
   }
@@ -4405,6 +4417,10 @@ html, body, label {
 
   .md\:mt-0 {
     margin-top: 0px;
+  }
+
+  .md\:flex {
+    display: flex;
   }
 
   .md\:grid {
