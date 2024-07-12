@@ -118,7 +118,11 @@ def main(request):
 
             files = request.FILES.getlist('images')
 
-            for file in files:
+            # Sort the files based on their names
+            sorted_files = sorted(files, key=lambda f: f.name)
+
+            # Now you can process the sorted_files as needed
+            for file in sorted_files:
                 image = Images(image=file)
                 image.save()
                 building.images.add(image)

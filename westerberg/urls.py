@@ -105,10 +105,13 @@ def kontakt(request):
         email = EmailMessage(
             subject=f"Info {request.POST['subject']}",
             body=body,
-            from_email=settings.EMAIL_HOST_USER,
+            from_email=(request.POST["name"]+settings.EMAIL_HOST_USER),
             to=[settings.INFO_EMAIL],
-            headers={'Reply-To': request.POST['email']} # add to other emails to??
+            cc=[settings.INFO_EMAIL],  # CC to info@stensatter.sele
+            reply_to=[request.POST["email"]]
+            # headers={'Reply-To': f" {request.POST['name']} {request.POST['email']}, Info {settings.INFO_EMAIL}"}
         )
+        print(f" {request.POST['name']} {request.POST['email']}, Info {settings.INFO_EMAIL}")
 
         # Send the email
         email.send()
