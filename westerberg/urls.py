@@ -22,7 +22,9 @@ from django.conf.urls.static import static
 from buildings.views import fast
 from buildings.models import Building
 from accounts.models import CustomUser
+from westerberg.mail import sendmail
 from rentals.views import ledigt, ledigt_lokaler
+
 
 from rentals.models import Rental
 from news.models import News
@@ -93,31 +95,20 @@ class KontaktView(TemplateView):
         return context
 
 def kontakt(request):
-    try:
-        body = (
-            f"Namn: {request.POST['name']}\n"
-            f"E-post: {request.POST['email']}\n"
-            f"Telefonnummer: {request.POST['phone']}\n"
-            f"Meddelande:\n {request.POST['msg']}"
-        )
+    # try:
+    body = (
+        f"Namn: {request.POST['name']}\n"
+        f"E-post: {request.POST['email']}\n"
+        f"Telefonnummer: {request.POST['phone']}\n"
+        f"Meddelande:\n {request.POST['msg']}"
+    )
 
-        # Create the email
-        email = EmailMessage(
-            subject=f"Info {request.POST['subject']}",
-            body=body,
-            from_email=(request.POST["name"]+settings.EMAIL_HOST_USER),
-            to=[settings.INFO_EMAIL],
-            cc=[settings.INFO_EMAIL],  # CC to info@stensatter.sele
-            reply_to=[request.POST["email"]]
-            # headers={'Reply-To': f" {request.POST['name']} {request.POST['email']}, Info {settings.INFO_EMAIL}"}
-        )
-        print(f" {request.POST['name']} {request.POST['email']}, Info {settings.INFO_EMAIL}")
 
-        # Send the email
-        email.send()
-        return render(request,"components/Alert.html",{"type":"success","msg":"Meddelandet skickat!"})
-    except:
-        return render(request,"components/Alert.html",{"type":"error","msg":"Något gick fel!"})
+    sendmail(request.POST["subject"],body,request.POST['name'],request.POST['email'],settings.INFO_EMAIL)
+
+    #     return render(request,"components/Alert.html",{"type":"success","msg":"Meddelandet skickat!"})
+    # except:
+    return render(request,"components/Alert.html",{"type":"error","msg":"Något gick fel!"})
 
 urlpatterns = [
     path("", HomeView.as_view(template_name="home.html"), name="home"),

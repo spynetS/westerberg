@@ -1,4 +1,5 @@
 from django.template.loader import render_to_string
+from westerberg.mail import sendmail
 from westerberg import settings
 from django.shortcuts import render
 from buildings.models import Building
@@ -33,18 +34,14 @@ def main(request):
 
         body = render_to_string("intrestreport/intrestreport_mail.html",context=data,request=request)
 
-        email = EmailMessage(
-            f'Serviceanmälan (bostad) {data["area"]}',
-            body,
-            settings.EMAIL_HOST_USER,
-            [settings.INTRESTREPORT_EMAIL],
-        )
-        email.content_subtype = "html"  # Ensure the email content type is set to HTML
-        email.send()
+        sendmail(f'Intresseanmälan (bostad) {data["area"]}',
+                 body,data['name'],
+                 data['email'],
+                 settings.SERVICEREPORT_EMAIL,
+                 "html")
 
         report = IntrestReport(data=str(data))
         report.save()
-
 
         return render(request, "intrestreport/bostad.html",{"success":True,"cities":cities})
     return render(request, "intrestreport/bostad.html",{"cities":cities})

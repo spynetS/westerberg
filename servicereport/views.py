@@ -2,6 +2,7 @@
 from django.http import HttpResponse
 import re
 from django.shortcuts import render
+from westerberg.mail import sendmail
 from westerberg import settings
 
 from django.core.mail import EmailMessage
@@ -53,15 +54,14 @@ def create_report(request):
 
       body = render_to_string("servicereport/email.html",context=data,request=request)
 
-      email = EmailMessage(
+      sendmail(
          f'Serviceanmälan {data["Ort"]}',
          body,
-         settings.EMAIL_HOST_USER,
-         ['alfred@stensatter.se'],
+         data['Namn'],
+         data['Epost'],
+         settings.SERVICEREPORT_EMAIL,
+         "html"
       )
-      email.content_subtype = "html"  # Ensure the email content type is set to HTML
-      email.send()
-
 
 
    except Exception as e:
