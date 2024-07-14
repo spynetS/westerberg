@@ -95,20 +95,20 @@ class KontaktView(TemplateView):
         return context
 
 def kontakt(request):
-    # try:
-    body = (
-        f"Namn: {request.POST['name']}\n"
-        f"E-post: {request.POST['email']}\n"
-        f"Telefonnummer: {request.POST['phone']}\n"
-        f"Meddelande:\n {request.POST['msg']}"
-    )
+    try:
+        body = (
+            f"Namn: {request.POST['name']}\n"
+            f"E-post: {request.POST['email']}\n"
+            f"Telefonnummer: {request.POST['phone']}\n"
+            f"Meddelande:\n {request.POST['msg']}"
+        )
 
 
-    sendmail(request.POST["subject"],body,request.POST['name'],request.POST['email'],settings.INFO_EMAIL,"Inforeport")
+        sendmail(request.POST["subject"],body,request.POST['name'],request.POST['email'],settings.INFO_EMAIL,"Inforeport")
 
-    #     return render(request,"components/Alert.html",{"type":"success","msg":"Meddelandet skickat!"})
-    # except:
-    return render(request,"components/Alert.html",{"type":"error","msg":"Något gick fel!"})
+        return render(request,"components/Alert.html",{"type":"success","msg":"Meddelandet skickat!"})
+    except:
+        return render(request,"components/Alert.html",{"type":"error","msg":"Något gick fel!"})
 
 urlpatterns = [
     path("", HomeView.as_view(template_name="home.html"), name="home"),
