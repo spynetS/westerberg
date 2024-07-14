@@ -153,7 +153,16 @@
             }
 
             if (params["omrade"]) {
-                document.getElementById("select_areas").value = params["omrade"];
+				var select = document.getElementById("select_areas");
+
+				// Iterate over the options to find the one with the matching text
+				for (var i = 0; i < select.options.length; i++) {
+					if (select.options[i].text === params["omrade"]) {
+						// Set the value of the select element to the value of the matching option
+						select.value = select.options[i].value;
+						break;
+					}
+				}
             }
         }
 
