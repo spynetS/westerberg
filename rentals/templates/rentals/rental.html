@@ -65,7 +65,11 @@
 					<div class="cardcomp flex flex-col text-start">
 						<a href="/buildings/building/{{rental.building.adress}}" class="link link-primary" >Fastigheten</a>
 						<p>Om du är intresserad gör en intresseanmälan idag!</p>
-						<a href="/intresseanmalan/bostad?rum={{rental.rooms}}&inflyttning={{rental.avalible_from}}&stad={{rental.building.get_city_display}}&omrade={{rental.building.get_area_display}}" class="btn btn-primary" >Intresseanmälan</a>
+						{% if retnal.lokal %}
+							<a href="/intresseanmalan/bostad?rum={{rental.rooms}}&inflyttning={{rental.avalible_from}}&stad={{rental.building.get_city_display}}&omrade={{rental.building.get_area_display}}" class="btn btn-primary" >Intresseanmälan</a>
+						{% else %}
+							<a href="/intresseanmalan/lokal" class="btn btn-primary" >Intresseanmälan</a>
+						{% endif %}
 					</div>
 				</div>
 			</div>
