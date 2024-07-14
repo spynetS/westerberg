@@ -50,7 +50,7 @@
 
 									{% for item in rentals %}
 										{% if item.lokal %}
-										<li><a href="/rentals/rental/{{building.adress}}/{{item.pk}}" >Lokal: {{item.rooms}} rum {{item.size}} kvm {{item.rent}}/månad </a></li>
+										<li><a href="/rentals/rental/{{building.adress}}/{{item.pk}}" >Lokal: {{item.rooms}} rum {{item.size}} kvm {% if item.rent > 0 %}{{item.rent}}/månad {% endif %}</a></li>
 											{% else %}
 										<li><a href="/rentals/rental/{{building.adress}}/{{item.pk}}" >Bostad: {{item.rooms}} rum {{item.size}} kvm {{item.rent}}/månad </a></li>
 											{% endif %}
