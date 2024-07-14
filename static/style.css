@@ -3320,10 +3320,6 @@ details.collapse summary::-webkit-details-marker {
   top: 88px;
 }
 
-.left-\[400px\] {
-  left: 400px;
-}
-
 .-z-10 {
   z-index: -10;
 }
@@ -3391,10 +3387,6 @@ details.collapse summary::-webkit-details-marker {
   margin-bottom: 1rem;
 }
 
-.-ml-2 {
-  margin-left: -0.5rem;
-}
-
 .mb-12 {
   margin-bottom: 3rem;
 }
@@ -3440,10 +3432,6 @@ details.collapse summary::-webkit-details-marker {
 
 .block {
   display: block;
-}
-
-.inline-block {
-  display: inline-block;
 }
 
 .flex {
@@ -3651,6 +3639,10 @@ details.collapse summary::-webkit-details-marker {
   align-items: flex-start;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .items-center {
   align-items: center;
 }
@@ -3701,10 +3693,6 @@ details.collapse summary::-webkit-details-marker {
 
 .gap-5 {
   gap: 1.25rem;
-}
-
-.overflow-hidden {
-  overflow: hidden;
 }
 
 .overflow-visible {
@@ -3812,9 +3800,14 @@ details.collapse summary::-webkit-details-marker {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
-.bg-red-200 {
+.bg-red-300 {
   --tw-bg-opacity: 1;
-  background-color: rgb(254 202 202 / var(--tw-bg-opacity));
+  background-color: rgb(252 165 165 / var(--tw-bg-opacity));
+}
+
+.bg-green-200 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(187 247 208 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-25 {
@@ -3931,6 +3924,18 @@ details.collapse summary::-webkit-details-marker {
   padding: 2rem;
 }
 
+.p-32 {
+  padding: 8rem;
+}
+
+.p-\[40\%\] {
+  padding: 40%;
+}
+
+.p-\[20\%\] {
+  padding: 20%;
+}
+
 .px-0 {
   padding-left: 0px;
   padding-right: 0px;
@@ -4011,10 +4016,6 @@ details.collapse summary::-webkit-details-marker {
 
 .text-end {
   text-align: end;
-}
-
-.align-baseline {
-  vertical-align: baseline;
 }
 
 .text-2xl {
@@ -4375,10 +4376,6 @@ html, body, label {
 }
 
 @media (min-width: 640px) {
-  .sm\:flex-row {
-    flex-direction: row;
-  }
-
   .sm\:text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -4388,14 +4385,6 @@ html, body, label {
 @media (min-width: 768px) {
   .md\:left-0 {
     left: 0px;
-  }
-
-  .md\:left-\[400px\] {
-    left: 400px;
-  }
-
-  .md\:right-0 {
-    right: 0px;
   }
 
   .md\:order-1 {
@@ -4409,10 +4398,6 @@ html, body, label {
   .md\:mx-auto {
     margin-left: auto;
     margin-right: auto;
-  }
-
-  .md\:-ml-6 {
-    margin-left: -1.5rem;
   }
 
   .md\:mt-0 {
@@ -4499,11 +4484,6 @@ html, body, label {
 
   .md\:text-5xl {
     font-size: 3rem;
-    line-height: 1;
-  }
-
-  .md\:text-7xl {
-    font-size: 4.5rem;
     line-height: 1;
   }
 
