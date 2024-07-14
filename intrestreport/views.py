@@ -38,6 +38,7 @@ def main(request):
                  body,data['name'],
                  data['email'],
                  settings.SERVICEREPORT_EMAIL,
+                 "Intrestreport",
                  "html")
 
         report = IntrestReport(data=str(data))

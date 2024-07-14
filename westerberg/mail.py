@@ -6,10 +6,10 @@ from django.core.mail import EmailMessage
 from westerberg import settings
 
 
-def sendmail(subject,body,name,email,to,content_subtype="text/plain"):
+def sendmail(subject,body,name,email,to,group,content_subtype="text/plain"):
 
     # Assuming 'mail' is the name of the group you're interested in
-    group_name = "Mail"
+    group_name = group
 
     # Get the group object
     mail_group = Group.objects.get(name=group_name)

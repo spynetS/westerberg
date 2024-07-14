@@ -60,6 +60,7 @@ def create_report(request):
          data['Namn'],
          data['Epost'],
          settings.SERVICEREPORT_EMAIL,
+         "Servicereport",
          "html"
       )
 
