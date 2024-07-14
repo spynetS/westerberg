@@ -104,7 +104,7 @@ def kontakt(request):
     )
 
 
-    sendmail(request.POST["subject"],body,request.POST['name'],request.POST['email'],settings.INFO_EMAIL,"Info")
+    sendmail(request.POST["subject"],body,request.POST['name'],request.POST['email'],settings.INFO_EMAIL,"Inforeport")
 
     #     return render(request,"components/Alert.html",{"type":"success","msg":"Meddelandet skickat!"})
     # except:
