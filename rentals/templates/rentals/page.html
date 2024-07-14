@@ -66,7 +66,7 @@
 						{% endwith %}
 						<div class="card-body">
 							<h4 class="card-title">{{building.building.adress}}</h4>
-							<h5 class="font-semibold" >{{building.rent}} på {{building.size}} m2</h5>
+							<h5 class="font-semibold" >{% if building.rent > 0 %} {{building.rent}} på {% endif %} {{building.size}} m2</h5>
 							<p class="line-clamp-3" >{{building.description}}</p>
 							<button class="mt-2 btn btn-secondary" >Visa mer</button>
 						</div>
