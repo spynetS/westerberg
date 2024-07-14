@@ -15,7 +15,7 @@ class Rental(models.Model):
     rooms = models.IntegerField() # rooms
     description = models.TextField()
     rent = models.IntegerField()
-    features = models.TextField() # json list ["Diskmakin", "Tv"]
+    features = models.TextField(null=True) # json list ["Diskmakin", "Tv"]
     images = models.ManyToManyField(Image,related_name="images",blank=True)
 
     class LokalType(models.TextChoices):
