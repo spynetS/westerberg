@@ -3574,6 +3574,14 @@ details.collapse summary::-webkit-details-marker {
   width: 100vw;
 }
 
+.w-\[40\%\] {
+  width: 40%;
+}
+
+.w-\[20\%\] {
+  width: 20%;
+}
+
 .max-w-\[80\%\] {
   max-width: 80%;
 }
@@ -3633,6 +3641,10 @@ details.collapse summary::-webkit-details-marker {
 
 .flex-wrap {
   flex-wrap: wrap;
+}
+
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
 }
 
 .items-start {
@@ -4520,6 +4532,10 @@ html, body, label {
 
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
   .lg\:pt-0 {
