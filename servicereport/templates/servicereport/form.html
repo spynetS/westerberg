@@ -27,6 +27,11 @@
 	<input value="{{Postnummer}}"  name="Postnummer" type="text" placeholder="Postnummer" class="input input-bordered  " />
 	<input value="{{Ort}}"  name="Ort" type="text" placeholder="Ort" class="input input-bordered  " />
 
+	<div class="flex items-start gap-2 col-span-2">
+		<input id="checkbox" name="Huvudnyckel" type="checkbox" class="checkbox" />
+		<span class="label-text">Jag tillåter att ni går in med huvudnyckel</span>
+	</div>
+
 	<label  for="homedate">Hemmadatum</label>
 	<input value="{{Hemmadatum}}" id="homedate" name="Hemmadatum" type="date" placeholder="Hemmadatum" class="input input-bordered  col-span-2" />
 
@@ -38,11 +43,6 @@
 
 	<textarea name="Felbeskrivning" placeholder="Felbeskrivning" class="textarea textarea-bordered textarea-lg col-span-2 " >{{Felbeskrivning}}</textarea>
 
-
-	<div class="flex items-start gap-2 col-span-2">
-		<input name="Huvudnyckel" type="checkbox" class="checkbox" />
-		<span class="label-text">Jag tillåter att ni går in med huvudnyckel</span>
-	</div>
 
 	{% if error %}
 		<div role="alert" class="alert alert-error col-span-2">
@@ -60,7 +60,14 @@
 		<span class="htmx-indicator loading loading-spinner loading-lg  "></span>
 		Skicka serviceanmälan
 	</button>
-
 </form>
+
+<script type="text/javascript">
+	document.getElementById('checkbox').addEventListener('change', function(event) {
+		document.getElementById("homedate").disabled =   event.target.checked;
+		document.getElementById("hemma-from").disabled = event.target.checked;
+		document.getElementById("hemma-to").disabled =   event.target.checked;
+	});
+</script>
 
 {% endif %}

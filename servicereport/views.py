@@ -31,19 +31,19 @@ def create_report(request):
       post = post.replace(" ","")
 
    try:
-      report = ServiceReport(
-         name=request.POST['Namn'],
-         email=request.POST['Epost'],
-         phone=request.POST['Telefonnummer'],
-         adress=request.POST['Adress'],
-         postnumber=post,
-         area=request.POST['Ort'],
-         homedate=request.POST['Hemmadatum'],
-         homefrom=request.POST['Hemmafrom'],
-         hometo=request.POST['Hemmato'],
-         description =request.POST['Felbeskrivning'],
-      )
-      report.save()
+      # report = ServiceReport(
+      #    name=request.POST['Namn'],
+      #    email=request.POST['Epost'],
+      #    phone=request.POST['Telefonnummer'],
+      #    adress=request.POST['Adress'],
+      #    postnumber=post,
+      #    area=request.POST['Ort'],
+      #    homedate=request.POST['Hemmadatum'],
+      #    homefrom=request.POST['Hemmafrom'],
+      #    hometo=request.POST['Hemmato'],
+      #    description =request.POST['Felbeskrivning'],
+      # )
+      # report.save()
 
       data = request.POST.copy()
 
