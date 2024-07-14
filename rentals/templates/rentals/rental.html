@@ -28,7 +28,10 @@
 					</div>
 					<div class="px-12 grid grid-cols-2 justifty-evenly" >
 						<div  >
-							<p class="text-3xl font-bold">{{rental.rent}} kr</p>
+							{% if rental.rent == 0 %}
+							{% else %}
+								<p class="text-3xl font-bold">{{rental.rent}} kr</p>
+							{% endif %}
 							<p class="text-3xl font-bold">{{rental.size}} m2</p>
 							<p>{{rental.rooms}} rum</p>
 
