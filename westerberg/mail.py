@@ -25,13 +25,20 @@ def sendmail(subject,body,name,email,to,group,content_subtype="text/plain"):
         to.append(user.email)
 
     mail = EmailMessage(
-        subject=f"Info {subject}",
+        subject=f"{subject}",
         body=body,
         from_email=(name+settings.EMAIL_HOST_USER),
         to=to,
         reply_to=reply
         # headers={'Reply-To': f" {request.POST['name']} {request.POST['email']}, Info {settings.INFO_EMAIL}"}
     )
+    # looging the email
+    print("_____SENDEMAIL_____")
+    print(f"subject={subject}")
+    print(f"to={to}")
+    print(f"from={settings.EMAIL_HOST_USER}")
+    print(f"body={body}")
+
     mail.content_subtype = content_subtype
 
     # Send the email
