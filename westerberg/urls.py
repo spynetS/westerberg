@@ -15,7 +15,8 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin as adm
-from django.urls import include, path
+from django.urls import include, path, re_path
+from django.views.generic import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
 
@@ -139,4 +140,6 @@ urlpatterns = [
     path("rentals/", include("rentals.urls")),
     path("servicereport/", include("servicereport.urls")),
     path("intrestreport/", include("intrestreport.urls")),
+    re_path(r'^sitemap\.xml$', RedirectView.as_view(url='/static/sitemap.xml', permanent=True)),
+
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + static(settings.STATIC_URL, document_root=settings.MEDIA_ROOT)
