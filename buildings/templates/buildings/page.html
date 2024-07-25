@@ -24,7 +24,7 @@
 				<div class=" p-8 col gap-5 bg-opacity-[70%] " >
 					<h1 class="text-3xl font-bold" >Våra Fastigheter</h1>
 					<p class="font-semibold" >Utforska våra fastigheter hos Westerberg Fastigheter AB. Vi erbjuder ett brett utbud av fastigheter i Norrköping, Söderköping och Åby.</p>
-					<div class="w-full flex justify-evenly" >
+					<div class="w-full flex flex-wrap justify-evenly" >
 						<a href="/intresseanmalan" class="btn btn-primary" >Intresseanmalan</a>
 						<a href="/lediga-lagenheter" class="btn btn-secondary " >Lediga Lägenheter</a>
 						<a href="/lediga-lokaler" class="btn btn-secondary " >Lediga Lokaler</a>
@@ -51,7 +51,7 @@
 	{% for areabuildings in buildings %}
 		<div class="shadow-xl p-8 gap-4 w-screen flex flex-col" >
 			<h1 class="text-1xl font-semibold" >Område: {{areabuildings.0.get_area_display}}</h1>
-			<div class="flex flex-wrap gap-5 justify-start" >
+			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 justify-start" >
 				{% for building in areabuildings %}
 					{% include "components/BuildingCard.html" with building=building %}
 				{% endfor %}
