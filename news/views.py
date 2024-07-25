@@ -37,6 +37,6 @@ def page(request):
     return render(request,'news/form.html',{'news':news})
 
 def cards(request):
-    amount_of_news = 4
+    amount_of_news = 7
     news = News.objects.order_by('-created_at')[:amount_of_news]
     return render(request,'news/card.html',{'news':news})

@@ -49,6 +49,10 @@ class HomeView(TemplateView):
             ['/static/slides/6.png','I söderköping har vi lokaler från 100 till 600 kvm som kan anpassas och förändras för din verksamhet. Samtliga belägna i gatuplan med bra kommunikation och centrumläge'],
             ['/static/slides/7.png','I åby har vi mindre kontros och versamhetslokaler från 60 till 100kvm. Dessutom finns en större 600kvm butikslokal. Samtliga belägna i Åby Centrum med god tillgång till parkeringsplatser']
                             ]
+
+        amount_of_news = 7
+        news = News.objects.order_by('-created_at')[:amount_of_news]
+        context['news'] = news
         return context
 
 class NewsView(TemplateView):

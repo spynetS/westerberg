@@ -1,8 +1,8 @@
-<a href="/buildings/building/{{building.adress}}" class="card w-[200px]   bg-base-200 shadow-xl">
+<a href="/buildings/building/{{building.adress}}" class="card   bg-base-200 shadow-xl">
 	{% with building.images.all|first as img  %}
 		{% if img and img.thumbnail %}
 			<figure>
-				<img width="200" src="{{ img.medium.url }}" alt="Ingen bild finns" />
+				<img width="100%" src="{{ img.medium.url }}" alt="Ingen bild finns" />
 			</figure>
 		{% else %}
 			<figure>
