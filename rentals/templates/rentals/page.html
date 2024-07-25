@@ -1,16 +1,16 @@
 <div id="outer" class=" gap-2 flex flex-col items-start justify-start w-screen" >
 	<style type="text/css" media="screen">
 	 .headering{
-		 {% if select == "1" %}
+		 {% if omrade == "Norrköping" %}
 		 	background-image: url("/static/norrköping.jpg");
 		 {% endif %}
-		 {% if select == "2" %}
+		 {% if omrade == "Söderköping" %}
 		 	background-image: url("/static/soderkoping.jpg");
 		 {% endif %}
-		 {% if select == "3" %}
+		 {% if omrade ==  "Åby"%}
 		 	background-image: url("/static/åby.jpg");
 		 {% endif %}
-		 {% if select == "alla" %}
+		 {% if omrade == "alla" %}
 		 	background-image: url("/static/norr.jpg");
 		 {% endif %}
 		 background-size: cover;
@@ -42,11 +42,11 @@
 
 	<div class="w-screen gap-3 flex flex-col justify-between px-12">
 		<h2 class="text-3xl font-semibold" >{{rentals.0.0.building.get_city_display}}</h2>
-		<select name="select" hx-push-url="true" hx-get="/ledigt" hx-target="#outer" hx-swap="outerHTML" hx-headers='{"refresh":true}' class="select select-bordered w-full max-w-xs">
+		<select name="omrade" hx-push-url="true" hx-get="/lediga-{% if lokaler %}lokaler{% else %}lagenheter{% endif %}" hx-target="#outer" hx-swap="outerHTML" hx-headers='{"refresh":true}' class="select select-bordered w-full max-w-xs">
 			<option selected>Välj stad</option>
 			<option value="alla">Alla</option>
 			{% for option in options %}
-			<option value="{{option.0}}">{{option.1}}</option>
+			<option value="{{option.1}}">{{option.1}}</option>
 			{% endfor %}
 		</select>
 	</div>

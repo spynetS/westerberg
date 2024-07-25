@@ -1,4 +1,4 @@
-from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound
+from django.http import Http404, HttpResponse, HttpResponseBadRequest, HttpResponseNotFound, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from datetime import datetime
 from django.views.decorators.http import require_POST
@@ -31,11 +31,13 @@ def page(request, lokaler=False):
     if "lokaler" in request.headers:
         lokaler = request.headers["lokaler"]
 
-    if "select" in request.GET and request.GET["select"] != "alla":
-        select = request.GET["select"]
-        rentals = Rental.objects.filter(building__city=request.GET['select'],lokal=lokaler,public=True)
+    if "omrade" in request.GET and request.GET["omrade"] != "alla":
+        omrade = request.GET["omrade"]
+        city_dict = {value: key for key, value in Building.City.choices}
+
+        rentals = Rental.objects.filter(building__city=city_dict[omrade],lokal=lokaler,public=True)
     else:
-        select = "alla"
+        omrade = "alla"
         rentals = Rental.objects.filter(lokal=lokaler,public=True)
 
 
@@ -55,21 +57,21 @@ def page(request, lokaler=False):
     options = Building.City.choices
     options = [[i[0],i[1]] for i in options]
 
-    return render(request, "rentals/page.html",{"rentals": list(sorted_rentals.values()),"options":options,"lokaler":lokaler,"select":select})
+    return render(request, "rentals/page.html",{"rentals": list(sorted_rentals.values()),"options":options,"lokaler":lokaler,"omrade":omrade})
 
 def ledigt(request):
     if "refresh" in request.headers:
         return page(request)
-    if "select" in request.GET:
-        return render(request, "ledigt.html",{"select":"?select="+request.GET['select'], "lokaler":False})
+    if "omrade" in request.GET:
+        return render(request, "ledigt.html",{"omrade":"?omrade="+request.GET['omrade'], "lokaler":False})
     else:
         return render(request, "ledigt.html",{"lokaler":False})
 
 def ledigt_lokaler(request):
     if "refresh" in request.headers:
         return page(request,True)
-    if "select" in request.GET:
-        return render(request, "ledigt.html",{"select":"?select="+request.GET['select'], "lokaler":True})
+    if "omrade" in request.GET:
+        return render(request, "ledigt.html",{"omrade":"?omrade="+request.GET['omrade'], "lokaler":True})
     else:
         return render(request, "ledigt.html",{"lokaler":True})
 

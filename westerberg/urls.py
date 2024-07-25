@@ -121,8 +121,8 @@ urlpatterns = [
 
     path('superadmin/', adm.site.urls),
     path("fastigheter/", fast, name="fastigheter"),
-    path("ledigt/", ledigt, name="fastigheter"),
-    path("ledigt/lokaler", ledigt_lokaler, name="fastigheter"),
+    path("lediga-lagenheter", ledigt, name="fastigheter"),
+    path("lediga-lokaler", ledigt_lokaler, name="fastigheter"),
     path("nyheter/", NewsView.as_view(template_name="news.html"), name="fastigheter"),
     path("serviceanmalan/", TemplateView.as_view(template_name="serviceanmalan.html"), name="fastigheter"),
     path("intresseanmalan/", TemplateView.as_view(template_name="intressreport.html"), name="fastigheter"),
