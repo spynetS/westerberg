@@ -15,6 +15,7 @@
     <meta name="twitter:description" content="Hyr lägenheter i Norrköping, Söderköping och Åby med vår pålitliga uthyrningsfirma. Vi erbjuder bekväma och prisvärda boenden för alla behov. Kontakta oss idag för mer information!">
     <meta name="twitter:image" content="/static/slides/5.png">
     <link rel="canonical" href="{{ request.build_absolute_uri }}">
+    <script defer type="text/javascript" src="/static/js/home.js" ></script>
 {% endblock %}
 
 {% block content %}
@@ -49,66 +50,20 @@
         </div>
         <div class="p-5 flex flex-col gap-12 md:min-h-screen">
             {% include 'components/slider.html' with images=images alts=alts%}
+
         </div>
-        <div hx-get="/news/cards/" hx-target="#cardholder" hx-trigger="load" hx-on::after-request="cards()" class="relative mt-12 p-5 flex flex-col gap-12 min-h-screen items-center w-screen">
+        <div class="relative mt-12 p-5 flex flex-col gap-12 min-h-screen items-center w-screen">
             <img class="absolute bottom-0 right-0" src="/static/Vector 9.png" alt="Decorative Vector 9" />
             <img class="absolute bottom-0 left-0" src="/static/Vector 8.png" alt="Decorative Vector 8" />
             <h2 class="text-3xl md:text-5xl font-bold">Nyheter</h2>
+
             <div id="cardholder" class="container mx-0 md:mx-auto px-0 md:px-16 flex flex-col gap-4">
-                <!-- Cards will be loaded here -->
+                {% for card in news %}
+                    {% include 'components/NewsCard.html' with card=card visible=True %}
+                {% endfor %}
             </div>
+
             <a href="/nyheter" class="z-10 btn btn-secondary">Visa alla</a>
         </div>
     </div>
-
-    <script type="text/javascript">
-        document.getElementById("homeVideo").addEventListener('loadedmetadata', start);
-        let video_length = 0;
-        let fadeout = 39000;
-        let i = 0;
-        let removeTimeoutId;
-        let addTimeoutId;
-
-        let quotes = [
-            ["Vi ser mycket långsiktigt på vårt företagande och vår målsättning är att även detta skall speglas i långvariga och trevliga kontakter med våra hyresgäster.", 8000],
-            ["Vi har fastigheter i, Söderköping, Norrköping, Åby", 8000],
-        ];
-
-        function changeText() {
-            let para = document.getElementById("para");
-            let inner = `<p class="animate-in fade-id slide-in-from-left-72 duration-700 lg:text-2xl md:text-lg font-semibold text-white w-[200px] md:w-[400px]">${quotes[i][0]}</p>`;
-            para.innerHTML = inner;
-            setTimeout(changeText, quotes[i][1]);
-            i = (i + 1) % quotes.length;
-        }
-
-        function add() {
-            let over = document.getElementById("overvideo");
-            over.classList.remove("opacity-0");
-            removeTimeoutId = setTimeout(remove, fadeout);
-        }
-
-        function remove() {
-            let over = document.getElementById("overvideo");
-            over.classList.add("opacity-0");
-            addTimeoutId = setTimeout(add, video_length - fadeout);
-        }
-
-        function start() {
-            var x = document.getElementById("homeVideo").duration;
-            video_length = x * 1000;
-            i = 0;
-            removeTimeoutId = setTimeout(remove, fadeout);
-            changeText();
-        }
-
-        document.addEventListener('visibilitychange', function() {
-            if (document.visibilityState === 'visible') {
-                document.getElementById("homeVideo").currentTime = 0;
-                clearTimeout(removeTimeoutId);
-                clearTimeout(addTimeoutId);
-                start();
-            }
-        });
-    </script>
 {% endblock %}
