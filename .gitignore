@@ -11,6 +11,7 @@ htmlcov
 .venv
 .env
 db.sqlite3
+media/
 
 ./js/node_modules
 js/node_modules
