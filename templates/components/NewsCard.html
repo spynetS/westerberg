@@ -1,6 +1,9 @@
 <div class=" {% if visible %} is-visible {% endif %} news-card card border-2 border-gray-200 md:card-side min-h-[200px] fade-in-section w-full bg-base-100 shadow-xl">
+
 	{% if card.image %}
-  <figure  ><img class="max-h-[300px]" src="{{card.image.url}}" alt="News image"/></figure>
+    <div class="w-[20%] bg-cover rounded-bl-xl rounded-tl-xl bg-center" style="background-image: url('{{ card.image.url }}');">
+    </div>
+    <!-- <figure  ><img class="max-h-[300px]" src="{{card.image.url}}" alt="News image"/></figure> -->
   {% endif %}
 
   <div class=" p-3 md:p-5  md:w-[80%]">
