@@ -32,7 +32,12 @@
 					<p class="font-semibold" >Lediga bostadslägenheter matchar vi alltid mot de intresseanmälningar som gjorts. I vissa fall så finner du den lediga lägenheten här nedan. Om du har intresse av den gör då en intresseanmälan och ange ”ledigt just nu”. <br /><br />
 		Vi har flera olika lägenheter som har varit/är under renovering, och blir lediga för inflyttning under våren/sommaren. Gör därför en intresseanmälan så svarar vi på vilka lediga bostäder som kan passa dig. Vi svarar på intresseanmälningar löpande vad gäller Norrköping</p>
 					<div class="w-full flex justify-evenly" >
-						<a href="/intresseanmalan" class="btn btn-primary w-full" >Intresseanmalan</a>
+						<a href="/intresseanmalan" class="btn btn-primary " >Intresseanmalan</a>
+						{% if lokaler %}
+						<a href="/lediga-lagenheter" class="btn btn-secondary" >Lägenheter?</a>
+						{% else %}
+						<a href="/lediga-lokaler" class="btn btn-secondary" >Lokaler?</a>
+						{% endif %}
 					</div>
 				</div>
 			</div>
@@ -41,7 +46,13 @@
 	</div>
 
 	<div class="w-screen gap-3 flex flex-col justify-between px-12">
-		<h2 class="text-3xl font-semibold" >{{rentals.0.0.building.get_city_display}}</h2>
+		<h2 class="text-3xl font-semibold" >
+			{% if lokaler %}
+			Lokaler
+			{% else %}
+			Lägenheter
+			{% endif %}
+		</h2>
 		<select name="omrade" hx-push-url="true" hx-get="/lediga-{% if lokaler %}lokaler{% else %}lagenheter{% endif %}" hx-target="#outer" hx-swap="outerHTML" hx-headers='{"refresh":true}' class="select select-bordered w-full max-w-xs">
 			<option selected>Välj stad</option>
 			<option value="alla">Alla</option>
@@ -55,7 +66,10 @@
 
 	{% for areabuildings in rentals %}
 		<div class="shadow-xl p-8 gap-4 w-screen flex flex-col  " >
-			<h3 class="text-1xl font-semibold" >Område: {{areabuildings.0.building.get_area_display}}</h3>
+			<div>
+				<h3 class="text-xl font-semibold" >{{areabuildings.0.building.get_city_display}}</h3>
+				<h4 class="text-1xl font-semibold" >{{areabuildings.0.building.get_area_display}}</h3>
+			</div>
 			<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-5 justify-start" >
 				{% for building in areabuildings %}
 
@@ -66,7 +80,7 @@
 						{% endwith %}
 						<div class="card-body">
 							<h4 class="card-title">{{building.building.adress}}</h4>
-							<h5 class="font-semibold" >{% if building.rent > 0 %} {{building.rent}} på {% endif %} {{building.size}} m2</h5>
+							<h5 class="font-semibold" >{% if building.rent > 0 %} {{building.rent}} kr på {% endif %} {{building.size}} m2</h5>
 							<p class="line-clamp-3" >{{building.description}}</p>
 							<button class="mt-2 btn btn-secondary" >Visa mer</button>
 						</div>
